@@ -216,7 +216,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3704406781942161667, guid: af4aca96ca8ce4e49bffc803da48bdf3, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3704406781942161667, guid: af4aca96ca8ce4e49bffc803da48bdf3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -261,18 +261,6 @@ PrefabInstance:
     - target: {fileID: 7980038566765333230, guid: af4aca96ca8ce4e49bffc803da48bdf3, type: 3}
       propertyPath: m_Name
       value: PizzaHouse
-      objectReference: {fileID: 0}
-    - target: {fileID: 8110616652221842568, guid: af4aca96ca8ce4e49bffc803da48bdf3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.633
-      objectReference: {fileID: 0}
-    - target: {fileID: 8110616652221842568, guid: af4aca96ca8ce4e49bffc803da48bdf3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.966
-      objectReference: {fileID: 0}
-    - target: {fileID: 8110616652221842568, guid: af4aca96ca8ce4e49bffc803da48bdf3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.053
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af4aca96ca8ce4e49bffc803da48bdf3, type: 3}
@@ -368,5 +356,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
