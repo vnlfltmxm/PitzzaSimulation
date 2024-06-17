@@ -9,45 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1710345386844084}
+  m_RootGameObject: {fileID: 1027517570568528}
   m_IsPrefabParent: 1
---- !u!1 &1710345386844084
+--- !u!1 &1027517570568528
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4312579908521846}
-  - component: {fileID: 33667719705264612}
-  - component: {fileID: 23409733236592844}
-  - component: {fileID: 64916278579970670}
+  - component: {fileID: 4522630951679328}
+  - component: {fileID: 33168738531591854}
+  - component: {fileID: 23427996444716556}
+  - component: {fileID: 64474431014557050}
   m_Layer: 0
-  m_Name: SM_Prop_Kitchen_Counter_Food_Insert_Small_04
+  m_Name: Cheese
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4312579908521846
+--- !u!4 &4522630951679328
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1710345386844084}
+  m_GameObject: {fileID: 1027517570568528}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23409733236592844
+--- !u!23 &23427996444716556
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1710345386844084}
+  m_GameObject: {fileID: 1027517570568528}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -74,19 +74,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33667719705264612
+--- !u!33 &33168738531591854
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1710345386844084}
-  m_Mesh: {fileID: 4300000, guid: b889bf502d3db3641bb3ffb3f4b8de70, type: 3}
---- !u!64 &64916278579970670
+  m_GameObject: {fileID: 1027517570568528}
+  m_Mesh: {fileID: 4300000, guid: 492fc95b31bbc8b44bd3034b6a731002, type: 3}
+--- !u!64 &64474431014557050
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1710345386844084}
+  m_GameObject: {fileID: 1027517570568528}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -94,4 +94,4 @@ MeshCollider:
   m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43807150248368224, guid: fe7dcf6d51fb9e94ba54c8817767f287, type: 2}
+  m_Mesh: {fileID: 43192484116107244, guid: 7b60caef7f8dd7543a61d48bda18f7db, type: 2}
