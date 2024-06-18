@@ -19206,6 +19206,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Oven
       objectReference: {fileID: 0}
+    - target: {fileID: 8099212194842472605, guid: 6a98a7dd1f494e141b84eac8acfb3b37, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099212194842472605, guid: 6a98a7dd1f494e141b84eac8acfb3b37, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8101060527724752411, guid: 6a98a7dd1f494e141b84eac8acfb3b37, type: 3}
       propertyPath: m_RootOrder
       value: 8
