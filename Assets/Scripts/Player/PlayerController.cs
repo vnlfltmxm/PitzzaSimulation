@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
-    public Camera _camera;
+    [SerializeField]
+    private Camera _camera;
     private NavMeshAgent _nav;
     private float _moveSpeed = 3.0f;
     private float _rotateSpeed = 10.0f;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         MoveToPlayer();
         RotateWithMouse();
+        RayToCameraFoward();
     }
 
     private bool CheckKey()
@@ -87,4 +89,14 @@ public class PlayerController : MonoBehaviour
         _verticalLookRotation = Mathf.Clamp(_verticalLookRotation, _minLookAngle, _maxLookAngle);
         _camera.transform.localEulerAngles = new Vector3(_verticalLookRotation, _camera.transform.localEulerAngles.y, 0);
     }
+
+    private void RayToCameraFoward()
+    {
+        if(Physics.Raycast(_camera.transform.position,_camera.transform.forward,out RaycastHit hit, 50))
+        {
+
+            Debug.DrawRay(_camera.transform.position, _camera.transform.forward * 50, Color.red);
+        }
+    }
+
 }
