@@ -7,6 +7,8 @@ public class PlayerController : Singleton<PlayerController>
 {
     [SerializeField]
     private Camera _camera;
+    [SerializeField]
+    private GameObject _grabPos;
     private NavMeshAgent _nav;
     private float _moveSpeed = 3.0f;
     private float _rotateSpeed = 10.0f;
@@ -94,8 +96,21 @@ public class PlayerController : Singleton<PlayerController>
     {
         if(Physics.Raycast(_camera.transform.position,_camera.transform.forward,out RaycastHit hit, 50))
         {
-
             Debug.DrawRay(_camera.transform.position, _camera.transform.forward * 50, Color.red);
+            if (hit.transform.gameObject != null) 
+            {
+                PickUpItem(hit.transform.gameObject);
+            }
+        }
+    }
+
+    private void PickUpItem(GameObject Object)
+    {
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            GameObject gameObject = Instantiate(Object, _grabPos.transform);
+            gameObject.transform.position = _grabPos.transform.position;
+            gameObject.transform.rotation = _grabPos.transform.rotation;
         }
     }
 

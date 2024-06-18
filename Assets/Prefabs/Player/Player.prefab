@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 4081643717400969108}
+  _grabPos: {fileID: 519199233263369706}
 --- !u!195 &787078250398362963
 NavMeshAgent:
   m_ObjectHideFlags: 0
