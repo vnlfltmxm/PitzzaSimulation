@@ -87,7 +87,7 @@ public class PlayerController : Singleton<PlayerController>
 
         _verticalLookRotation -= mouseY * _verticalLookSpeed;
         _verticalLookRotation = Mathf.Clamp(_verticalLookRotation, _minLookAngle, _maxLookAngle);
-        _camera.transform.localEulerAngles = new Vector3(_verticalLookRotation, _camera.transform.localEulerAngles.y, 0);
+        _camera.transform.localEulerAngles = new Vector3(_verticalLookRotation, 0, 0);
     }
 
     private void RayToCameraFoward()
