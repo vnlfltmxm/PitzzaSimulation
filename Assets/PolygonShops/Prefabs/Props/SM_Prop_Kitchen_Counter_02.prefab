@@ -758,7 +758,6 @@ GameObject:
   - component: {fileID: 4489319135912284}
   - component: {fileID: 33103825819504284}
   - component: {fileID: 23813139831349930}
-  - component: {fileID: 64914091864292710}
   m_Layer: 0
   m_Name: SM_Prop_Kitchen_Counter_02
   m_TagString: Untagged
@@ -840,17 +839,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64914091864292710
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931935813099910}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43809205175046862, guid: 9599489cf0a9e774ebefc976bc347570, type: 2}
