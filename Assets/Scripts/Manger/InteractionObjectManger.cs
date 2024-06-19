@@ -33,13 +33,17 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     //    _pickUpItem += ;
     //}
 
-    public void OnPickUpItem()
+    public void OnPickUpItem(GameObject item, GameObject grapPos)
     {
-
+        SetUseGravityInItem(item, false);
+        item.transform.position = grapPos.transform.position;
+        item.transform.rotation = grapPos.transform.rotation;
+        item.transform.parent = grapPos.transform;
     }
-    public void OnDropItem()
+    public void OnDropItem(GameObject item)
     {
-
+        item.transform.parent = null;
+        SetUseGravityInItem(item, true);
     }
     public void OnReturnHandlingItemToPool(GameObject pool,GameObject item)
     {
@@ -68,9 +72,11 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     {
         GameObject item = PoolManger.Instance.OutPoolItem(pool);
         item.SetActive(true);
+        
         item.transform.position = grapPos.transform.position;
         item.transform.rotation = grapPos.transform.rotation;
         item.transform.parent = grapPos.transform;
+        SetUseGravityInItem(item, false);
     }
     private void OnReturnItemToPool(GameObject pool, GameObject item)
     {
@@ -81,13 +87,24 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     private void SetUseGravityInItem(GameObject item, bool value)
     {
         Rigidbody rd= item.GetComponent<Rigidbody>();
-        if (rd = null) 
+        if (rd == null) 
         {
             return;
         }
-
+        
+        SetConstraintsInItem(rd, value);
         rd.useGravity = value;
 
     }
-    
+    private void SetConstraintsInItem(Rigidbody rd, bool value)
+    {
+        if (value == true) 
+        {
+            rd.constraints = RigidbodyConstraints.None;
+        }
+        else
+        {
+            rd.constraints = RigidbodyConstraints.FreezeAll;
+        }
+    }
 }

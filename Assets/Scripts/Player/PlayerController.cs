@@ -111,10 +111,17 @@ public class PlayerController : Singleton<PlayerController>
                     case 6:
                         PickUpItemToPool(hit.transform.gameObject);
                         break;
+                    case 7:
+                        PickUpItem(hit.transform.gameObject);
+                        break;
                     default:
                         break;
                 }
 
+            }
+            else
+            {
+                DropItem();
             }
         }
     }
@@ -128,7 +135,21 @@ public class PlayerController : Singleton<PlayerController>
 
         return false;
     }
-
+    private void PickUpItem(GameObject obj)
+    {
+        if (obj.transform.gameObject != null)
+        {
+            InteractionObjectManger.Instance.OnPickUpItem(obj, _grabPos);
+            
+        }
+    }
+    private void DropItem()
+    {
+        if (CheckOnHandlingItem())
+        {
+            InteractionObjectManger.Instance.OnDropItem(_grabPos.transform.GetChild(0).gameObject);
+        }
+    }
     private void PickUpItemToPool(GameObject obj)
     {
         if (obj.transform.gameObject != null)

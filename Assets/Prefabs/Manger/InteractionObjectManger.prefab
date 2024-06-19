@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58950894e7a246e4183b6a6a598a2332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pizzaHouse: {fileID: 7980038566765333230, guid: af4aca96ca8ce4e49bffc803da48bdf3, type: 3}
+  _pizzaHouse: {fileID: 0}
   _doughtRefrigerator: {fileID: 3797118438238345098, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
