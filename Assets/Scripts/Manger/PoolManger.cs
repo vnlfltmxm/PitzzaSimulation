@@ -14,7 +14,7 @@ public class PoolManger : Singleton<PoolManger>
     {
         AddPoolInDictionary(Prefabs_Dough);
 
-        AddObjectInPool(Prefabs_Dough);
+       // AddObjectInPool(Prefabs_Dough);
     }
 
     private void AddObjectInPool(GameObject prefabObj)
