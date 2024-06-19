@@ -22382,6 +22382,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3704406781942161667}
     m_Modifications:
+    - target: {fileID: 3314813664749889881, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3793256809346716946, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -22430,7 +22434,43 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoughRefrigerator
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3855732661950983815, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078774692796297365, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794899289953649800, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614087720018768205, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318964331714074722, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943474316518579923, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208738407228678072, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8019632983842715181, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+    - {fileID: 5426418374761650392, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+    - {fileID: 5183755267954237186, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+    - {fileID: 1910112828741234233, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+    - {fileID: 7271376315890484200, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+    - {fileID: 5232930471698356659, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+    - {fileID: 871508038219429877, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+    - {fileID: 72286726356937191, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
 --- !u!4 &5654983305913543074 stripped
 Transform:

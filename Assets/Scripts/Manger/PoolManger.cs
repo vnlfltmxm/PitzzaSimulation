@@ -42,4 +42,17 @@ public class PoolManger : Singleton<PoolManger>
         _poolDic.TryGetValue(tagName, out Queue<GameObject> pool);
         return pool;
     }
+
+    public void InPoolItem(GameObject pool,GameObject item)
+    {
+        _poolDic[pool.tag].Enqueue(item);
+        item.transform.parent = pool.transform;
+        item.SetActive(false);
+    }
+
+    public GameObject OutPoolItem(GameObject pool)
+    {
+        GameObject item = _poolDic[pool.tag].Dequeue();
+        return item;
+    }
 }

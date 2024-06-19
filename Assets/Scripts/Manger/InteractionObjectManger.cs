@@ -16,6 +16,7 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
 
     public Transform FindPrefabsParentTrasnform(string tagName)
     {
+
         foreach (Transform child in _pizzaHouse.transform)
         {
             if (child.CompareTag(tagName))
@@ -32,28 +33,61 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     //    _pickUpItem += ;
     //}
 
-    public void OnPickUpItem(string tagName,GameObject grapPos)
+    public void OnPickUpItem()
     {
-        OnGetItemToTag(tagName);
-        OnGrapItemToPlayer(_usingPool, grapPos);
-    }
 
-    private void OnGetItemToTag(string tagName)
+    }
+    public void OnDropItem()
+    {
+
+    }
+    public void OnReturnHandlingItemToPool(GameObject pool,GameObject item)
+    {
+        //OnGetItemPoolToTag(pool.gameObject.name);
+        OnReturnItemToPool(pool, item);
+    }
+    //public void OnPickUpItemToPool(string tagName,GameObject grapPos)
+    //{
+    //    OnGetItemPoolToTag(tagName);
+    //    //OnGrapItemToPlayer(_usingPool, grapPos);
+    //}
+    public void OnPickUpItemToPool(GameObject pool, GameObject grapPos)
+    {
+        OnGrapItemInPoolToPlayer(pool, grapPos);
+    }
+    private void OnGetItemPoolToTag(string tagName)
     {
         _usingPool = PoolManger.Instance.GetPoolToTagName(tagName);
     }
-    private void OnGetItemToTag(string tagName,GameObject grapPos)
+    private void OnGetItemPoolToTag(string tagName,GameObject grapPos)
     {
         _usingPool = PoolManger.Instance.GetPoolToTagName(tagName);
     }
 
-    private void OnGrapItemToPlayer(Queue<GameObject> pool,GameObject grapPos)
+    private void OnGrapItemInPoolToPlayer(GameObject pool,GameObject grapPos)
     {
-        GameObject item = pool.Dequeue();
+        GameObject item = PoolManger.Instance.OutPoolItem(pool);
         item.SetActive(true);
         item.transform.position = grapPos.transform.position;
         item.transform.rotation = grapPos.transform.rotation;
         item.transform.parent = grapPos.transform;
     }
+    private void OnReturnItemToPool(GameObject pool, GameObject item)
+    {
+        PoolManger.Instance.InPoolItem(pool, item);
+       
+    }
 
+    private void SetUseGravityInItem(GameObject item, bool value)
+    {
+        Rigidbody rd= item.GetComponent<Rigidbody>();
+        if (rd = null) 
+        {
+            return;
+        }
+
+        rd.useGravity = value;
+
+    }
+    
 }

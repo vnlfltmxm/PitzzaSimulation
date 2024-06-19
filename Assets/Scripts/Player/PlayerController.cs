@@ -35,7 +35,7 @@ public class PlayerController : Singleton<PlayerController>
         MoveToPlayer();
         RotateWithMouse();
         RayToCameraFoward();
-        PickUpItem();
+        PressButtonG();
     }
 
     private bool CheckKey()
@@ -98,20 +98,65 @@ public class PlayerController : Singleton<PlayerController>
         Debug.DrawRay(_camera.transform.position, _camera.transform.forward * 50, Color.red);
     }
 
-    private void PickUpItem()
+    private void PressButtonG()
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hit, 50,~(1<<LayerMask.NameToLayer("Ignore Raycast"))))
+            if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hit, 50, ~(1 << LayerMask.NameToLayer("Ignore Raycast"))))
             {
-
-                if (hit.transform.gameObject != null && _grabPos.transform.childCount <= 0) 
-                {
-                    InteractionObjectManger.Instance.OnPickUpItem(hit.transform.tag, _grabPos);
-                }
+                var obj = hit.transform.gameObject.layer;
                 
+                switch (obj)
+                {
+                    case 6:
+                        PickUpItemToPool(hit.transform.gameObject);
+                        break;
+                    default:
+                        break;
+                }
+
             }
         }
     }
+
+    private bool CheckOnHandlingItem()
+    {
+        if (_grabPos.transform.childCount > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void PickUpItemToPool(GameObject obj)
+    {
+        if (obj.transform.gameObject != null)
+        {
+            if (CheckOnHandlingItem()) 
+            {
+               RetrunHandlingItem(obj);
+            }
+            else
+            {
+                InteractionObjectManger.Instance.OnPickUpItemToPool(obj, _grabPos);
+            }
+        }
+
+    }
+
+    private void RetrunHandlingItem(GameObject rayHitObj)
+    {
+        var grapItem = _grabPos.transform.GetChild(0).gameObject;
+        if (rayHitObj.CompareTag(grapItem.tag))
+        {
+            InteractionObjectManger.Instance.OnReturnHandlingItemToPool(rayHitObj, grapItem);
+        }
+        else
+        {
+            return;
+        }
+    }
+
 
 }
