@@ -6,7 +6,8 @@ public class PoolManger : Singleton<PoolManger>
 {
     [HideInInspector]
     public Dictionary<string, Queue<GameObject>> _poolDic = new Dictionary<string, Queue<GameObject>>();
-
+    [HideInInspector]
+    public Queue<GameObject> _usingPool = new Queue<GameObject>();
     [SerializeField] 
     private GameObject Prefabs_Dough;
     //private Queue<GameObject> _poolQueue;
@@ -34,5 +35,11 @@ public class PoolManger : Singleton<PoolManger>
     private void AddPoolInDictionary(GameObject prefabObj)
     {
         _poolDic.Add(prefabObj.gameObject.name, new Queue<GameObject>());
+    }
+
+    public Queue<GameObject> GetPoolToTagName(string tagName)
+    {
+        _poolDic.TryGetValue(tagName, out Queue<GameObject> pool);
+        return pool;
     }
 }

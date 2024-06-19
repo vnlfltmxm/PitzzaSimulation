@@ -35,6 +35,7 @@ public class PlayerController : Singleton<PlayerController>
         MoveToPlayer();
         RotateWithMouse();
         RayToCameraFoward();
+        PickUpItem();
     }
 
     private bool CheckKey()
@@ -94,23 +95,22 @@ public class PlayerController : Singleton<PlayerController>
 
     private void RayToCameraFoward()
     {
-        if(Physics.Raycast(_camera.transform.position,_camera.transform.forward,out RaycastHit hit, 50))
-        {
-            Debug.DrawRay(_camera.transform.position, _camera.transform.forward * 50, Color.red);
-            if (hit.transform.gameObject != null) 
-            {
-                PickUpItem(hit.transform.gameObject);
-            }
-        }
+        Debug.DrawRay(_camera.transform.position, _camera.transform.forward * 50, Color.red);
     }
 
-    private void PickUpItem(GameObject Object)
+    private void PickUpItem()
     {
-        if(Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            GameObject gameObject = Instantiate(Object, _grabPos.transform);
-            gameObject.transform.position = _grabPos.transform.position;
-            gameObject.transform.rotation = _grabPos.transform.rotation;
+            if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hit, 50,~(1<<LayerMask.NameToLayer("Ignore Raycast"))))
+            {
+
+                if (hit.transform.gameObject != null && _grabPos.transform.childCount <= 0) 
+                {
+                    InteractionObjectManger.Instance.OnPickUpItem(hit.transform.tag, _grabPos);
+                }
+                
+            }
         }
     }
 
