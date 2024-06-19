@@ -85,7 +85,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3480847483682499570
 Transform:
@@ -221,6 +221,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Computer_Printer_02
       objectReference: {fileID: 0}
+    - target: {fileID: 1305015131104824, guid: 4188c9e69b04ff7479036db8e62d6234, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4930302742570046, guid: 4188c9e69b04ff7479036db8e62d6234, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -300,6 +304,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Clothes_Rack_08
       objectReference: {fileID: 0}
+    - target: {fileID: 1455293834013480, guid: bf523cc3ea021eb49b6992b4e2e838df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4105294295665368, guid: bf523cc3ea021eb49b6992b4e2e838df, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -310,7 +318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4105294295665368, guid: bf523cc3ea021eb49b6992b4e2e838df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4105294295665368, guid: bf523cc3ea021eb49b6992b4e2e838df, type: 3}
       propertyPath: m_LocalPosition.y
