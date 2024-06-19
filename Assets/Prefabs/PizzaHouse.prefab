@@ -421,6 +421,7 @@ Transform:
   - {fileID: 4320195649064901851}
   - {fileID: 3769337786902249269}
   - {fileID: 6731628332818685724}
+  - {fileID: 4913809820560630}
   m_Father: {fileID: 3704406781942161667}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -497,6 +498,76 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1558640770
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 436946388274213536}
+    m_Modifications:
+    - target: {fileID: 1534186241912442, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_Name
+      value: SM_Bld_Base_Wall_Half_01 (50)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1534186241912442, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913811354014836, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_RootOrder
+      value: 214
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913811354014836, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -57.50005
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913811354014836, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913811354014836, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913811354014836, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913811354014836, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913811354014836, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913811354014836, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913811354014836, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23463206545778500, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c476b064a70c5c45b76305cc5c88875, type: 2}
+    - target: {fileID: 23463206545778500, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c476b064a70c5c45b76305cc5c88875, type: 2}
+    - target: {fileID: 65307040060651968, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+--- !u!4 &4913809820560630 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4913811354014836, guid: 129a028953e253d4ca2d40ccb14de684, type: 3}
+  m_PrefabInstance: {fileID: 1558640770}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &333626009498685012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1116,7 +1187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4642422675652786, guid: 6185dd6903d36e2458ab9d475a3382ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.625
+      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 4642422675652786, guid: 6185dd6903d36e2458ab9d475a3382ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1244,7 +1315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.010086
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8238,7 +8309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4642422675652786, guid: 6185dd6903d36e2458ab9d475a3382ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.625
+      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 4642422675652786, guid: 6185dd6903d36e2458ab9d475a3382ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9138,7 +9209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 37.510086
+      value: 37.5
       objectReference: {fileID: 0}
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13940,7 +14011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40.01009
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17524,7 +17595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4642422675652786, guid: 6185dd6903d36e2458ab9d475a3382ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.625
+      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 4642422675652786, guid: 6185dd6903d36e2458ab9d475a3382ee, type: 3}
       propertyPath: m_LocalPosition.z
