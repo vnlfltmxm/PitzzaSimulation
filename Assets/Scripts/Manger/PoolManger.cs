@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PoolManger : Singleton<PoolManger>
 {
+    private Dictionary<string, int> _itemCountDic = new Dictionary<string, int>();
+    private Dictionary<string, int> _itemMaxCountDic = new Dictionary<string, int>();
     [HideInInspector]
     public Dictionary<string, Queue<GameObject>> _poolDic = new Dictionary<string, Queue<GameObject>>();
     [HideInInspector]
@@ -22,6 +24,8 @@ public class PoolManger : Singleton<PoolManger>
         {
             AddPoolInDictionary(foodList[i]);
             AddObjectInPool(foodList[i]);
+            SetItemMaxCountValueInDictionary(foodList[i].name, 5);
+            SetItemCountValueInDictionary(foodList[i].name);
         }
     }
 
@@ -55,11 +59,62 @@ public class PoolManger : Singleton<PoolManger>
         _poolDic[pool.tag].Enqueue(item);
         item.transform.parent = pool.transform;
         item.SetActive(false);
+        MinusItemCountValueInDictionary(pool.tag);
     }
 
     public GameObject OutPoolItem(GameObject pool)
     {
-        GameObject item = _poolDic[pool.tag].Dequeue();
-        return item;
+        if (CheckItemCount(pool.tag))
+        {
+            GameObject item = _poolDic[pool.tag].Dequeue();
+            PlusItemCountValueInDictionary(pool.tag);
+            return item;
+        }
+        else
+        {
+            Debug.Log("재료 소진");
+            return null;
+        }
+    }
+
+    private void AddItemMaxCountInDictionary(GameObject item)
+    {
+
+    }
+    private bool CheckItemCount(string itemName)
+    {
+
+        if (_itemMaxCountDic[itemName] > _itemCountDic[itemName])
+        {
+            return true;
+        }
+
+        return false;
+    }
+    private void SetItemMaxCountValueInDictionary(string itemName, int maxCount)
+    {
+        _itemMaxCountDic.Add(itemName, maxCount);
+    }
+    private void SetItemCountValueInDictionary(string itemName)
+    {
+        if (!_itemCountDic.ContainsKey(itemName))
+        {
+            _itemCountDic.Add(itemName, 0);
+        }
+    }
+
+    private void PlusItemCountValueInDictionary(string itemName)
+    {
+        if (_itemCountDic.ContainsKey(itemName))
+        {
+            _itemCountDic[itemName]++;
+        }
+    }
+    private void MinusItemCountValueInDictionary(string itemName)
+    {
+        if (_itemCountDic.ContainsKey(itemName))
+        {
+            _itemCountDic[itemName]--;
+        }
     }
 }

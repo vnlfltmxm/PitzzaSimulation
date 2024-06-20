@@ -90,6 +90,10 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     private void OnGrapItemInPoolToPlayer(GameObject pool,GameObject grapPos)
     {
         GameObject item = PoolManger.Instance.OutPoolItem(pool);
+        if(item == null) 
+        {
+            return;
+        }
         item.SetActive(true);
         
         item.transform.position = grapPos.transform.position;

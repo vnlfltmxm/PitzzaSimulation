@@ -10,8 +10,7 @@ public enum ItemName
 
 public class PlayerController : Singleton<PlayerController>
 {
-    Dictionary<string, int> _itemCountDic = new Dictionary<string, int>();
-    Dictionary<string, int> _itemMaxCountDic = new Dictionary<string, int>();
+   
     [SerializeField]
     private Camera _camera;
     [SerializeField]
@@ -32,8 +31,6 @@ public class PlayerController : Singleton<PlayerController>
     // Start is called before the first frame update
     void Start()
     {
-        SetItemMaxCountValueInDictionary(nameof(ItemName.Dough), 5);
-        SetItemCountValueInDictionary(nameof(ItemName.Dough));
     }
 
     // Update is called once per frame
@@ -58,46 +55,7 @@ public class PlayerController : Singleton<PlayerController>
             return false;
         }
     }
-    private void AddItemMaxCountInDictionary(GameObject item)
-    {
-        
-    }
-    private bool CheckItemCount(string itemName)
-    {
-
-        if (_itemMaxCountDic[itemName] > _itemCountDic[itemName])
-        {
-            return true;
-        }
-
-        return false;
-    }
-    private void SetItemMaxCountValueInDictionary(string itemName, int maxCount)
-    {
-        _itemMaxCountDic.Add(itemName, maxCount);
-    }
-    private void SetItemCountValueInDictionary(string itemName)
-    {
-        if (!_itemCountDic.ContainsKey(itemName))
-        {
-            _itemCountDic.Add(itemName, 0);
-        }
-    }
-
-    private void PlusItemCountValueInDictionary(string itemName)
-    {
-        if (_itemCountDic.ContainsKey(itemName))
-        {
-            _itemCountDic[itemName]++;
-        }
-    }
-    private void MinusItemCountValueInDictionary(string itemName)
-    {
-        if (_itemCountDic.ContainsKey(itemName))
-        {
-            _itemCountDic[itemName]--;
-        }
-    }
+    
     private void MoveToPlayer()
     {
         if (CheckKey())
@@ -273,19 +231,10 @@ public class PlayerController : Singleton<PlayerController>
             if (CheckOnHandlingItem()) 
             {
                 RetrunHandlingItem(obj);
-                MinusItemCountValueInDictionary(obj.tag);
             }
             else
             {
-                if (CheckItemCount(obj.tag))
-                {
-                    InteractionObjectManger.Instance.OnPickUpItemToPool(obj, _grabPos);
-                    PlusItemCountValueInDictionary(obj.tag);
-                }
-                else
-                {
-                    Debug.Log("재료 소진");
-                }
+                InteractionObjectManger.Instance.OnPickUpItemToPool(obj, _grabPos);
             }
         }
 
