@@ -115,7 +115,7 @@ public class PlayerController : Singleton<PlayerController>
                         PickUpItem(hit.transform.gameObject);
                         break;
                     case 8:
-                        DropItemToMachine(hit.transform.gameObject, hit);
+                        DropPizzaToMachine(hit.transform.gameObject, hit);
                         break;
                     default:
                         break;
@@ -146,15 +146,18 @@ public class PlayerController : Singleton<PlayerController>
             
         }
     }
-    private void DropItemToMachine(GameObject machine, RaycastHit RayHitPos)
+    private void DropPizzaToMachine(GameObject machine, RaycastHit RayHitPos)
     {
         Vector3 pointPos = RayHitPos.normal;
 
+        var obj = _grabPos.transform.GetChild(0).gameObject;
         float dotProduct = Vector3.Dot(pointPos, machine.transform.up);
 
-        if (CheckOnHandlingItem() && dotProduct > 0.9f) 
+        if (CheckOnHandlingItem() &&
+            dotProduct > 0.9f &&
+            obj.layer == LayerMask.NameToLayer("Pizza"))  
         {
-            InteractionObjectManger.Instance.OnDropItemToMachine(_grabPos.transform.GetChild(0).gameObject, machine, RayHitPos.point);
+            InteractionObjectManger.Instance.OnDropItemToMachine(obj, machine, RayHitPos.point);
         }
     }
     private void DropItem()
