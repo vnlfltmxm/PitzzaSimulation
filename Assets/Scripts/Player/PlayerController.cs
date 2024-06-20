@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum ItemName
+{
+    Dough
+}
+
 public class PlayerController : Singleton<PlayerController>
 {
+    Dictionary<string, int> _itemCountDic = new Dictionary<string, int>();
+    Dictionary<string, int> _itemMaxCountDic = new Dictionary<string, int>();
     [SerializeField]
     private Camera _camera;
     [SerializeField]
@@ -15,8 +22,7 @@ public class PlayerController : Singleton<PlayerController>
     private float _verticalLookSpeed = 2.0f; 
     private float _maxLookAngle = 80f; 
     private float _minLookAngle = -60f; 
-    private float _verticalLookRotation = 0f; 
-
+    private float _verticalLookRotation = 0f;
     private void Awake()
     {
         _nav = GetComponent<NavMeshAgent>();
@@ -26,7 +32,8 @@ public class PlayerController : Singleton<PlayerController>
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetItemMaxCountValueInDictionary(nameof(ItemName.Dough), 5);
+        SetItemCountValueInDictionary(nameof(ItemName.Dough));
     }
 
     // Update is called once per frame
@@ -51,7 +58,46 @@ public class PlayerController : Singleton<PlayerController>
             return false;
         }
     }
+    private void AddItemMaxCountInDictionary(GameObject item)
+    {
+        
+    }
+    private bool CheckItemCount(string itemName)
+    {
 
+        if (_itemMaxCountDic[itemName] > _itemCountDic[itemName])
+        {
+            return true;
+        }
+
+        return false;
+    }
+    private void SetItemMaxCountValueInDictionary(string itemName, int maxCount)
+    {
+        _itemMaxCountDic.Add(itemName, maxCount);
+    }
+    private void SetItemCountValueInDictionary(string itemName)
+    {
+        if (!_itemCountDic.ContainsKey(itemName))
+        {
+            _itemCountDic.Add(itemName, 0);
+        }
+    }
+
+    private void PlusItemCountValueInDictionary(string itemName)
+    {
+        if (_itemCountDic.ContainsKey(itemName))
+        {
+            _itemCountDic[itemName]++;
+        }
+    }
+    private void MinusItemCountValueInDictionary(string itemName)
+    {
+        if (_itemCountDic.ContainsKey(itemName))
+        {
+            _itemCountDic[itemName]--;
+        }
+    }
     private void MoveToPlayer()
     {
         if (CheckKey())
@@ -226,11 +272,20 @@ public class PlayerController : Singleton<PlayerController>
         {
             if (CheckOnHandlingItem()) 
             {
-               RetrunHandlingItem(obj);
+                RetrunHandlingItem(obj);
+                MinusItemCountValueInDictionary(obj.tag);
             }
             else
             {
-                InteractionObjectManger.Instance.OnPickUpItemToPool(obj, _grabPos);
+                if (CheckItemCount(obj.tag))
+                {
+                    InteractionObjectManger.Instance.OnPickUpItemToPool(obj, _grabPos);
+                    PlusItemCountValueInDictionary(obj.tag);
+                }
+                else
+                {
+                    Debug.Log("재료 소진");
+                }
             }
         }
 
