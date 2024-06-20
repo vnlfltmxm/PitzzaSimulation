@@ -45,6 +45,12 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
         item.transform.parent = null;
         SetUseGravityInItem(item, true);
     }
+    public void OnDropItemToMachine(GameObject item, GameObject machine, Vector3 hitPointPos)
+    {
+        item.transform.parent = null;
+        item.transform.position = hitPointPos;
+        item.transform.rotation = machine.transform.rotation;
+    }
     public void OnReturnHandlingItemToPool(GameObject pool,GameObject item)
     {
         //OnGetItemPoolToTag(pool.gameObject.name);

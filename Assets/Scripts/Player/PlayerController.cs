@@ -114,6 +114,9 @@ public class PlayerController : Singleton<PlayerController>
                     case 7:
                         PickUpItem(hit.transform.gameObject);
                         break;
+                    case 8:
+                        DropItemToMachine(hit.transform.gameObject, hit);
+                        break;
                     default:
                         break;
                 }
@@ -141,6 +144,17 @@ public class PlayerController : Singleton<PlayerController>
         {
             InteractionObjectManger.Instance.OnPickUpItem(obj, _grabPos);
             
+        }
+    }
+    private void DropItemToMachine(GameObject machine, RaycastHit RayHitPos)
+    {
+        Vector3 pointPos = RayHitPos.normal;
+
+        float dotProduct = Vector3.Dot(pointPos, machine.transform.up);
+
+        if (CheckOnHandlingItem() && dotProduct > 0.9f) 
+        {
+            InteractionObjectManger.Instance.OnDropItemToMachine(_grabPos.transform.GetChild(0).gameObject, machine, RayHitPos.point);
         }
     }
     private void DropItem()
