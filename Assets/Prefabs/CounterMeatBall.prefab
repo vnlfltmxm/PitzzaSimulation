@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4714247262910768782}
   - component: {fileID: 6580651217882379684}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CounterMeatBall
-  m_TagString: Untagged
+  m_TagString: MeatBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

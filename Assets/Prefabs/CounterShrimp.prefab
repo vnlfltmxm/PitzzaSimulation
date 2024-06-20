@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 33987819760128492}
   - component: {fileID: 23070796445781792}
   - component: {fileID: 3864122149034298902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CounterShrimp
-  m_TagString: Untagged
+  m_TagString: Shrimp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

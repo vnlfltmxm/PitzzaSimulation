@@ -7,6 +7,16 @@ TagManager:
   - Dough
   - playerSpawnPos
   - Kneader
+  - GreenPepper
+  - Olive
+  - Onion
+  - Cheese
+  - Shrimp
+  - Pepperoni
+  - Pineapple
+  - MeatBall
+  - Mushroom
+  - Sausage
   layers:
   - Default
   - TransparentFX

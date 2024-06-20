@@ -108,9 +108,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5662545161831689532}
   - component: {fileID: 4694154107982263347}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CounterPepperoni
-  m_TagString: Untagged
+  m_TagString: Pepperoni
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

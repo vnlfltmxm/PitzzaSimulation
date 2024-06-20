@@ -108,9 +108,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7520579052413247613}
   - component: {fileID: 4512521883448741132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CounterPineapple
-  m_TagString: Untagged
+  m_TagString: Pineapple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

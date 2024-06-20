@@ -9,13 +9,20 @@ public class PoolManger : Singleton<PoolManger>
     [HideInInspector]
     public Queue<GameObject> _usingPool = new Queue<GameObject>();
     [SerializeField] 
-    private GameObject Prefabs_Dough;
+    private GameObject[] Prefabs_Food;
     //private Queue<GameObject> _poolQueue;
     private void Awake()
     {
-        AddPoolInDictionary(Prefabs_Dough);
+        InitPool(Prefabs_Food);
+    }
 
-        AddObjectInPool(Prefabs_Dough);
+    private void InitPool(GameObject[] foodList)
+    {
+        for (int i = 0; i < foodList.Length; i++)
+        {
+            AddPoolInDictionary(foodList[i]);
+            AddObjectInPool(foodList[i]);
+        }
     }
 
     private void AddObjectInPool(GameObject prefabObj)
