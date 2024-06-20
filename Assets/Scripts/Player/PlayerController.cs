@@ -35,7 +35,6 @@ public class PlayerController : Singleton<PlayerController>
         MoveToPlayer();
         RotateWithMouse();
         RayToCameraFoward();
-        PressButtonG();
     }
 
     private bool CheckKey()
@@ -96,37 +95,84 @@ public class PlayerController : Singleton<PlayerController>
     private void RayToCameraFoward()
     {
         Debug.DrawRay(_camera.transform.position, _camera.transform.forward * 50, Color.red);
-    }
+        Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hit, 50, ~(1 << LayerMask.NameToLayer("Ignore Raycast")));
 
-    private void PressButtonG()
-    {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hit, 50, ~(1 << LayerMask.NameToLayer("Ignore Raycast"))))
-            {
-                var obj = hit.transform.gameObject.layer;
-                
-                switch (obj)
-                {
-                    case 6:
-                        PickUpItemToPool(hit.transform.gameObject);
-                        break;
-                    case 7:
-                        PickUpItem(hit.transform.gameObject);
-                        break;
-                    case 8:
-                        DropPizzaToMachine(hit.transform.gameObject, hit);
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-            else
-            {
-                DropItem();
-            }
+            PressButtonG(hit);
         }
+        else if(Input.GetKeyDown(KeyCode.Space))
+        {
+            PressButtonSpace(hit);
+        }
+    }
+
+    private void PressButtonG(RaycastHit hit)
+    {
+        if (hit.transform != null)
+        {
+            var obj = hit.transform.gameObject.layer;
+
+            switch (obj)
+            {
+                case 6:
+                    PickUpItemToPool(hit.transform.gameObject);
+                    break;
+                case 7:
+                    PickUpItem(hit.transform.gameObject);
+                    break;
+                case 8:
+                    DropPizzaToMachine(hit.transform.gameObject, hit);
+                    break;
+                case 9:
+                    PickUpItem(hit.transform.gameObject);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+        else
+        {
+            DropItem();
+        }
+    }
+
+    private void PressButtonSpace(RaycastHit hit)
+    {
+        if (hit.transform == null)
+        {
+            return;
+        }
+        if (CheckOnHandlingItem()) 
+        {
+            return;
+        }
+
+        GameObject obj = hit.transform.gameObject;
+
+        if (CheckItemLayer(obj, "Item") && CheckItemTag(obj, "Dough")) 
+        {
+            InteractionObjectManger.Instance.OnInvokeHandKneadEvent(hit.transform.gameObject);
+        }
+    }
+    private bool CheckItemTag(GameObject item,string tagName)
+    {
+        if (item.CompareTag(tagName))
+        {
+            return true;
+        }
+
+        return false;
+    }
+    private bool CheckItemLayer(GameObject item,string layerName)
+    {
+        if (item.layer == LayerMask.NameToLayer(layerName))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private bool CheckOnHandlingItem()
@@ -162,7 +208,7 @@ public class PlayerController : Singleton<PlayerController>
 
         if (CheckOnHandlingItem() &&
             dotProduct > 0.9f &&
-            obj.layer == LayerMask.NameToLayer("Pizza"))  
+            obj.CompareTag("Dough"))  
         {
             InteractionObjectManger.Instance.OnDropItemToMachine(obj, machine, RayHitPos.point);
         }
