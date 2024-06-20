@@ -8,7 +8,8 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
 {
     [SerializeField]
     private GameObject _pizzaHouse;
-    public GameObject _doughtRefrigerator;
+    [SerializeField]
+    private GameObject _toppingZone;
 
     public Action<GameObject> HandKnead;
 
@@ -24,6 +25,15 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
                 return child;
             }
         }
+
+        foreach (Transform child in _toppingZone.transform)
+        {
+            if (child.CompareTag(tagName))
+            {
+                return child;
+            }
+        }
+
         return null;
     }
 

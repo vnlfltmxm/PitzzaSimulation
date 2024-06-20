@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: cb581c59937d74543b991f5dbb3e047c, type: 2}
+--- !u!1 &79914206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4937039115100330772, guid: af4aca96ca8ce4e49bffc803da48bdf3, type: 3}
+  m_PrefabInstance: {fileID: 725893005}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &725893005
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -338,6 +343,10 @@ PrefabInstance:
       propertyPath: _pizzaHouse
       value: 
       objectReference: {fileID: 1480253026}
+    - target: {fileID: 9123704729221742320, guid: 88908948b8203d7409a00359eb3e39af, type: 3}
+      propertyPath: _toppingZone
+      value: 
+      objectReference: {fileID: 79914206}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88908948b8203d7409a00359eb3e39af, type: 3}
 --- !u!1001 &4104941976628707172
