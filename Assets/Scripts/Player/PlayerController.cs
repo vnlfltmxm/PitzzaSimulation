@@ -142,7 +142,14 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (obj.transform.gameObject != null)
         {
-            InteractionObjectManger.Instance.OnPickUpItem(obj, _grabPos);
+            if (CheckOnHandlingItem())
+            {
+                return;
+            }
+            else
+            {
+                InteractionObjectManger.Instance.OnPickUpItem(obj, _grabPos);
+            }
             
         }
     }
