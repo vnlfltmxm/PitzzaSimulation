@@ -128,3 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2110b3190ece2b643b4ab18a72867d0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _meshs:
+  - {fileID: 4300000, guid: bbbb0d0edf09e094db2c82def6498ff3, type: 3}
+  - {fileID: 4300000, guid: f65afbae9e16b724881fd457f409e358, type: 3}

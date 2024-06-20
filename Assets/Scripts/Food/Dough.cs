@@ -7,12 +7,21 @@ public class Dough : MonoBehaviour
     private int _doughCount = 0;
     private bool _isDoughReady = false;
 
+    [SerializeField]
+    private Mesh[] _meshs;
+
+    private MeshFilter _meshFilter;
+    private MeshCollider _meshCollider;
+
+    private void Awake()
+    {
+        _meshCollider = GetComponent<MeshCollider>();
+        _meshFilter = GetComponent<MeshFilter>();
+    }
 
     private void OnEnable()
     {
-        _isDoughReady = false;
-        _doughCount = 0;
-        this.gameObject.layer = LayerMask.NameToLayer("Item");
+       InitDough();
     }
 
     // Start is called before the first frame update
@@ -35,10 +44,31 @@ public class Dough : MonoBehaviour
         }
     }
 
+    private void ChangeMesh(Mesh mesh)
+    {
+        _meshFilter.mesh = mesh;
+        ChangeMeshCollider(mesh);
+    }
+
+    private void ChangeMeshCollider(Mesh mesh)
+    {
+        _meshCollider.sharedMesh = null;
+        _meshCollider.sharedMesh = mesh;
+    }
+
+    private void InitDough()
+    {
+        _isDoughReady = false;
+        _doughCount = 0;
+        this.gameObject.layer = LayerMask.NameToLayer("Item");
+        ChangeMesh(_meshs[0]);
+    }
+
     private void DoughReady()
     {
         _isDoughReady = true;
         this.gameObject.layer = LayerMask.NameToLayer("Pizza");
+        ChangeMesh(_meshs[1]);
         UnResterHandKneadEvent();
     }
 
