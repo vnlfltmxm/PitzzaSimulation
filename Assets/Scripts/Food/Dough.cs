@@ -91,11 +91,11 @@ public class Dough : MonoBehaviour
 
     private void ResterHandKneadEvent()
     {
-        InteractionObjectManger.Instance.HandKnead += OnPlusDoughCount;
+        EventManger.Instance.HandKnead += OnPlusDoughCount;
     }
     private void UnResterHandKneadEvent()
     {
-        InteractionObjectManger.Instance.HandKnead -= OnPlusDoughCount;
+        EventManger.Instance.HandKnead -= OnPlusDoughCount;
         Debug.Log("반죽 이벤트 해제");
     }
 }

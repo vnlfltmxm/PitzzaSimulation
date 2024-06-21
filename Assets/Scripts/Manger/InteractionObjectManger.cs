@@ -11,7 +11,7 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     [SerializeField]
     private GameObject _toppingZone;
 
-    public Action<GameObject> HandKnead;
+  
 
     private Queue<GameObject> _usingPool = new Queue<GameObject>();
 
@@ -42,10 +42,7 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     //    _pickUpItem += OnGetItemToTag;
     //    _pickUpItem += ;
     //}
-    public void OnInvokeHandKneadEvent(GameObject target)
-    {
-        HandKnead?.Invoke(target);
-    }
+    
     public void OnPickUpItem(GameObject item, GameObject grapPos)
     {
         SetUseGravityInItem(item, false);

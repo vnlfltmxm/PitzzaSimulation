@@ -157,7 +157,7 @@ public class PlayerController : Singleton<PlayerController>
 
         if (CheckItemLayer(obj, "Item") && CheckItemTag(obj, "Dough")) 
         {
-            InteractionObjectManger.Instance.OnInvokeHandKneadEvent(hit.transform.gameObject);
+            EventManger.Instance.OnInvokeHandKneadEvent(hit.transform.gameObject);
         }
     }
     private bool CheckItemTag(GameObject item,string tagName)
