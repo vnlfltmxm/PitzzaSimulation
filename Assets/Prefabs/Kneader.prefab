@@ -393,6 +393,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Elevator_Buttons_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1428609012047252, guid: d78db2c9c92d95c46b071d012f2eae7b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4200403950582492, guid: d78db2c9c92d95c46b071d012f2eae7b, type: 3}
       propertyPath: m_RootOrder
       value: 3

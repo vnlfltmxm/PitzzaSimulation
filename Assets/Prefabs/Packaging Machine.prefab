@@ -766,6 +766,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Toilet_Button_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1170931982474130, guid: 8c16664783a9ea848b7e8f4ba7ebd55a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4645812443968926, guid: 8c16664783a9ea848b7e8f4ba7ebd55a, type: 3}
       propertyPath: m_RootOrder
       value: 11
