@@ -7,45 +7,51 @@ public class MachineButtonBase : MonoBehaviour
 {
     [SerializeField]
     private BoxCollider _usingCollider;
-    private string _tagName;
+    protected string _tagName;
 
     protected virtual void OnEnable()
     {
         _tagName = gameObject.tag;
+        RegisterMachinButtonEvent(_tagName, EnableUsingCollider, DisabeleUsingCollider);
     }
 
-    public void RegisterMachinButtonEvent(string tagName, Action action)
+    protected void RegisterMachinButtonEvent(string tagName, Action pushAction, Action unPushAction)
     {
         switch (tagName)
         {
             case "Oven":
                 break;
             case "Kneader":
-                EventManger.Instance.KneaderMachine += action;
+                EventManger.Instance.TurnOnKneaderMachine += pushAction;
+                EventManger.Instance.TurnOffKneaderMachine += unPushAction;
                 break;
             case "PackagingMachine":
                 break;
 
         }
     }
-    public void UnRegisterMachinButtonEvent(string tagName, Action action)
+    protected void UnRegisterMachinButtonEvent(string tagName, Action action, Action unPushAction)
     {
         switch (tagName)
         {
             case "Oven":
                 break;
             case "Kneader":
-                EventManger.Instance.KneaderMachine -= action;
+                EventManger.Instance.TurnOnKneaderMachine -= action;
+                EventManger.Instance.TurnOffKneaderMachine -= unPushAction;
                 break;
             case "PackagingMachine":
                 break;
 
         }
     }
-    protected virtual void SetUsingCollider(bool value)
+    protected virtual void DisabeleUsingCollider()
     {
-        _usingCollider.enabled = value;
+        _usingCollider.enabled = false;
     }
 
-
+    protected virtual void EnableUsingCollider()
+    {
+        _usingCollider.enabled = true;
+    }
 }
