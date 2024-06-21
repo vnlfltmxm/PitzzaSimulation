@@ -13,6 +13,7 @@ public class MachineButtonBase : MonoBehaviour
     {
         _tagName = gameObject.tag;
         RegisterMachinButtonEvent(_tagName, EnableUsingCollider, DisabeleUsingCollider);
+        
     }
 
     protected void RegisterMachinButtonEvent(string tagName, Action pushAction, Action unPushAction)
@@ -30,6 +31,8 @@ public class MachineButtonBase : MonoBehaviour
 
         }
     }
+
+    
     protected void UnRegisterMachinButtonEvent(string tagName, Action action, Action unPushAction)
     {
         switch (tagName)

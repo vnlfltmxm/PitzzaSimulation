@@ -71,7 +71,7 @@ public class Dough : MonoBehaviour
         ChangeMesh(_meshs[1]);
         UnResterHandKneadEvent();
     }
-
+    
     private void OnPlusDoughCount(GameObject thisGameObj)
     {
         if(thisGameObj != this.gameObject)
