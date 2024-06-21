@@ -9,10 +9,21 @@ public class EventManger : Singleton<EventManger>
     public Action<GameObject> HandKnead;
     public Action TurnOnKneaderMachine;
     public Action TurnOffKneaderMachine;
+    public Action<GameObject> TurnOffMachine;
+    public Action<GameObject> TurnOnMachine;
 
     public void OnInvokeHandKneadEvent(GameObject target)
     {
         HandKnead?.Invoke(target);
+    }
+
+    public void OnMachineActivateEvent(GameObject targetMachine)
+    {
+        TurnOnMachine?.Invoke(targetMachine);
+    }
+    public void OnMachineUnactivateEvent(GameObject targetMachine)
+    {
+        TurnOffMachine?.Invoke(targetMachine);
     }
 
     public void OnMachineButtonPushEvent(string tagName)
