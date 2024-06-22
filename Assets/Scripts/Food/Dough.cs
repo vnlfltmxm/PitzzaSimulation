@@ -90,16 +90,14 @@ public class Dough : MonoBehaviour
     {
         if (EventManger.Instance.CheckEventTarget(thisGameObj, this.gameObject) == false)
         {
-            Debug.Log("³ª¾Æ´Ô");
             return;
         }
 
         _doughCount++;
-        Debug.Log($"{_doughCount}È¸ ¹ÝÁ×");
+
         if(_doughCount >= 10)
         {
             DoughReady();
-            Debug.Log("¹ÝÁ× ²ý");
         }
     }
 
@@ -110,7 +108,6 @@ public class Dough : MonoBehaviour
     private void UnResterHandKneadEvent()
     {
         EventManger.Instance.HandKnead -= OnPlusDoughCount;
-        Debug.Log("¹ÝÁ× ÀÌº¥Æ® ÇØÁ¦");
     }
     private void ResterMoveDoughEvent()
     {
@@ -119,6 +116,40 @@ public class Dough : MonoBehaviour
     private void UnResterMoveDoughEvent()
     {
         EventManger.Instance.HandKnead -= OnPlusDoughCount;
-        Debug.Log("¹ÝÁ× ÀÌº¥Æ® ÇØÁ¦");
     }
+
+    public IEnumerator MoveDough(Transform destination)
+    {
+        while (true)
+        {
+
+            yield return new WaitForSeconds(0.5f);
+
+            float desY = destination.position.y - transform.position.y;
+            float desZ = destination.position.z - transform.position.z;
+
+            new Vector3 (0,desY, desZ);
+
+            this.transform.Translate()
+
+
+
+            if (CheckDestinationPos(destination))
+            {
+                yield break;
+            }
+        }
+    }
+
+    private bool CheckDestinationPos(Transform destination)
+    {
+        if (destination.position.y - this.transform.position.y <= 1 &&
+            destination.position.z - this.transform.position.z <= 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
 }
