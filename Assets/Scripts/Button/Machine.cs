@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class Machine : MonoBehaviour
+public class MachineBase : MonoBehaviour
 {
     [SerializeField]
     private string _type;
@@ -12,7 +12,7 @@ public class Machine : MonoBehaviour
 
     [HideInInspector]
     public bool _isTurnOnMachine {  get { return _isActiveMachine; } }
-    private void OnActivateMachine(GameObject target)
+    protected virtual void OnActivateMachine(GameObject target)
     {
         if (EventManger.Instance.CheckEventTarget(target, this.gameObject) == false)
         {
@@ -22,7 +22,7 @@ public class Machine : MonoBehaviour
         _isActiveMachine = true;
     }
 
-    private void OnUnactivateMachine(GameObject target)
+    protected virtual void OnUnactivateMachine(GameObject target)
     {
         if (EventManger.Instance.CheckEventTarget(target, this.gameObject) == false)
         {
