@@ -40,6 +40,14 @@ public class EventManger : Singleton<EventManger>
 
         }
     }
+    public bool CheckEventTarget(GameObject target, GameObject thisObj)
+    {
+        if (target == null || target != thisObj)
+        {
+            return false;
+        }
 
-   
+        return true;
+    }
+
 }

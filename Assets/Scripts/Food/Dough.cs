@@ -42,7 +42,21 @@ public class Dough : MonoBehaviour
         {
             ResterHandKneadEvent();
         }
+
+        if (collision.transform.CompareTag("KneaderInputPos") && _isDoughReady == true)
+        {
+            ResterHandKneadEvent();
+        }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.CompareTag("KneaderInputPos") && _isDoughReady == true)
+        {
+            ResterHandKneadEvent();
+        }
+    }
+
 
     private void ChangeMesh(Mesh mesh)
     {
@@ -74,7 +88,7 @@ public class Dough : MonoBehaviour
     
     private void OnPlusDoughCount(GameObject thisGameObj)
     {
-        if(thisGameObj != this.gameObject)
+        if (EventManger.Instance.CheckEventTarget(thisGameObj, this.gameObject) == false)
         {
             Debug.Log("나아님");
             return;
@@ -94,6 +108,15 @@ public class Dough : MonoBehaviour
         EventManger.Instance.HandKnead += OnPlusDoughCount;
     }
     private void UnResterHandKneadEvent()
+    {
+        EventManger.Instance.HandKnead -= OnPlusDoughCount;
+        Debug.Log("반죽 이벤트 해제");
+    }
+    private void ResterMoveDoughEvent()
+    {
+        EventManger.Instance.HandKnead += OnPlusDoughCount;
+    }
+    private void UnResterMoveDoughEvent()
     {
         EventManger.Instance.HandKnead -= OnPlusDoughCount;
         Debug.Log("반죽 이벤트 해제");

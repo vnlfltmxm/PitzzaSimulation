@@ -14,7 +14,7 @@ public class Machine : MonoBehaviour
     public bool _isTurnOnMachine {  get { return _isActiveMachine; } }
     private void OnActivateMachine(GameObject target)
     {
-        if(target == null || target != this.gameObject)
+        if (EventManger.Instance.CheckEventTarget(target, this.gameObject) == false)
         {
             return;
         }
@@ -24,23 +24,15 @@ public class Machine : MonoBehaviour
 
     private void OnUnactivateMachine(GameObject target)
     {
-        if (target == null || target != this.gameObject)
+        if (EventManger.Instance.CheckEventTarget(target, this.gameObject) == false)
         {
             return;
         }
         _isActiveMachine = false;
     }
 
-    private void RegisterOnMachineEvent(GameObject target)
-    {
-        EventManger.Instance.TurnOnMachine += OnActivateMachine;
-    }
-
-    private void RegisterOffMachineEvent(GameObject target)
-    {
-        EventManger.Instance.TurnOffMachine += OnUnactivateMachine;
-    }
-
+  
+    
 
 
 }
