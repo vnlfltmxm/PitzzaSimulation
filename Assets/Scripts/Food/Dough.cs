@@ -6,6 +6,7 @@ public class Dough : MonoBehaviour
 {
     private int _doughCount = 0;
     private bool _isDoughReady = false;
+    private bool _isMoveReady = false;
 
     [SerializeField]
     private Mesh[] _meshs;
@@ -47,6 +48,11 @@ public class Dough : MonoBehaviour
         {
             ResterHandKneadEvent();
         }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        
     }
 
     private void OnCollisionExit(Collision collision)
@@ -120,6 +126,7 @@ public class Dough : MonoBehaviour
 
     public IEnumerator MoveDough(Transform destination)
     {
+        this.gameObject.layer = LayerMask.NameToLayer("Default");
         while (true)
         {
 
@@ -128,14 +135,15 @@ public class Dough : MonoBehaviour
             float desY = destination.position.y - transform.position.y;
             float desZ = destination.position.z - transform.position.z;
 
-            new Vector3 (0,desY, desZ);
+            Vector3 moveDes = new Vector3(0, desY, desZ);
 
-            this.transform.Translate()
+            this.transform.Translate(moveDes);
 
 
 
             if (CheckDestinationPos(destination))
             {
+                this.gameObject.layer = LayerMask.NameToLayer("Pizza");
                 yield break;
             }
         }
