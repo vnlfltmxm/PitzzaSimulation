@@ -47,6 +47,7 @@ public class Dough : MonoBehaviour
 
         if (collision.transform.CompareTag("KneaderInputPos") && _isDoughReady == true)
         {
+            _isMoveReady = true;
             ResterMoveDoughEvent();
         }
     }
@@ -95,6 +96,7 @@ public class Dough : MonoBehaviour
     private void InitDough()
     {
         _isDoughReady = false;
+        _isMoveReady = false;
         _doughCount = 0;
         this.gameObject.layer = LayerMask.NameToLayer("Item");
         ChangeMesh(_meshs[0]);
@@ -155,14 +157,14 @@ public class Dough : MonoBehaviour
         while (true)
         {
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForFixedUpdate();
 
             float desY = destination.position.y - transform.position.y;
             float desZ = destination.position.z - transform.position.z;
 
             Vector3 moveDes = new Vector3(0, desY, desZ);
 
-            this.transform.Translate(moveDes);
+            this.transform.Translate(moveDes,Space.World);
 
 
 
@@ -177,8 +179,8 @@ public class Dough : MonoBehaviour
 
     private bool CheckDestinationPos(Transform destination)
     {
-        if (destination.position.y - this.transform.position.y <= 1 &&
-            destination.position.z - this.transform.position.z <= 1)
+        if (destination.position.y - this.transform.position.y <= 0 &&
+            destination.position.z - this.transform.position.z <= 0)
         {
             return true;
         }

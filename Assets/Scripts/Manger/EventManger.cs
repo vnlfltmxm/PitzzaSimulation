@@ -18,7 +18,12 @@ public class EventManger : Singleton<EventManger>
     {
         var doughPos = DoughDesPos.Invoke();
 
-        DoughMove.Invoke(doughPos);
+        if(doughPos == null)
+        {
+            return;
+        }
+        DoughMove?.Invoke(doughPos);
+
     }
 
     public void OnInvokeHandKneadEvent(GameObject target)
