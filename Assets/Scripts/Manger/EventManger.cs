@@ -30,25 +30,11 @@ public class EventManger : Singleton<EventManger>
     {
         TurnOnMachine?.Invoke(targetMachine);
     }
-    public void OnMachineUnactivateEvent(GameObject targetMachine)
+    public void OnMachineDeactivateEvent(GameObject targetMachine)
     {
         TurnOffMachine?.Invoke(targetMachine);
     }
 
-    public void OnMachineButtonPushEvent(string tagName)
-    {
-        switch (tagName)
-        {
-            case "Oven":
-                break;
-            case "Kneader":
-                TurnOnKneaderMachine?.Invoke();
-                break;
-            case "PackagingMachine":
-                break;
-
-        }
-    }
     public bool CheckEventTarget(GameObject target, GameObject thisObj)
     {
         if (target == null || target != thisObj)

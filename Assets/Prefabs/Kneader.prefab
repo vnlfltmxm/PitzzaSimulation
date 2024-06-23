@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: Kneader
+  _doughDesPos: {fileID: 1635675885521623859}
 --- !u!1 &5854590896552103827
 GameObject:
   m_ObjectHideFlags: 0

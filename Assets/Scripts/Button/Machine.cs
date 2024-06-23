@@ -16,15 +16,21 @@ public class MachineBase : MonoBehaviour
     public string _machineType { get { return _type; } }
     protected virtual void OnEnable()
     {
-        EventManger.Instance.TurnOnMachine += OnActivateMachine;
+        RegisterMachinButtonEvent();
+    }
+    protected virtual void OnDisable()
+    {
+        UnRegisterMachinButtonEvent();
     }
     protected void RegisterMachinButtonEvent()
     {
+        EventManger.Instance.TurnOnMachine += OnActivateMachine;
     }
 
 
     protected void UnRegisterMachinButtonEvent()
     {
+        EventManger.Instance.TurnOnMachine -= OnActivateMachine;
     }
     protected virtual void OnActivateMachine(GameObject target)
     {
@@ -33,7 +39,14 @@ public class MachineBase : MonoBehaviour
             return;
         }
 
-        _isActiveMachine = true;
+        if(_isActiveMachine)
+        {
+            _isActiveMachine = false;
+        }
+        else
+        {
+            _isActiveMachine = true;
+        }
     }
 
     protected virtual void OnUnactivateMachine(GameObject target)

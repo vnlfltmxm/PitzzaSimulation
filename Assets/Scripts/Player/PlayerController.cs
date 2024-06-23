@@ -131,6 +131,10 @@ public class PlayerController : Singleton<PlayerController>
                 case 9:
                     PickUpItem(hit.transform.gameObject);
                     break;
+                case 10:
+                    
+                    PushMachineButton(hit.transform.gameObject);
+                    break;
                 default:
                     break;
             }
@@ -206,12 +210,14 @@ public class PlayerController : Singleton<PlayerController>
     private void DropPizzaToMachine(GameObject machine, RaycastHit RayHitPos)
     {
         Vector3 pointPos = RayHitPos.normal;
-
+        if(CheckOnHandlingItem()==false ) 
+        {
+            return;
+        }
         var obj = _grabPos.transform.GetChild(0).gameObject;
         float dotProduct = Vector3.Dot(pointPos, machine.transform.up);
 
-        if (CheckOnHandlingItem() &&
-            dotProduct > 0.9f &&
+        if (dotProduct > 0.9f &&
             obj.CompareTag("Dough"))  
         {
             InteractionObjectManger.Instance.OnDropItemToMachine(obj, machine, RayHitPos.point);
@@ -238,6 +244,16 @@ public class PlayerController : Singleton<PlayerController>
             }
         }
 
+    }
+
+    private void PushMachineButton(GameObject obj)
+    {
+        var MachineButton = obj.GetComponentInParent<MachineBase>();
+
+        if(MachineButton != null)
+        {
+            EventManger.Instance.OnMachineActivateEvent(MachineButton.gameObject);
+        }
     }
 
     private void RetrunHandlingItem(GameObject rayHitObj)

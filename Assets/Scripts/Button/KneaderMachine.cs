@@ -8,9 +8,16 @@ public class KneaderMachine : MachineBase
     private GameObject _doughDesPos;
 
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         EventManger.Instance.DoughDesPos += TransMissionDoughDesPos;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        EventManger.Instance.DoughDesPos -= TransMissionDoughDesPos;
     }
     public Transform TransMissionDoughDesPos()
     {
