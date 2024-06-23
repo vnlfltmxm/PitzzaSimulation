@@ -132,7 +132,6 @@ public class PlayerController : Singleton<PlayerController>
                     PickUpItem(hit.transform.gameObject);
                     break;
                 case 10:
-                    
                     PushMachineButton(hit.transform.gameObject);
                     break;
                 default:
