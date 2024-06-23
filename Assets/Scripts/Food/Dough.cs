@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Dough : MonoBehaviour
@@ -46,13 +47,28 @@ public class Dough : MonoBehaviour
 
         if (collision.transform.CompareTag("KneaderInputPos") && _isDoughReady == true)
         {
-            ResterHandKneadEvent();
+            ResterMoveDoughEvent();
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        
+        if(collision.transform.GetComponentInParent<MachineBase>() != null)
+        {
+            var machine = collision.transform.GetComponentInParent<MachineBase>();
+
+            if (machine._isTurnOnMachine)
+            {
+                switch (machine._machineType)
+                {
+                    case "Kneader":
+                        EventManger.Instance.OnDoughMoveEvent();
+                        break;
+                }
+            }
+
+            
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -117,11 +133,20 @@ public class Dough : MonoBehaviour
     }
     private void ResterMoveDoughEvent()
     {
-        EventManger.Instance.HandKnead += OnPlusDoughCount;
+        EventManger.Instance.DoughMove += StartMove;
     }
     private void UnResterMoveDoughEvent()
     {
-        EventManger.Instance.HandKnead -= OnPlusDoughCount;
+        EventManger.Instance.DoughMove -= StartMove;
+    }
+
+    private void StartMove(Transform destination)
+    {
+        if (_isMoveReady)
+        {
+            _isMoveReady = false;
+            StartCoroutine(MoveDough(destination));
+        }
     }
 
     public IEnumerator MoveDough(Transform destination)
@@ -144,6 +169,7 @@ public class Dough : MonoBehaviour
             if (CheckDestinationPos(destination))
             {
                 this.gameObject.layer = LayerMask.NameToLayer("Pizza");
+                UnResterMoveDoughEvent();
                 yield break;
             }
         }

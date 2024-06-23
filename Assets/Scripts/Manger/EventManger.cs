@@ -7,10 +7,19 @@ public class EventManger : Singleton<EventManger>
 {
 
     public Action<GameObject> HandKnead;
-    public Action TurnOnKneaderMachine;
-    public Action TurnOffKneaderMachine;
     public Action<GameObject> TurnOffMachine;
     public Action<GameObject> TurnOnMachine;
+
+    public Action<Transform> DoughMove;
+    public Func<Transform> DoughDesPos;
+
+
+    public void OnDoughMoveEvent()
+    {
+        var doughPos = DoughDesPos.Invoke();
+
+        DoughMove.Invoke(doughPos);
+    }
 
     public void OnInvokeHandKneadEvent(GameObject target)
     {
