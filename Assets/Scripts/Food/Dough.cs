@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Dough : MonoBehaviour
 {
@@ -165,9 +166,7 @@ public class Dough : MonoBehaviour
             Vector3 moveDes = new Vector3(0, desY, desZ);
 
             this.transform.Translate(moveDes * Time.deltaTime, Space.World);
-
-
-
+            RotateDough(destination);
             if (CheckDestinationPos(destination))
             {
                 this.gameObject.layer = LayerMask.NameToLayer("Pizza");
@@ -175,6 +174,14 @@ public class Dough : MonoBehaviour
                 yield break;
             }
         }
+    }
+
+    private void RotateDough(Transform destination)
+    {
+        Quaternion currentRotation = transform.rotation;
+        Quaternion targetRotation = destination.rotation;
+
+        transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, Time.deltaTime);
     }
 
     private bool CheckDestinationPos(Transform destination)
