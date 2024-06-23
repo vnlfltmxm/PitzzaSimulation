@@ -164,7 +164,7 @@ public class Dough : MonoBehaviour
 
             Vector3 moveDes = new Vector3(0, desY, desZ);
 
-            this.transform.Translate(moveDes,Space.World);
+            this.transform.Translate(moveDes * Time.deltaTime, Space.World);
 
 
 
@@ -179,8 +179,8 @@ public class Dough : MonoBehaviour
 
     private bool CheckDestinationPos(Transform destination)
     {
-        if (destination.position.y - this.transform.position.y <= 0 &&
-            destination.position.z - this.transform.position.z <= 0)
+        if (destination.position.y - this.transform.position.y <= 0.1f &&
+            destination.position.z - this.transform.position.z <= 0.1f)
         {
             return true;
         }
