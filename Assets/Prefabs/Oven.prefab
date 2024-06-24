@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6589975346025148598}
   - component: {fileID: 6759797881785169886}
   - component: {fileID: 3489731517996957288}
-  - component: {fileID: 2548152546839791695}
   m_Layer: 0
   m_Name: DownOvenGlass
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68942397533049285}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.07, z: 0.84}
+  m_LocalPosition: {x: 0, y: 0.165, z: 0.84}
   m_LocalScale: {x: 0.148, y: 1, z: 0.021999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2548152546839791695
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68942397533049285}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1459233024144134395
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2632213377096400164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.047, y: 0.097, z: 0.85}
+  m_LocalPosition: {x: -1.047, y: 0.177, z: 0.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -258,7 +243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2986189684054804200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.051, y: 0.087, z: 0.854}
+  m_LocalPosition: {x: -1.051, y: 0.185, z: 0.854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -303,7 +288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6363783920393186417}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.159, z: -0.85}
+  m_LocalPosition: {x: 0, y: 0.058, z: -0.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -337,7 +322,6 @@ GameObject:
   - component: {fileID: 363719376947743434}
   - component: {fileID: 106823159397252270}
   - component: {fileID: 1244708954764567307}
-  - component: {fileID: 4954874931158980933}
   m_Layer: 0
   m_Name: UpOvenGlass
   m_TagString: Untagged
@@ -353,7 +337,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7352238992213266497}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.076, z: 0.84}
+  m_LocalPosition: {x: 0, y: 0.165, z: 0.84}
   m_LocalScale: {x: 0.148, y: 1, z: 0.021999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -410,20 +394,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4954874931158980933
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7352238992213266497}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &7446216423685133196
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7446216423685133196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.152, z: -0.85}
+  m_LocalPosition: {x: 0, y: 0.067, z: -0.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -652,7 +622,6 @@ GameObject:
   - component: {fileID: 8076518748893778651}
   - component: {fileID: 8085987959083931443}
   - component: {fileID: 969861471239860505}
-  - component: {fileID: 6120603369611174417}
   m_Layer: 0
   m_Name: Oven
   m_TagString: Untagged
@@ -740,16 +709,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.3720288, y: 2.0119386, z: 1.6528475}
   m_Center: {x: 0, y: 1.0059693, z: 0}
---- !u!114 &6120603369611174417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8099212194842472605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 372fb4e3328f9954ebf9d86043f7d5bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _type: Oven
