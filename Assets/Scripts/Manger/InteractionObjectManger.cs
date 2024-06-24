@@ -61,6 +61,22 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
         item.transform.position = hitPointPos;
         item.transform.rotation = machine.transform.rotation;
     }
+    public void OnToppingPizza(GameObject item, GameObject pizza, Vector3 hitPointPos)
+    {
+        GameObject pizzaItem = PoolManger.Instance.OutPoolItem(item);
+        if (pizzaItem == null)
+        {
+            item.transform.parent = pizza.transform;
+            item.transform.position = hitPointPos;
+            item.transform.rotation = pizza.transform.rotation;
+            Debug.Log("재료소진2");
+            return;
+        }
+        pizzaItem.SetActive(true);
+        pizzaItem.transform.parent = pizza.transform;
+        pizzaItem.transform.position = hitPointPos;
+        SetUseGravityInItem(pizzaItem, false);
+    }
     public void OnReturnHandlingItemToPool(GameObject pool,GameObject item)
     {
         //OnGetItemPoolToTag(pool.gameObject.name);

@@ -124,6 +124,7 @@ public class PlayerController : Singleton<PlayerController>
                     break;
                 case 7:
                     PickUpItem(hit.transform.gameObject);
+                    ToppingPizza(hit.transform.gameObject, hit);
                     break;
                 case 8:
                     DropPizzaToMachine(hit.transform.gameObject, hit);
@@ -244,6 +245,22 @@ public class PlayerController : Singleton<PlayerController>
         }
 
     }
+
+    private void ToppingPizza(GameObject pizza,RaycastHit hitRay)
+    {
+        if (CheckOnHandlingItem())
+        {
+            var pizzaItem=_grabPos.transform.GetChild(0).gameObject;
+
+            if(pizzaItem.CompareTag("Dough"))
+            {
+                return;
+            }
+
+            InteractionObjectManger.Instance.OnToppingPizza(pizzaItem, pizza, hitRay.point);
+        }
+    }
+
 
     private void PushMachineButton(GameObject obj)
     {
