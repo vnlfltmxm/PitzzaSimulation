@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class Dough : MonoBehaviour
 {
@@ -160,12 +159,19 @@ public class Dough : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
 
-            float desY = destination.position.y - transform.position.y;
-            float desZ = destination.position.z - transform.position.z;
 
-            Vector3 moveDes = new Vector3(0, desY, desZ);
+            float y = destination.position.y;
+            float z = destination.position.z;
 
-            this.transform.Translate(moveDes * Time.deltaTime, Space.World);
+            Vector3 test = new Vector3(this.transform.position.x, y, z);
+
+            this.transform.position = Vector3.Lerp(transform.position, test, Time.deltaTime);
+
+            //float desY = destination.position.y - transform.position.y;
+            //float desZ = destination.position.z - transform.position.z;
+            //Vector3 moveDes = new Vector3(0, desY, desZ);
+            //this.transform.Translate(moveDes * Time.deltaTime, Space.World);
+
             RotateDough(destination);
             if (CheckDestinationPos(destination))
             {
