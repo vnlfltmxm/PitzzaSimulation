@@ -64,7 +64,7 @@ public class PoolManger : Singleton<PoolManger>
     {
         if (item.transform.childCount > 0)
         {
-            for (int i = 0; i < item.transform.childCount; i++) 
+            for (int i = item.transform.childCount - 1; i >= 0; i--)  
             {
                 var child = item.transform.GetChild(i);
 
