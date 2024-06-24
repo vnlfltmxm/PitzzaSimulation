@@ -9,6 +9,7 @@ public class EventManger : Singleton<EventManger>
     public Action<GameObject> HandKnead;
     public Action<GameObject> TurnOffMachine;
     public Action<GameObject> TurnOnMachine;
+    public Action<Color> OverCooked;
 
     public Action<Transform> DoughMove;
     public Func<Transform> DoughDesPos;
@@ -24,6 +25,16 @@ public class EventManger : Singleton<EventManger>
         }
         DoughMove?.Invoke(doughPos);
 
+    }
+
+    public void OnRegisterOverCookedEvent(Action<Color> action)
+    {
+        OverCooked += action;
+    }
+
+    public void OnOverCookedEvent()
+    {
+        OverCooked?.Invoke(Color.black);
     }
 
     public void OnInvokeHandKneadEvent(GameObject target)

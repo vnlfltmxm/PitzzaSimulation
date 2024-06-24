@@ -8,22 +8,27 @@ public class Dough : Food
     private int _doughCount = 0;
     private bool _isDoughReady = false;
     private bool _isMoveReady = false;
+    private bool _isDoughCooked = false;
+    private bool _isDoughOverCooked = false;
+    private float _doughCookedTime;
 
     [SerializeField]
     private Mesh[] _meshs;
 
-    private MeshFilter _meshFilter;
+    protected MeshFilter _meshFilter;
     private MeshCollider _meshCollider;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _meshCollider = GetComponent<MeshCollider>();
         _meshFilter = GetComponent<MeshFilter>();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-       InitDough();
+        base.OnEnable();
+        InitDough();
     }
     // Start is called before the first frame update
     void Start()
@@ -64,6 +69,9 @@ public class Dough : Food
                     case "Kneader":
                         EventManger.Instance.OnDoughMoveEvent();
                         break;
+                    case "Oven":
+                        DoughCooked();
+                        break;
                 }
             }
 
@@ -79,7 +87,31 @@ public class Dough : Food
         }
     }
 
+    private void DoughCooked()
+    {
+        if(_isDoughOverCooked == false)
+        {
+            _doughCookedTime += Time.deltaTime;
+            Debug.Log(_doughCookedTime);
+            if (_isDoughCooked == false && _doughCookedTime >= 10.0f)
+            {
+                //마테리얼 변경
+                Color cookedColor = new Color(1, 0.68f, 0.28f, 1);
+                base.ChangeMaterialColor(cookedColor);
+                Debug.Log("구워짐");
+                _isDoughCooked = true;
+            }
 
+            if (_doughCookedTime >= 15.0f)
+            {
+                //마테리얼 변경
+                EventManger.Instance.OnOverCookedEvent();
+                Debug.Log("탐");
+                _isDoughOverCooked = true;
+            }
+        }
+    }
+    
     private void ChangeMesh(Mesh mesh)
     {
         _meshFilter.mesh = mesh;
@@ -97,6 +129,9 @@ public class Dough : Food
         _isDoughReady = false;
         _isMoveReady = false;
         _doughCount = 0;
+        _doughCookedTime = 0;
+        _isDoughCooked = false;
+        _isDoughOverCooked = false;
         ChangeMesh(_meshs[0]);
     }
 

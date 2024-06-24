@@ -131,3 +131,7 @@ MonoBehaviour:
   _meshs:
   - {fileID: 4300000, guid: bbbb0d0edf09e094db2c82def6498ff3, type: 3}
   - {fileID: 4300000, guid: f65afbae9e16b724881fd457f409e358, type: 3}
+  _material:
+  - {fileID: 2100000, guid: fb5a8f1b9970d0f41a73e9afcbe48579, type: 2}
+  - {fileID: 2100000, guid: 6381c55409d79c948a5bd5ee3db00638, type: 2}
+  - {fileID: 2100000, guid: 4d1eb66f926402d4a8bbfb9f3cb8adac, type: 2}
