@@ -60,6 +60,7 @@ public class PoolManger : Singleton<PoolManger>
         item.transform.parent = pool.transform;
         item.SetActive(false);
         MinusItemCountValueInDictionary(pool.tag);
+        SetPoolPosionY(pool);
     }
 
     public GameObject OutPoolItem(GameObject pool)
@@ -68,6 +69,7 @@ public class PoolManger : Singleton<PoolManger>
         {
             GameObject item = _poolDic[pool.tag].Dequeue();
             PlusItemCountValueInDictionary(pool.tag);
+            SetPoolPosionY(pool);
             return item;
         }
         else
@@ -76,10 +78,41 @@ public class PoolManger : Singleton<PoolManger>
             return null;
         }
     }
-
-    private void AddItemMaxCountInDictionary(GameObject item)
+    public void SetPoolPosionY(GameObject pool)
     {
+        var targetPool = InteractionObjectManger.Instance.FindPrefabsParentTrasnform(pool.tag);
+        
+        
+        if (targetPool.CompareTag("Dough"))
+        {
+            return;
+        }
+        float m = -0.23f / _itemMaxCountDic[pool.tag];
+        float b = 1.0f;
 
+        Vector3 resultPos = new Vector3(targetPool.gameObject.transform.localPosition.x, m * _itemCountDic[pool.tag] + b, targetPool.gameObject.transform.localPosition.z);
+        targetPool.gameObject.transform.localPosition = resultPos;
+        PoolMeshEnableToCount(targetPool.gameObject);
+    }
+    private void PoolMeshEnableToCount(GameObject pool)
+    {
+        var chiled = pool.transform.GetChild(0);
+        if(chiled == null)
+        {
+            return;
+        }
+
+        if (_itemCountDic[pool.tag] == _itemMaxCountDic[pool.tag])
+        {
+            chiled.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (chiled.gameObject.activeSelf == false) 
+            {
+                chiled.gameObject.SetActive(true);
+            }
+        }
     }
     private bool CheckItemCount(string itemName)
     {

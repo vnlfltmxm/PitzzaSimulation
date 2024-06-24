@@ -70,12 +70,16 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
             item.transform.position = hitPointPos;
             item.transform.rotation = pizza.transform.rotation;
             Debug.Log("재료소진2");
-            return;
         }
-        pizzaItem.SetActive(true);
-        pizzaItem.transform.parent = pizza.transform;
-        pizzaItem.transform.position = hitPointPos;
-        SetUseGravityInItem(pizzaItem, false);
+        else
+        {
+            pizzaItem.SetActive(true);
+            pizzaItem.transform.parent = pizza.transform;
+            pizzaItem.transform.position = hitPointPos;
+            SetUseGravityInItem(pizzaItem, false);
+        }
+        
+       // PoolManger.Instance.SetPoolPosionY(item);
     }
     public void OnReturnHandlingItemToPool(GameObject pool,GameObject item)
     {
