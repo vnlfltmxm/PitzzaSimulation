@@ -56,13 +56,28 @@ public class PoolManger : Singleton<PoolManger>
 
     public void InPoolItem(GameObject pool,GameObject item)
     {
-        _poolDic[pool.tag].Enqueue(item);
-        item.transform.parent = pool.transform;
-        item.SetActive(false);
+        ReturnItemInPool(item);
         MinusItemCountValueInDictionary(pool.tag);
         SetPoolPosionY(pool);
     }
+    public void ReturnItemInPool(GameObject item)
+    {
+        if (item.transform.childCount > 0)
+        {
+            for (int i = 0; i < item.transform.childCount; i++) 
+            {
+                var child = item.transform.GetChild(i);
 
+                ReturnItemInPool(child.gameObject);
+            }
+        }
+        _poolDic[item.tag].Enqueue(item);
+
+        var parent = InteractionObjectManger.Instance.FindPrefabsParentTrasnform(item.tag);
+        item.transform.parent = parent.transform;
+        item.SetActive(false);
+
+    }
     public GameObject OutPoolItem(GameObject pool)
     {
         if (CheckItemCount(pool.tag))
