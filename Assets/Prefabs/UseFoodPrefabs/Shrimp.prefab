@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23469435686118748}
   - component: {fileID: 2449984491817814006}
   - component: {fileID: 7204222164185566946}
+  - component: {fileID: -5063408953342800434}
   m_Layer: 9
   m_Name: Shrimp
   m_TagString: Shrimp
@@ -114,3 +115,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5063408953342800434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439163563751860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463e9c58ac15ec2419d4b07f8a195b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

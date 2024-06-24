@@ -123,8 +123,9 @@ public class PlayerController : Singleton<PlayerController>
                     PickUpItemToPool(hit.transform.gameObject);
                     break;
                 case 7:
-                    PickUpItem(hit.transform.gameObject);
-                    ToppingPizza(hit.transform.gameObject, hit);
+                    //ToppingPizza(hit.transform.gameObject, hit);
+                    //PickUpItem(hit.transform.gameObject);
+                    PizzaActive(hit.transform.gameObject, hit);
                     break;
                 case 8:
                     DropPizzaToMachine(hit.transform.gameObject, hit);
@@ -182,7 +183,21 @@ public class PlayerController : Singleton<PlayerController>
 
         return false;
     }
+    private void PizzaActive(GameObject pizza, RaycastHit hitRay)
+    {
+        if (pizza.transform.gameObject != null)
+        {
+            if (CheckOnHandlingItem())
+            {
+                ToppingPizza(pizza, hitRay);
+            }
+            else
+            {
+                PickUpItem(pizza);
+            }
 
+        }
+    }
     private bool CheckOnHandlingItem()
     {
         if (_grabPos.transform.childCount > 0)
@@ -248,17 +263,14 @@ public class PlayerController : Singleton<PlayerController>
 
     private void ToppingPizza(GameObject pizza,RaycastHit hitRay)
     {
-        if (CheckOnHandlingItem())
+        var pizzaItem = _grabPos.transform.GetChild(0).gameObject;
+
+        if (pizzaItem.CompareTag("Dough"))
         {
-            var pizzaItem=_grabPos.transform.GetChild(0).gameObject;
-
-            if(pizzaItem.CompareTag("Dough"))
-            {
-                return;
-            }
-
-            InteractionObjectManger.Instance.OnToppingPizza(pizzaItem, pizza, hitRay.point);
+            return;
         }
+
+        InteractionObjectManger.Instance.OnToppingPizza(pizzaItem, pizza, hitRay.point);
     }
 
 

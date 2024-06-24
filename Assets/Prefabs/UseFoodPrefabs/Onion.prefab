@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23372085265958914}
   - component: {fileID: 1531940425333103517}
   - component: {fileID: 4525347920727303258}
+  - component: {fileID: 6909573194372854470}
   m_Layer: 9
   m_Name: Onion
   m_TagString: Onion
@@ -114,3 +115,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6909573194372854470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821227637025026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463e9c58ac15ec2419d4b07f8a195b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

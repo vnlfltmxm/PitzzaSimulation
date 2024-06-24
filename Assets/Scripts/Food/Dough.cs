@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Dough : MonoBehaviour
+public class Dough : Food
 {
     private int _doughCount = 0;
     private bool _isDoughReady = false;
@@ -25,7 +25,6 @@ public class Dough : MonoBehaviour
     {
        InitDough();
     }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -98,7 +97,6 @@ public class Dough : MonoBehaviour
         _isDoughReady = false;
         _isMoveReady = false;
         _doughCount = 0;
-        this.gameObject.layer = LayerMask.NameToLayer("Item");
         ChangeMesh(_meshs[0]);
     }
 

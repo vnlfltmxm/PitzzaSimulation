@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23940009703335166}
   - component: {fileID: 5411835299762467544}
   - component: {fileID: 7931979479322307688}
+  - component: {fileID: -1995393725945191007}
   m_Layer: 9
   m_Name: Sausage
   m_TagString: Sausage
@@ -114,3 +115,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1995393725945191007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603613873904006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463e9c58ac15ec2419d4b07f8a195b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
