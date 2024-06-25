@@ -13,7 +13,7 @@ public class EventManger : Singleton<EventManger>
     public Action Packing;
     public Action<Transform> DoughMove;
     public Func<Transform> DoughDesPos;
-
+    
     public void OnRegisterPackingEvent(Action action)
     {
         Packing += action;

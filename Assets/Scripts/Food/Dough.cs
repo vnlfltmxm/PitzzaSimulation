@@ -22,6 +22,8 @@ public class Dough : Food
     protected MeshFilter _meshFilter;
     private MeshCollider _meshCollider;
 
+    public bool _isPizzaCooked { get { return _isDoughCooked; } }
+
     protected override void Awake()
     {
         base.Awake();

@@ -189,6 +189,10 @@ public class PlayerController : Singleton<PlayerController>
         {
             if (CheckOnHandlingItem())
             {
+                if (CheckePizzaCooked(pizza) == true)
+                {
+                    return;
+                }
                 ToppingPizza(pizza, hitRay);
             }
             else
@@ -197,6 +201,16 @@ public class PlayerController : Singleton<PlayerController>
             }
 
         }
+    }
+    private bool CheckePizzaCooked(GameObject pizza)
+    {
+        var checkPizza = pizza.GetComponentInParent<Dough>();
+        if(checkPizza == null)
+        {
+            return false;
+        }
+
+        return checkPizza._isPizzaCooked;
     }
     private bool CheckOnHandlingItem()
     {

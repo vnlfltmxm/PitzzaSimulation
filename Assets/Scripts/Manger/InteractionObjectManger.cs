@@ -64,6 +64,7 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     public void OnToppingPizza(GameObject item, GameObject pizza, Vector3 hitPointPos)
     {
         GameObject pizzaItem = PoolManger.Instance.OutPoolItem(item);
+
         if (pizzaItem == null)
         {
             item.transform.parent = pizza.transform;
