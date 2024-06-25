@@ -197,6 +197,10 @@ public class PlayerController : Singleton<PlayerController>
             }
             else
             {
+                if (CheckePizzaCooked(pizza) == true && pizza.CompareTag("Dough") == false)  
+                {
+                    return;
+                }
                 PickUpItem(pizza);
             }
 
