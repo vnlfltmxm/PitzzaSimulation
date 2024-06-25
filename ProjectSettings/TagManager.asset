@@ -19,6 +19,7 @@ TagManager:
   - Sausage
   - KneaderInputPos
   - Oven
+  - Sauce
   layers:
   - Default
   - TransparentFX

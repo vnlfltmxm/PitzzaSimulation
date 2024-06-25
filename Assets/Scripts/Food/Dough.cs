@@ -91,6 +91,7 @@ public class Dough : Food
                         break;
                     case "Oven":
                         DoughCooked();
+                        Debug.Log(collision.gameObject.name);
                         break;
                 }
             }
@@ -114,13 +115,13 @@ public class Dough : Food
         if (_isDoughOverCooked == false)
         {
             _doughCookedTime += Time.deltaTime;
-            Debug.Log(_doughCookedTime);
+            
             if (_isDoughCooked == false && _doughCookedTime >= 10.0f)
             {
                 //마테리얼 변경
                 Color cookedColor = new Color(1, 0.68f, 0.28f, 1);
                 base.ChangeMaterialColor(cookedColor);
-                MeltingCheese();
+                Melting();
                 Debug.Log("구워짐");
                 _isDoughCooked = true;
             }
@@ -140,31 +141,38 @@ public class Dough : Food
         }
     }
     
-    private void MeltingCheese()
+    private void Melting()
     {
-        if (CheckCheese(this.gameObject))
+        if (CheckObj(this.gameObject,"Cheese"))
         {
             _meitingCheese.SetActive(true);
             PoolManger.Instance.ReturnItemInPool(this.gameObject, "Cheese", true);
             ChangeCheeseColor(new Color(1, 0.86f, 0, 1));
+
+            if (CheckObj(this.gameObject, "Sauce"))
+            {
+                PoolManger.Instance.ReturnItemInPool(this.gameObject, "Sauce", true);
+            }
         }
+
+        
     }
     private void ChangeCheeseColor(Color color)
     {
         _meitingCheese.GetComponent<MeshRenderer>().material.color = color;
     }
-    private bool CheckCheese(GameObject item)
+    private bool CheckObj(GameObject item, string tagName)
     {
         if (item.transform.childCount > 0)
         {
             for (int i = item.transform.childCount - 1; i >= 0; i--)
             {
                 var child = item.transform.GetChild(i);
-                if (child.CompareTag("Cheese"))
+                if (child.CompareTag(tagName))
                 {
                     return true;
                 }
-                CheckCheese(child.gameObject);
+                CheckObj(child.gameObject, tagName);
             }
         }
         return false;

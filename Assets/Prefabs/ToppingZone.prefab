@@ -304,6 +304,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CounterSauceParent
       objectReference: {fileID: 0}
+    - target: {fileID: 6081255691491399114, guid: cfbcb24cc08d4d943bb0ad2898d5b7dd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6081255691491399114, guid: cfbcb24cc08d4d943bb0ad2898d5b7dd, type: 3}
+      propertyPath: m_TagString
+      value: Sauce
+      objectReference: {fileID: 0}
     - target: {fileID: 6838127876523300452, guid: cfbcb24cc08d4d943bb0ad2898d5b7dd, type: 3}
       propertyPath: m_RootOrder
       value: 5

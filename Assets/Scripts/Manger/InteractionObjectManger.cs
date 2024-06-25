@@ -61,6 +61,7 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
         item.transform.position = hitPointPos;
         item.transform.rotation = machine.transform.rotation;
     }
+
     public void OnToppingPizza(GameObject item, GameObject pizza, Vector3 hitPointPos)
     {
         GameObject pizzaItem = PoolManger.Instance.OutPoolItem(item);
@@ -85,7 +86,7 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
             pizzaItem.SetActive(true);
             pizzaItem.transform.parent = pizza.transform;
             pizzaItem.transform.position = hitPointPos;
-            if (pizzaItem.CompareTag("Cheese") == true)
+            if (pizzaItem.CompareTag("Cheese") == true || pizzaItem.CompareTag("Sauce") == true) 
             {
                 pizzaItem.layer = LayerMask.NameToLayer("Ignore Raycast");
             }
