@@ -6,10 +6,7 @@ public class PoolManger : Singleton<PoolManger>
 {
     private Dictionary<string, int> _itemCountDic = new Dictionary<string, int>();
     private Dictionary<string, int> _itemMaxCountDic = new Dictionary<string, int>();
-    [HideInInspector]
-    public Dictionary<string, Queue<GameObject>> _poolDic = new Dictionary<string, Queue<GameObject>>();
-    [HideInInspector]
-    public Queue<GameObject> _usingPool = new Queue<GameObject>();
+    private Dictionary<string, Queue<GameObject>> _poolDic = new Dictionary<string, Queue<GameObject>>();
     [SerializeField] 
     private GameObject[] Prefabs_Food;
     //private Queue<GameObject> _poolQueue;

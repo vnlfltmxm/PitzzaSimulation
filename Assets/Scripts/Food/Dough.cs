@@ -91,7 +91,6 @@ public class Dough : Food
                         break;
                     case "Oven":
                         DoughCooked();
-                        Debug.Log(collision.gameObject.name);
                         break;
                 }
             }
@@ -122,7 +121,6 @@ public class Dough : Food
                 Color cookedColor = new Color(1, 0.68f, 0.28f, 1);
                 base.ChangeMaterialColor(cookedColor);
                 Melting();
-                Debug.Log("±¸¿öÁü");
                 _isDoughCooked = true;
             }
 
@@ -131,7 +129,6 @@ public class Dough : Food
                 //¸¶Å×¸®¾ó º¯°æ
                 EventManger.Instance.OnOverCookedEvent(this.gameObject);
                 base.ChangeMaterialColor(Color.black);
-                Debug.Log("Å½");
                 _isDoughOverCooked = true;
                 if (_meitingCheese.activeSelf == true)
                 {
