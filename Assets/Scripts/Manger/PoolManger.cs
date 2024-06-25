@@ -60,6 +60,30 @@ public class PoolManger : Singleton<PoolManger>
         MinusItemCountValueInDictionary(pool.tag);
         SetPoolPosionY(pool);
     }
+    public void ReturnItemInPool(GameObject item, string targetTagName,bool isTargetTagInclude)
+    {
+        if (item.transform.childCount > 0)
+        {
+            for (int i = item.transform.childCount - 1; i >= 0; i--)
+            {
+                var child = item.transform.GetChild(i);
+
+                ReturnItemInPool(child.gameObject, targetTagName, isTargetTagInclude);
+            }
+        }
+
+        if (_poolDic.ContainsKey(item.tag) == false || item.CompareTag(targetTagName) != isTargetTagInclude) 
+        {
+            return;
+        }
+
+        _poolDic[item.tag].Enqueue(item);
+
+        var parent = InteractionObjectManger.Instance.FindPrefabsParentTrasnform(item.tag);
+        item.transform.parent = parent.transform;
+        item.SetActive(false);
+
+    }
     public void ReturnItemInPool(GameObject item)
     {
         if (item.transform.childCount > 0)
@@ -71,6 +95,12 @@ public class PoolManger : Singleton<PoolManger>
                 ReturnItemInPool(child.gameObject);
             }
         }
+
+        if (_poolDic.ContainsKey(item.tag) == false) 
+        {
+            return;
+        }
+
         _poolDic[item.tag].Enqueue(item);
 
         var parent = InteractionObjectManger.Instance.FindPrefabsParentTrasnform(item.tag);

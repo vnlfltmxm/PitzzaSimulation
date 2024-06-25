@@ -10,11 +10,22 @@ public class EventManger : Singleton<EventManger>
     public Action<GameObject> TurnOffMachine;
     public Action<GameObject> TurnOnMachine;
     public Action<Color> OverCooked;
-
+    public Action Packing;
     public Action<Transform> DoughMove;
     public Func<Transform> DoughDesPos;
 
-
+    public void OnRegisterPackingEvent(Action action)
+    {
+        Packing += action;
+    }
+    public void OnUnRegisterPackingEvent(Action action)
+    {
+        Packing -= action;
+    }
+    public void OnPackingEvent()
+    {
+        Packing?.Invoke();
+    }
     public void OnDoughMoveEvent()
     {
         var doughPos = DoughDesPos.Invoke();

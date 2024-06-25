@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Dough : Food
 {
@@ -11,7 +12,10 @@ public class Dough : Food
     private bool _isDoughCooked = false;
     private bool _isDoughOverCooked = false;
     private float _doughCookedTime;
-
+    private float _doughKneadCount = 0;
+    private bool _isPizzaPackaging = false;
+    [SerializeField]
+    private GameObject _meitingCheese;
     [SerializeField]
     private Mesh[] _meshs;
 
@@ -44,21 +48,34 @@ public class Dough : Food
 
     private void OnCollisionEnter(Collision collision)
     {
+        
         if (collision.transform.CompareTag("Kneader") && _isDoughReady == false) 
         {
             ResterHandKneadEvent();
         }
 
-        if (collision.transform.CompareTag("KneaderInputPos") && _isDoughReady == true)
+        if (collision.transform.CompareTag("KneaderInputPos") )
         {
             _isMoveReady = true;
             ResterMoveDoughEvent();
+        }
+
+        if (collision.transform.GetComponentInParent<MachineBase>() != null)
+        {
+            var machine = collision.transform.GetComponentInParent<MachineBase>();
+
+            if (machine._machineType == "PackagingMachine")
+            {
+                EventManger.Instance.OnRegisterPackingEvent(PackagingDough);
+            }
+
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        if(collision.transform.GetComponentInParent<MachineBase>() != null)
+       
+        if (collision.transform.GetComponentInParent<MachineBase>() != null)
         {
             var machine = collision.transform.GetComponentInParent<MachineBase>();
 
@@ -81,6 +98,7 @@ public class Dough : Food
 
     private void OnCollisionExit(Collision collision)
     {
+       
         if (collision.transform.CompareTag("KneaderInputPos") && _isDoughReady == true)
         {
             ResterHandKneadEvent();
@@ -89,7 +107,8 @@ public class Dough : Food
 
     private void DoughCooked()
     {
-        if(_isDoughOverCooked == false)
+       
+        if (_isDoughOverCooked == false)
         {
             _doughCookedTime += Time.deltaTime;
             Debug.Log(_doughCookedTime);
@@ -98,6 +117,7 @@ public class Dough : Food
                 //¸¶Å×¸®¾ó º¯°æ
                 Color cookedColor = new Color(1, 0.68f, 0.28f, 1);
                 base.ChangeMaterialColor(cookedColor);
+                MeltingCheese();
                 Debug.Log("±¸¿öÁü");
                 _isDoughCooked = true;
             }
@@ -108,10 +128,44 @@ public class Dough : Food
                 EventManger.Instance.OnOverCookedEvent();
                 Debug.Log("Å½");
                 _isDoughOverCooked = true;
+                if (_meitingCheese.activeSelf == true)
+                {
+                    ChangeCheeseColor(Color.black);
+                }
             }
         }
     }
     
+    private void MeltingCheese()
+    {
+        if (CheckCheese(this.gameObject))
+        {
+            _meitingCheese.SetActive(true);
+            PoolManger.Instance.ReturnItemInPool(this.gameObject, "Cheese", true);
+            ChangeCheeseColor(new Color(1, 0.86f, 0, 1));
+        }
+    }
+    private void ChangeCheeseColor(Color color)
+    {
+        _meitingCheese.GetComponent<MeshRenderer>().material.color = color;
+    }
+    private bool CheckCheese(GameObject item)
+    {
+        if (item.transform.childCount > 0)
+        {
+            for (int i = item.transform.childCount - 1; i >= 0; i--)
+            {
+                var child = item.transform.GetChild(i);
+                if (child.CompareTag("Cheese"))
+                {
+                    return true;
+                }
+                CheckCheese(child.gameObject);
+            }
+        }
+        return false;
+    }
+
     private void ChangeMesh(Mesh mesh)
     {
         _meshFilter.mesh = mesh;
@@ -132,9 +186,23 @@ public class Dough : Food
         _doughCookedTime = 0;
         _isDoughCooked = false;
         _isDoughOverCooked = false;
+        _doughKneadCount = 0;
+        _meshRenderer.enabled = true;
+        _isPizzaPackaging = false;
+        DisableBox();
         ChangeMesh(_meshs[0]);
+        SetDoughScale(_doughKneadCount);
     }
-
+    private void DisableBox()
+    {
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            if (gameObject.transform.GetChild(i).gameObject.activeSelf == true)
+            {
+                gameObject.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
     private void DoughReady()
     {
         _isDoughReady = true;
@@ -149,7 +217,10 @@ public class Dough : Food
         {
             return;
         }
-
+        if (_isPizzaPackaging)
+        {
+            return;
+        }
         _doughCount++;
 
         if(_doughCount >= 10)
@@ -183,7 +254,11 @@ public class Dough : Food
             StartCoroutine(MoveDough(destination));
         }
     }
-
+    private void SetDoughScale(float kneadCount)
+    {
+        Vector3 startScale = new Vector3(1, 1, 1);
+        gameObject.transform.localScale = startScale + (startScale * (kneadCount * 0.1f));
+    }
     public IEnumerator MoveDough(Transform destination)
     {
         this.gameObject.layer = LayerMask.NameToLayer("Default");
@@ -208,13 +283,37 @@ public class Dough : Food
             RotateDough(destination);
             if (CheckDestinationPos(destination))
             {
+                
                 this.gameObject.layer = LayerMask.NameToLayer("Pizza");
                 UnResterMoveDoughEvent();
+                if (_isPizzaPackaging || !_isDoughReady) 
+                {
+                    yield break;
+                }
+                _doughKneadCount++;
+                SetDoughScale(_doughKneadCount);
+               
                 yield break;
             }
         }
     }
-
+    private void PackagingDough()
+    {
+        SetDoughScale(0);
+        _meshRenderer.enabled = false;
+        if (_doughKneadCount < 5) 
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.GetChild(1).gameObject.SetActive(true);
+        }
+        _isPizzaPackaging = true;
+        _meitingCheese.SetActive(false);
+        PoolManger.Instance.ReturnItemInPool(this.gameObject,"Dough",false);
+        EventManger.Instance.OnUnRegisterPackingEvent(PackagingDough);
+    }
     private void RotateDough(Transform destination)
     {
         Quaternion currentRotation = transform.rotation;

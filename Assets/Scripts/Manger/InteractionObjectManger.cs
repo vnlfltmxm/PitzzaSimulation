@@ -69,7 +69,14 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
             item.transform.parent = pizza.transform;
             item.transform.position = hitPointPos;
             item.transform.rotation = pizza.transform.rotation;
-            item.layer = LayerMask.NameToLayer("Pizza");
+            if (item.CompareTag("Cheese") == true)
+            {
+                item.layer = LayerMask.NameToLayer("Ignore Raycast");
+            }
+            else
+            {
+                item.layer = LayerMask.NameToLayer("Pizza");
+            }
             Debug.Log("재료소진2");
         }
         else
@@ -77,7 +84,14 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
             pizzaItem.SetActive(true);
             pizzaItem.transform.parent = pizza.transform;
             pizzaItem.transform.position = hitPointPos;
-            pizzaItem.layer = LayerMask.NameToLayer("Pizza");
+            if (pizzaItem.CompareTag("Cheese") == true)
+            {
+                pizzaItem.layer = LayerMask.NameToLayer("Ignore Raycast");
+            }
+            else
+            {
+                pizzaItem.layer = LayerMask.NameToLayer("Pizza");
+            }
             SetUseGravityInItem(pizzaItem, false);
         }
         
@@ -149,4 +163,5 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
             rd.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
+
 }
