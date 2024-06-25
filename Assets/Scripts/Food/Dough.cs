@@ -31,7 +31,7 @@ public class Dough : Food
 
     protected override void OnEnable()
     {
-        base.OnEnable();
+        ChangeMaterialColor(Color.white, null);
         InitDough();
     }
     // Start is called before the first frame update
@@ -63,10 +63,11 @@ public class Dough : Food
         if (collision.transform.GetComponentInParent<MachineBase>() != null)
         {
             var machine = collision.transform.GetComponentInParent<MachineBase>();
-
-            if (machine._machineType == "PackagingMachine")
+            switch (machine._machineType)
             {
-                EventManger.Instance.OnRegisterPackingEvent(PackagingDough);
+                case "PackagingMachine":
+                    EventManger.Instance.OnRegisterPackingEvent(PackagingDough);
+                    break;
             }
 
         }
@@ -125,7 +126,8 @@ public class Dough : Food
             if (_doughCookedTime >= 15.0f)
             {
                 //마테리얼 변경
-                EventManger.Instance.OnOverCookedEvent();
+                EventManger.Instance.OnOverCookedEvent(this.gameObject);
+                base.ChangeMaterialColor(Color.black);
                 Debug.Log("탐");
                 _isDoughOverCooked = true;
                 if (_meitingCheese.activeSelf == true)
