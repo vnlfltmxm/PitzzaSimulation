@@ -114,6 +114,8 @@ public class DataManger : MonoBehaviour
             SetDataList(out tempPizza.LargeSizeToppingValues, data, "LargeSizeToppingValues");
 
             LoadedPizzaList.Add(tempPizza.ClassName, tempPizza);
+
+
         }
     }
     private void SetDataList<T>(out List<T> usingList, XElement data,string listName)
@@ -182,7 +184,7 @@ public class DataManger : MonoBehaviour
             tempPlayer.Name = data.Attribute(nameof(tempPlayer.Name)).Value;
             tempPlayer.StartPizzaRecipe = data.Attribute(nameof(tempPlayer.StartPizzaRecipe)).Value;
             tempPlayer.StartMoney = int.Parse(data.Attribute(nameof(tempPlayer.StartMoney)).Value);
-            SetDataList(tempPlayer.StartToppingResorceList, data, "StartToppingResorceList");
+            SetDataList(out tempPlayer.StartToppingResorceList, data, "StartToppingResorceList");
             LoadedPlayer.Add(tempPlayer.Name, tempPlayer);
         }
     }
