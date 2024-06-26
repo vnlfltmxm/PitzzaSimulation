@@ -12,9 +12,9 @@ public class Pizza
     public string PrefabPath { get; set; }
     public float BaseSizeRidous {  get; set; }
     public float LargeSizeRidous {  get; set; }
-    public List<string> ToppingResorceList { get; set; }
-    public List<int> BaseSizeToppingValues {  get; set; }
-    public List<int> LargeSizeToppingValues { get; set; }
+    public List<string> ToppingResorceList = new List<string>();
+    public List<int> BaseSizeToppingValues = new List<int>();
+    public List<int> LargeSizeToppingValues = new List<int>();
 }
 
 public class ToppingResorce
@@ -31,5 +31,5 @@ public class Player
     public string Name { get; set; }
     public string StartPizzaRecipe {  get; set; }
     public int StartMoney {  get; set; }
-    public List<string> StartToppingResorceList { get; set; }
+    public List<string> StartToppingResorceList = new List<string>();
 }

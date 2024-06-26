@@ -109,15 +109,16 @@ public class DataManger : MonoBehaviour
             tempPizza.LargeSizeRidous = float.Parse(data.Attribute(nameof(tempPizza.LargeSizeRidous)).Value);
 
             //tempSkill.IconName = data.Attribute(nameof(tempSkill.IconName)).Value;
-            SetDataList(tempPizza.BaseSizeToppingValues, data);
-            SetDataList(tempPizza.LargeSizeToppingValues, data);
+            SetDataList(out tempPizza.ToppingResorceList, data, "ToppingResorceList");
+            SetDataList(out tempPizza.BaseSizeToppingValues, data, "BaseSizeToppingValues");
+            SetDataList(out tempPizza.LargeSizeToppingValues, data, "LargeSizeToppingValues");
 
             LoadedPizzaList.Add(tempPizza.ClassName, tempPizza);
         }
     }
-    private void SetDataList<T>(List<T> listName, XElement data)
+    private void SetDataList<T>(out List<T> usingList, XElement data,string listName)
     {
-        string toppingResorceListStr = data.Attribute(nameof(listName)).Value;
+        string toppingResorceListStr = data.Attribute(listName).Value;
         if (!string.IsNullOrEmpty(toppingResorceListStr))
         {
             toppingResorceListStr = toppingResorceListStr.Replace("{", string.Empty);
@@ -135,8 +136,11 @@ public class DataManger : MonoBehaviour
                     list.Add(value);
                 }
             }
-            listName = list;
-
+            usingList = list;
+        }
+        else
+        {
+            usingList = null;
         }
     }
     //교수님 변환기 사용시
@@ -178,7 +182,7 @@ public class DataManger : MonoBehaviour
             tempPlayer.Name = data.Attribute(nameof(tempPlayer.Name)).Value;
             tempPlayer.StartPizzaRecipe = data.Attribute(nameof(tempPlayer.StartPizzaRecipe)).Value;
             tempPlayer.StartMoney = int.Parse(data.Attribute(nameof(tempPlayer.StartMoney)).Value);
-            SetDataList(tempPlayer.StartToppingResorceList, data);
+            SetDataList(tempPlayer.StartToppingResorceList, data, "StartToppingResorceList");
             LoadedPlayer.Add(tempPlayer.Name, tempPlayer);
         }
     }
