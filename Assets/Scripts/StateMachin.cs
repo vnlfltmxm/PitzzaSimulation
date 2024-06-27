@@ -10,12 +10,14 @@ public class StateMachin<T> where T : class
     new Dictionary<Enum, BaseState<T>>();
 
 
-    public StateMachin(Enum stateName, BaseState<T> state)
+    public StateMachin()
     {
-        AddState(stateName, state);
+    }
+    public void SetCurrentState(Enum stateName) 
+    {
         CurrentState = GetState(stateName);
     }
-
+   
     public void AddState(Enum stateName, BaseState<T> state)  // 상태 등록
     {
         if (!states.ContainsKey(stateName))
