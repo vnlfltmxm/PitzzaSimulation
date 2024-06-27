@@ -12,8 +12,14 @@ public class EventManger : Singleton<EventManger>
     public Action<Color,GameObject> OverCooked;
     public Action Packing;
     public Action<Transform> DoughMove;
+    //public Action<string> NPCTalk;
     public Func<Transform> DoughDesPos;
     
+    //public void OnNpcTalkEvent(string text)
+    //{
+    //    NPCTalk?.Invoke(text);
+    //}
+
     public void OnRegisterPackingEvent(Action action)
     {
         Packing += action;

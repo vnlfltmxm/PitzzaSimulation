@@ -71,7 +71,7 @@ public class NPCOrderState : BaseState<NPCController>
 
     public override void OnEnterState()
     {
-        
+        UIManger.Instance.PrintText("주문이요");
     }
 
     public override void OnExitState()
