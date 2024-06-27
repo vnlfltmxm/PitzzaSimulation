@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,5 +64,22 @@ public class NPCController : MonoBehaviour
             return true;
         }
             return false;
+    }
+    public void RegisterCheckState()
+    {
+        EventManger.Instance.CheckNPCState += CheckCurrentState;
+    }
+    public void UnRegisterCheckState()
+    {
+        EventManger.Instance.CheckNPCState -= CheckCurrentState;
+    }
+    public bool CheckCurrentState(Enum stateName)
+    {
+        if (_npcState.CurrentState == _npcState.GetState(stateName))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

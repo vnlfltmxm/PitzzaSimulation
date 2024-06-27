@@ -14,12 +14,23 @@ public class EventManger : Singleton<EventManger>
     public Action<Transform> DoughMove;
     //public Action<string> NPCTalk;
     public Func<Transform> DoughDesPos;
-    
+    public Func<Enum,bool> CheckNPCState;
+
     //public void OnNpcTalkEvent(string text)
     //{
     //    NPCTalk?.Invoke(text);
     //}
-
+    public bool? OnCheckNPCState(Enum statName)
+    {
+        if(CheckNPCState != null)
+        {
+            return CheckNPCState?.Invoke(statName);
+        }
+        else
+        {
+            return false;
+        }
+    }
     public void OnRegisterPackingEvent(Action action)
     {
         Packing += action;

@@ -72,10 +72,12 @@ public class NPCOrderState : BaseState<NPCController>
     public override void OnEnterState()
     {
         UIManger.Instance.PrintText("주문이요");
+        Owner.RegisterCheckState();
     }
 
     public override void OnExitState()
     {
+        Owner.UnRegisterCheckState();
     }
 
     public override void OnUpdateState()
