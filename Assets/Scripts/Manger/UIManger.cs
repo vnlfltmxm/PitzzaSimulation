@@ -9,6 +9,8 @@ public class UIManger : Singleton<UIManger>
     [SerializeField]
     private Text _text;
     [SerializeField]
+    private Text _interactionText;
+    [SerializeField]
     private Image _crossHair;
     [SerializeField]
     private GameObject _textRoot;
@@ -20,6 +22,7 @@ public class UIManger : Singleton<UIManger>
     private void Awake()
     {
         InitUI();
+        _interactionText.text = string.Empty;
     }
 
     private void InitUI()
@@ -46,7 +49,10 @@ public class UIManger : Singleton<UIManger>
         SetTextBGActive(true);
         StartCoroutine(SetPrintText(text));
     }
-
+    public void PrintInteractionText(string text)
+    {
+        _interactionText.text = text;
+    }
     //private void OnRegisterNPCTalkEvent()
     //{
     //    EventManger.Instance.NPCTalk += PrintText;

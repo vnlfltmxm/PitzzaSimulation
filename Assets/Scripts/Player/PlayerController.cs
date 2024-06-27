@@ -39,6 +39,7 @@ public class PlayerController : Singleton<PlayerController>
         MoveToPlayer();
         RotateWithMouse();
         RayToCameraFoward();
+        
     }
 
     private bool CheckKey()
@@ -100,7 +101,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         Debug.DrawRay(_camera.transform.position, _camera.transform.forward * 50, Color.red);
         Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hit, 50, ~(1 << LayerMask.NameToLayer("Ignore Raycast")));
-
+        TransmissionInteractionText(hit);
         if (Input.GetKeyDown(KeyCode.G))
         {
             PressButtonG(hit);
@@ -110,7 +111,55 @@ public class PlayerController : Singleton<PlayerController>
             PressButtonSpace(hit);
         }
     }
+    private void TransmissionInteractionText(RaycastHit hit)
+    {
+        if (hit.transform != null)
+        {
+            var obj = hit.transform.gameObject.layer;
 
+            switch (obj)
+            {
+                case 6:
+                    SetInteractionText("넣기", "꺼내기");
+                    break;
+                case 7:
+                    SetInteractionText("놓기", "줍기");
+                    break;
+                case 8:
+                    SetInteractionText("놓기", string.Empty);
+                    break;
+                case 9:
+                    SetInteractionText("놓기", "G : 줍기  Space : 반죽하기");
+                    break;
+                case 10:
+                    SetInteractionText("누르기");
+                    break;
+                default:
+                    break;
+            }
+
+        }
+        else
+        {
+            SetInteractionText(string.Empty);
+        }
+        
+    }
+    private void SetInteractionText(string text)
+    {
+        UIManger.Instance.PrintInteractionText(text);
+    }
+    private void SetInteractionText(string handlingText, string unHandlingText)
+    {
+        if (CheckOnHandlingItem())
+        {
+            UIManger.Instance.PrintInteractionText(handlingText);
+        }
+        else
+        {
+            UIManger.Instance.PrintInteractionText(unHandlingText);
+        }
+    }
     private void PressButtonG(RaycastHit hit)
     {
         if (hit.transform != null)

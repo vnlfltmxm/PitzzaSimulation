@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 7695248355846720966}
+  _interactionText: {fileID: 8091196183347840545}
   _crossHair: {fileID: 8559973435658963736}
   _textRoot: {fileID: 1341349709658905947}
   _PlayerUIRoot: {fileID: 7067263115940762014}
@@ -170,6 +171,17 @@ RectTransform:
 --- !u!114 &7695248355846720966 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7924928385829318907, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
+  m_PrefabInstance: {fileID: 517918334782750013}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8091196183347840545 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8609114423225940764, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
   m_PrefabInstance: {fileID: 517918334782750013}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
