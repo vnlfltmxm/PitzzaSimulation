@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EventManger : Singleton<EventManger>
 {
-
+    private Dictionary<GameObject, GameObject> _registedDoughDic= new Dictionary<GameObject, GameObject>();
     public Action<GameObject> HandKnead;
     public Action<GameObject> TurnOffMachine;
     public Action<GameObject> TurnOnMachine;
@@ -16,10 +18,20 @@ public class EventManger : Singleton<EventManger>
     public Func<Transform> DoughDesPos;
     public Func<Enum,bool> CheckNPCState;
 
+    public delegate void MyDelegate(GameObject obj, NPCStateName tempEnum = NPCStateName.WAITINGPIZZA);//이 방식은 action처럼 함수 선언시 모양은 맟춰줘야하지만 디폴트 변수를 사용함으로써 변수사용은 안해도 된다 ENUM만 
+    public MyDelegate CehckOrder;
+
+    // public Action<GameObject,Enum> CheckOrder;
+
     //public void OnNpcTalkEvent(string text)
     //{
     //    NPCTalk?.Invoke(text);
     //}
+
+    public void OnInvokeCheckOrder(GameObject obj)
+    {
+        CehckOrder?.Invoke(obj);
+    }
     public bool? OnCheckNPCState(Enum statName)
     {
         if(CheckNPCState != null)
@@ -64,7 +76,28 @@ public class EventManger : Singleton<EventManger>
     {
         OverCooked?.Invoke(Color.black,target);
     }
-
+    public void OnRegiterDouhgDic(GameObject dough)
+    {
+        if (!_registedDoughDic.ContainsKey(dough))
+        {
+            _registedDoughDic.Add(dough, dough);
+        }
+    }
+    public void UnRegiterDouhgDic(GameObject dough)
+    {
+        if (_registedDoughDic.ContainsKey(dough))
+        {
+            _registedDoughDic.Remove(dough);
+        }
+    }
+    public bool CheckRegisterDough(GameObject dough)
+    {
+        if (_registedDoughDic.ContainsKey(dough))
+        {
+            return true;
+        }
+        return false;
+    }
     public void OnInvokeHandKneadEvent(GameObject target)
     {
         HandKnead?.Invoke(target);

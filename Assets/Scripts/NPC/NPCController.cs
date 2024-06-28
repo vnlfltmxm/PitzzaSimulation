@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class NPCController : MonoBehaviour
 {
+    [HideInInspector]
+    public string _orderPizza;
     private StateMachin<NPCController> _npcState = new StateMachin<NPCController>();
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
@@ -31,6 +33,7 @@ public class NPCController : MonoBehaviour
         _npcState.AddState(NPCStateName.IDLE, new NPCIdleState(this));
         _npcState.AddState(NPCStateName.WALK, new NPCWalkState(this));
         _npcState.AddState(NPCStateName.ORDER, new NPCOrderState(this));
+        _npcState.AddState(NPCStateName.WAITINGPIZZA, new NPCWaitingPizzaState(this));
         _npcState.AddState(NPCStateName.LEAVE, new NPCLeaveState(this));
 
         _npcState.SetCurrentState(NPCStateName.IDLE);

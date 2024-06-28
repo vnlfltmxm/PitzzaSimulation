@@ -61,7 +61,16 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
         item.transform.position = hitPointPos;
         item.transform.rotation = machine.transform.rotation;
     }
+    //public void OnChangeNPCState(GameObject NPC)
+    //{
+    //    var target=NPC.GetComponent<NPCController>();
+    //    if (target == null)
+    //    {
+    //        return;
+    //    }
 
+    //    target.ChangeNPCState(NPCStateName.WAITINGPIZZA);
+    //}
     public void OnToppingPizza(GameObject item, GameObject pizza, Vector3 hitPointPos)
     {
         GameObject pizzaItem = PoolManger.Instance.OutPoolItem(item);
@@ -166,4 +175,23 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
         }
     }
 
+    public void UnRegisterChangeNPCState()
+    {
+        EventManger.Instance.CehckOrder -= OnChangeNPCState;
+    }
+    public void OnRegisterChangeNPCState()
+    {
+        EventManger.Instance.CehckOrder += OnChangeNPCState;
+    }
+    public void OnChangeNPCState(GameObject NPCObj, NPCStateName stateName = NPCStateName.WAITINGPIZZA)
+    {
+        var NPC=NPCObj.GetComponent<NPCController>();
+
+        if(NPC == null)
+        {
+            return;
+        }
+
+        NPC.ChangeNPCState(stateName);
+    }
 }

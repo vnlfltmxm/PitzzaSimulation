@@ -5488,7 +5488,8 @@ GameObject:
   - component: {fileID: 6612082245573183772}
   - component: {fileID: 8948965196171455645}
   - component: {fileID: 5380212853985554846}
-  m_Layer: 0
+  - component: {fileID: 980205635}
+  m_Layer: 11
   m_Name: man_metalhead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5502,7 +5503,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2561038062939070784}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5547,7 +5548,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -5569,6 +5570,19 @@ CapsuleCollider:
   m_Height: 1.93
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &980205635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2561038062939070784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c855a8aeb248f4289e189eb374f786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orderPizza: 
 --- !u!1 &2583166987548625998
 GameObject:
   m_ObjectHideFlags: 0

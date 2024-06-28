@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,6 +24,7 @@ public class PlayerController : Singleton<PlayerController>
     private float _maxLookAngle = 80f; 
     private float _minLookAngle = -60f; 
     private float _verticalLookRotation = 0f;
+    private GameObject _checkRayHitObj = null;
     private void Awake()
     {
         _nav = GetComponent<NavMeshAgent>();
@@ -113,8 +116,22 @@ public class PlayerController : Singleton<PlayerController>
     }
     private void TransmissionInteractionText(RaycastHit hit)
     {
+        //if (hit.transform.gameObject != null && _checkRayHitObj != hit.transform.gameObject)
+        //{
+        //    _checkRayHitObj = hit.transform.gameObject;
+        //}
+
         if (hit.transform != null)
         {
+            if (_checkRayHitObj == hit.transform.gameObject)
+            {
+                return;
+            }
+            else
+            {
+                _checkRayHitObj = hit.transform.gameObject;
+            }
+
             var obj = hit.transform.gameObject.layer;
 
             switch (obj)
@@ -129,7 +146,7 @@ public class PlayerController : Singleton<PlayerController>
                     SetInteractionText("놓기", string.Empty);
                     break;
                 case 9:
-                    SetInteractionText("놓기", "G : 줍기  Space : 반죽하기");
+                    SetItemInteractionText(hit.transform.gameObject);
                     break;
                 case 10:
                     SetInteractionText("누르기");
@@ -142,8 +159,28 @@ public class PlayerController : Singleton<PlayerController>
         else
         {
             SetInteractionText(string.Empty);
+            _checkRayHitObj = null;
         }
         
+    }
+    private void SetItemInteractionText(GameObject obj)
+    {
+        if (obj.CompareTag("Dough"))
+        {
+            if (EventManger.Instance.CheckRegisterDough(obj) == false)  
+            {
+
+                SetInteractionText(string.Empty, "G : 줍기");
+            }
+            else
+            {
+                SetInteractionText(string.Empty, "G : 줍기 Space : 반죽");
+            }
+        }
+        else
+        {
+            SetInteractionText(string.Empty, "줍기");
+        }
     }
     private void SetInteractionText(string text)
     {
@@ -185,6 +222,9 @@ public class PlayerController : Singleton<PlayerController>
                 case 10:
                     PushMachineButton(hit.transform.gameObject);
                     break;
+                case 11:
+                    CheckOrder(hit.transform.gameObject);
+                    break;
                 default:
                     break;
             }
@@ -212,6 +252,15 @@ public class PlayerController : Singleton<PlayerController>
         if (CheckItemLayer(obj, "Item") && CheckItemTag(obj, "Dough")) 
         {
             EventManger.Instance.OnInvokeHandKneadEvent(hit.transform.gameObject);
+        }
+    }
+    private void CheckOrder(GameObject targetNPC)
+    {
+        if (EventManger.Instance.OnCheckNPCState(NPCStateName.ORDER) == true)
+        {
+            InteractionObjectManger.Instance.OnRegisterChangeNPCState();
+            InteractionObjectManger.Instance.OnChangeNPCState(targetNPC);
+
         }
     }
     private bool CheckItemTag(GameObject item,string tagName)

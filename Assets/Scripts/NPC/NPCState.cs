@@ -8,6 +8,7 @@ public enum NPCStateName
     IDLE,
     WALK,
     ORDER,
+    WAITINGPIZZA,
     LEAVE,
 
     LAST
@@ -22,6 +23,7 @@ public class NPCIdleState : BaseState<NPCController>
 
     public override void OnEnterState()
     {
+       
     }
 
     public override void OnExitState()
@@ -78,6 +80,28 @@ public class NPCOrderState : BaseState<NPCController>
     public override void OnExitState()
     {
         Owner.UnRegisterCheckState();
+    }
+
+    public override void OnUpdateState()
+    {
+    }
+}
+public class NPCWaitingPizzaState : BaseState<NPCController>
+{
+    public NPCWaitingPizzaState(NPCController npcController) : base(npcController)
+    {
+
+    }
+
+    public override void OnEnterState()
+    {
+        Owner._orderPizza = "치즈피자";
+        UIManger.Instance.PrintText($"{Owner._orderPizza} 주세요");
+        InteractionObjectManger.Instance.UnRegisterChangeNPCState();
+    }
+
+    public override void OnExitState()
+    {
     }
 
     public override void OnUpdateState()

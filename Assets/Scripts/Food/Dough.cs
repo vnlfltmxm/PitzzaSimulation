@@ -50,10 +50,16 @@ public class Dough : Food
 
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if (collision.transform.CompareTag("Kneader") && _isDoughReady == false) 
+
+        if (collision.transform.CompareTag("Kneader") && this.transform.parent == null && _isDoughReady == false) 
         {
             ResterHandKneadEvent();
+            EventManger.Instance.OnRegiterDouhgDic(this.gameObject);
+        }
+        if (collision.transform.CompareTag("Player") && _isDoughReady == false)
+        {
+            UnResterHandKneadEvent();
+            EventManger.Instance.UnRegiterDouhgDic(this.gameObject);
         }
 
         if (collision.transform.CompareTag("KneaderInputPos") )
@@ -99,14 +105,14 @@ public class Dough : Food
         }
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
+    //private void OnCollisionExit(Collision collision)
+    //{
        
-        if (collision.transform.CompareTag("KneaderInputPos") && _isDoughReady == true)
-        {
-            ResterHandKneadEvent();
-        }
-    }
+    //    if (collision.transform.CompareTag("KneaderInputPos") && _isDoughReady == true)
+    //    {
+    //        UnResterHandKneadEvent();
+    //    }
+    //}
 
     private void DoughCooked()
     {

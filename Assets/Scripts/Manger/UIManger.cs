@@ -62,4 +62,73 @@ public class UIManger : Singleton<UIManger>
     //    EventManger.Instance.NPCTalk -= PrintText;
     //}
 
+    //public void TransmissionInteractionText(RaycastHit hit, bool value)
+    //{
+    //    if (hit.transform != null)
+    //    {
+    //        var obj = hit.transform.gameObject.layer;
+
+    //        switch (obj)
+    //        {
+    //            case 6:
+    //                SetInteractionText("넣기", "꺼내기",  value);
+    //                break;
+    //            case 7:
+    //                SetInteractionText("놓기", "줍기",  value);
+    //                break;
+    //            case 8:
+    //                SetInteractionText("놓기", string.Empty,  value);
+    //                break;
+    //            case 9:
+    //                SetItemInteractionText(hit.transform.gameObject,  value);
+    //                break;
+    //            case 10:
+    //                SetInteractionText("누르기");
+    //                break;
+    //            default:
+    //                break;
+    //        }
+
+    //    }
+    //    else
+    //    {
+    //        SetInteractionText(string.Empty);
+    //    }
+
+    //}
+    //private void SetItemInteractionText(GameObject obj,bool value)
+    //{
+    //    if (obj.CompareTag("Dough"))
+    //    {
+    //        if (EventManger.Instance.CheckRegisterDough(obj) == false)
+    //        {
+
+    //            SetInteractionText(string.Empty, "G : 줍기",  value);
+    //        }
+    //        else
+    //        {
+    //            SetInteractionText(string.Empty, "G : 줍기 Space : 반죽",  value);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        SetInteractionText(string.Empty, "줍기",  value);
+    //    }
+    //}
+    //private void SetInteractionText(string text)
+    //{
+    //    PrintInteractionText(text);
+    //}
+    //private void SetInteractionText(string handlingText, string unHandlingText,bool value)
+    //{
+    //    if (value == true)
+    //    {
+    //        PrintInteractionText(handlingText);
+    //    }
+    //    else
+    //    {
+    //        PrintInteractionText(unHandlingText);
+    //    }
+    //}
+
 }
