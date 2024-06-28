@@ -79,7 +79,7 @@ public class NPCOrderState : BaseState<NPCController>
 
     public override void OnExitState()
     {
-        Owner.UnRegisterCheckState();
+        
     }
 
     public override void OnUpdateState()
@@ -98,10 +98,12 @@ public class NPCWaitingPizzaState : BaseState<NPCController>
         Owner._orderPizza = "치즈피자";
         UIManger.Instance.PrintText($"{Owner._orderPizza} 주세요");
         InteractionObjectManger.Instance.UnRegisterChangeNPCState();
+        
     }
 
     public override void OnExitState()
     {
+        Owner.UnRegisterCheckState();
     }
 
     public override void OnUpdateState()

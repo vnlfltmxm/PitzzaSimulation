@@ -194,4 +194,14 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
 
         NPC.ChangeNPCState(stateName);
     }
+
+    public bool OnCheckNPCState(GameObject targetNPC,NPCStateName stateName)
+    {
+        if (EventManger.Instance.OnCheckNPCState(stateName, targetNPC) == true)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

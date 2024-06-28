@@ -76,12 +76,16 @@ public class NPCController : MonoBehaviour
     {
         EventManger.Instance.CheckNPCState -= CheckCurrentState;
     }
-    public bool CheckCurrentState(Enum stateName)
+    public bool CheckCurrentState(Enum stateName, GameObject target)
     {
-        if (_npcState.CurrentState == _npcState.GetState(stateName))
+        if (EventManger.Instance.CheckEventTarget(target, this.gameObject))
         {
-            return true;
+            if (_npcState.CurrentState == _npcState.GetState(stateName))
+            {
+                return true;
+            }
         }
+        
 
         return false;
     }

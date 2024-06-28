@@ -16,9 +16,9 @@ public class EventManger : Singleton<EventManger>
     public Action<Transform> DoughMove;
     //public Action<string> NPCTalk;
     public Func<Transform> DoughDesPos;
-    public Func<Enum,bool> CheckNPCState;
+    public Func<Enum,GameObject,bool> CheckNPCState;
 
-    public delegate void MyDelegate(GameObject obj, NPCStateName tempEnum = NPCStateName.WAITINGPIZZA);//이 방식은 action처럼 함수 선언시 모양은 맟춰줘야하지만 디폴트 변수를 사용함으로써 변수사용은 안해도 된다 ENUM만 
+    public delegate void MyDelegate(GameObject obj, NPCStateName tempEnum = NPCStateName.WAITINGPIZZA);//이 방식은 action처럼 함수 선언시 모양은 맟춰줘야하지만 디폴트 변수를 사용함으로써 변수사용은 안해도 된다 NPCStateName부분만 
     public MyDelegate CehckOrder;
 
     // public Action<GameObject,Enum> CheckOrder;
@@ -32,11 +32,11 @@ public class EventManger : Singleton<EventManger>
     {
         CehckOrder?.Invoke(obj);
     }
-    public bool? OnCheckNPCState(Enum statName)
+    public bool? OnCheckNPCState(Enum statName,GameObject target)
     {
         if(CheckNPCState != null)
         {
-            return CheckNPCState?.Invoke(statName);
+            return CheckNPCState?.Invoke(statName,target);
         }
         else
         {

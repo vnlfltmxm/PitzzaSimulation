@@ -151,6 +151,9 @@ public class PlayerController : Singleton<PlayerController>
                 case 10:
                     SetInteractionText("누르기");
                     break;
+                case 11:
+                    SetNPCInteractionText(hit.transform.gameObject);
+                    break;
                 default:
                     break;
             }
@@ -180,6 +183,20 @@ public class PlayerController : Singleton<PlayerController>
         else
         {
             SetInteractionText(string.Empty, "줍기");
+        }
+    }
+    private void SetNPCInteractionText(GameObject obj)
+    {
+        if (InteractionObjectManger.Instance.OnCheckNPCState(obj,NPCStateName.ORDER) == true)
+        {
+            SetInteractionText("주문 받기");
+        }
+        else if(InteractionObjectManger.Instance.OnCheckNPCState(obj, NPCStateName.WAITINGPIZZA) == true)
+        {
+            if (CheckOnHandlingItem()&&_grabPos.transform.GetChild(0).CompareTag("Dough"))
+            {
+                SetInteractionText("주기");
+            }
         }
     }
     private void SetInteractionText(string text)
@@ -256,13 +273,14 @@ public class PlayerController : Singleton<PlayerController>
     }
     private void CheckOrder(GameObject targetNPC)
     {
-        if (EventManger.Instance.OnCheckNPCState(NPCStateName.ORDER) == true)
+        if (InteractionObjectManger.Instance.OnCheckNPCState(targetNPC,NPCStateName.ORDER) == true) 
         {
             InteractionObjectManger.Instance.OnRegisterChangeNPCState();
             InteractionObjectManger.Instance.OnChangeNPCState(targetNPC);
 
         }
     }
+    
     private bool CheckItemTag(GameObject item,string tagName)
     {
         if (item.CompareTag(tagName))
