@@ -11,11 +11,20 @@ public class NPCController : MonoBehaviour
     private StateMachin<NPCController> _npcState = new StateMachin<NPCController>();
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
+
+    private Pizza _orderPizzaData;
+    [HideInInspector]
+    public Pizza Pizza { get { return _orderPizzaData; } }
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         InitState();
+    }
+
+    private void OnEnable()
+    {
+        
     }
     void Start()
     {

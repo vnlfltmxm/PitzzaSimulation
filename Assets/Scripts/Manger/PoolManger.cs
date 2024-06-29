@@ -12,25 +12,28 @@ public class PoolManger : Singleton<PoolManger>
     //private Queue<GameObject> _poolQueue;
     private void Awake()
     {
+        
+    }
+    private void Start()
+    {
         InitPool(Prefabs_Food);
     }
-
     private void InitPool(GameObject[] foodList)
     {
-        for (int i = 0; i < foodList.Length; i++)
+        var player = DataManger.Inst.GetplayerData("플레이어");
+        for (int i = 0; i < player.StartToppingResorceList.Count; i++)
         {
             AddPoolInDictionary(foodList[i]);
-            AddObjectInPool(foodList[i]);
+            AddObjectInPool(foodList[i], player.StartToppingResorceList[i]);
             SetItemMaxCountValueInDictionary(foodList[i].name, 5);
             SetItemCountValueInDictionary(foodList[i].name);
         }
     }
-
-    private void AddObjectInPool(GameObject prefabObj)
+    
+    private void AddObjectInPool(GameObject prefabObj,string name)
     {
-        string prefabName = prefabObj.name;
-        _poolDic.TryGetValue(prefabName, out Queue<GameObject> pool);
-        var parent = InteractionObjectManger.Instance.FindPrefabsParentTrasnform(prefabName);
+        _poolDic.TryGetValue(name, out Queue<GameObject> pool);
+        var parent = InteractionObjectManger.Instance.FindPrefabsParentTrasnform(name);
 
         for (int i = 0; i < 10; i++)
         {

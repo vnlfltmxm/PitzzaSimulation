@@ -14,7 +14,7 @@ public class DataManger : MonoBehaviour
     public Dictionary<string, Player> LoadedPlayer { get; private set; }
 
     private readonly string _dataRootPath = "C:/Users/KGA/Desktop/PizzaDataTable";//읽는거 실패시 \\을 /로
-
+    private readonly string _dataRootPathInHome = "C:/Users/qkr38/Downloads/PizzaDataTable";
     public static DataManger Inst { get; private set; }
 
     private void Awake()
@@ -95,7 +95,8 @@ public class DataManger : MonoBehaviour
     {
         LoadedPizzaList = new Dictionary<string, Pizza>();
 
-        XDocument doc = XDocument.Load($"{_dataRootPath}/{name}.xml");
+        XDocument doc = XDocument.Load($"{_dataRootPathInHome}/{name}.xml");
+        
         var dataElements = doc.Descendants("data");
 
         foreach (var data in dataElements)
@@ -153,7 +154,8 @@ public class DataManger : MonoBehaviour
     {
         LoadedToppingResorceList = new Dictionary<string, ToppingResorce>();
 
-        XDocument doc = XDocument.Load($"{_dataRootPath}/{name}.xml");
+        XDocument doc = XDocument.Load($"{_dataRootPathInHome}/{name}.xml");
+        
         var dataElements = doc.Descendants("data");
 
         foreach (var data in dataElements)
@@ -175,7 +177,8 @@ public class DataManger : MonoBehaviour
     {
         LoadedPlayer = new Dictionary<string, Player>();
 
-        XDocument doc = XDocument.Load($"{_dataRootPath}/{name}.xml");
+        XDocument doc = XDocument.Load($"{_dataRootPathInHome}/{name}.xml");
+        
         var dataElements = doc.Descendants("data");
 
         foreach (var data in dataElements)
@@ -197,14 +200,14 @@ public class DataManger : MonoBehaviour
         //딕셔너리는 찾아주는게 빠르다
         return manger.LoadedPizzaList[dataName];
     }
-    public Player GetplayerData( DataManger manger, string dataClassName)
+    public Player GetplayerData(string dataClassName)
     {
-        if (manger.LoadedPlayer.Count == 0
-            || manger.LoadedPlayer.ContainsKey(dataClassName))
+        if (LoadedPlayer.Count == 0
+            || !LoadedPlayer.ContainsKey(dataClassName))
             return null;
 
         //딕셔너리는 찾아주는게 빠르다
-        return manger.LoadedPlayer[dataClassName];
+        return LoadedPlayer[dataClassName];
     }
 
     public ToppingResorce GetBuffData( DataManger manger, string dataClassName)

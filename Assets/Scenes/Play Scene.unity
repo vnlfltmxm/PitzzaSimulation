@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -241,6 +241,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &634154056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 634154058}
+  - component: {fileID: 634154057}
+  m_Layer: 0
+  m_Name: DataManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &634154057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634154056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587606619b13eaf4f9dfe490e002d307, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &634154058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634154056}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.93524, y: 9.57217, z: -6.4641943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &695100515
 PrefabInstance:
@@ -695,6 +739,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 507925896594982274, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
+      propertyPath: Prefabs_Food.Array.data[1]
+      value: 
+      objectReference: {fileID: 1449764433530376782, guid: 394b9b5004c95c946a7142eb8af3baaa, type: 3}
+    - target: {fileID: 507925896594982274, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
+      propertyPath: Prefabs_Food.Array.data[2]
+      value: 
+      objectReference: {fileID: 1027517570568528, guid: badad962db30b9a4dbf326f4a2930b8e, type: 3}
+    - target: {fileID: 507925896594982274, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
+      propertyPath: Prefabs_Food.Array.data[3]
+      value: 
+      objectReference: {fileID: 1300191315913896, guid: 4d84159feecba1f4ba750873a49d1293, type: 3}
+    - target: {fileID: 507925896594982274, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
+      propertyPath: Prefabs_Food.Array.data[4]
+      value: 
+      objectReference: {fileID: 1837224294238456869, guid: 120f9788f122414c9d615659229e90d4, type: 3}
+    - target: {fileID: 507925896594982274, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
+      propertyPath: Prefabs_Food.Array.data[5]
+      value: 
+      objectReference: {fileID: 1821227637025026, guid: d9f6314e4883c524bba20489994e7db8, type: 3}
+    - target: {fileID: 507925896594982274, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
+      propertyPath: Prefabs_Food.Array.data[6]
+      value: 
+      objectReference: {fileID: 1439163563751860, guid: faf791c14f278664b9f67b76cb97797a, type: 3}
+    - target: {fileID: 507925896594982274, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
+      propertyPath: Prefabs_Food.Array.data[7]
+      value: 
+      objectReference: {fileID: 2530047374891432268, guid: 3548fb2a0f85476396d405ee78d13823, type: 3}
+    - target: {fileID: 507925896594982274, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
+      propertyPath: Prefabs_Food.Array.data[8]
+      value: 
+      objectReference: {fileID: 1603613873904006, guid: 71fe1ac5b01882b4497c852ca87aec9a, type: 3}
+    - target: {fileID: 507925896594982274, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
+      propertyPath: Prefabs_Food.Array.data[9]
+      value: 
+      objectReference: {fileID: 1002905431065138, guid: 8413afc6eec6a454a9a3c0b1642e0cf4, type: 3}
+    - target: {fileID: 507925896594982274, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
+      propertyPath: Prefabs_Food.Array.data[10]
+      value: 
+      objectReference: {fileID: 1568630130943234, guid: 69cbbbc03fa8f7d42849d30feca387e5, type: 3}
+    - target: {fileID: 507925896594982274, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
+      propertyPath: Prefabs_Food.Array.data[11]
+      value: 
+      objectReference: {fileID: 1532808183347224, guid: fc80d6e5084a1d0419df75a427caad24, type: 3}
     - target: {fileID: 3502495881652866028, guid: 1ac5754f39af86d4fa03164683fb4a6d, type: 3}
       propertyPath: m_Name
       value: PoolManger
