@@ -24,7 +24,7 @@ public class PoolManger : Singleton<PoolManger>
         {
             AddPoolInDictionary(foodList[i]);
             AddObjectInPool(foodList[i]);
-            SetItemMaxCountValueInDictionary(foodList[i].name, 100);
+            SetItemMaxCountValueInDictionary(foodList[i].name, DataManger.Inst.GetToppingResorceData(foodList[i].tag).StartMaxCount);
             SetItemCountValueInDictionary(foodList[i].name);
             DisableStartPoolAtPool(foodList[i]);
         }

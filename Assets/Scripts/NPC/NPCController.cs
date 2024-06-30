@@ -12,9 +12,9 @@ public class NPCController : MonoBehaviour
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
 
-    private Pizza _orderPizzaData;
+    private string _orderPizzaData;
     [HideInInspector]
-    public Pizza Pizza { get { return _orderPizzaData; } }
+    public string Pizza { get { return _orderPizzaData; } }
     private void Awake()
     {
         _animator = GetComponent<Animator>();

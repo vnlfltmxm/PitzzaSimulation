@@ -191,14 +191,14 @@ public class DataManger : MonoBehaviour
             LoadedPlayer.Add(tempPlayer.Name, tempPlayer);
         }
     }
-    public Pizza GetPizzaData( DataManger manger, string dataName)
+    public Pizza GetPizzaData(string dataName)
     {
-        if (manger.LoadedPizzaList.Count == 0
-            || manger.LoadedPizzaList.ContainsKey(dataName))
+        if (LoadedPizzaList.Count == 0
+            || !LoadedPizzaList.ContainsKey(dataName))
             return null;
 
         //딕셔너리는 찾아주는게 빠르다
-        return manger.LoadedPizzaList[dataName];
+        return LoadedPizzaList[dataName];
     }
     public Player GetplayerData(string dataClassName)
     {
@@ -210,14 +210,14 @@ public class DataManger : MonoBehaviour
         return LoadedPlayer[dataClassName];
     }
 
-    public ToppingResorce GetBuffData( DataManger manger, string dataClassName)
+    public ToppingResorce GetToppingResorceData(string dataClassName)
     {
-        if (manger.LoadedToppingResorceList.Count == 0
-            || manger.LoadedToppingResorceList.ContainsKey(dataClassName))
+        if (LoadedToppingResorceList.Count == 0
+            || !LoadedToppingResorceList.ContainsKey(dataClassName))
             return null;
 
         //딕셔너리는 찾아주는게 빠르다
-        return manger.LoadedToppingResorceList[dataClassName];
+        return LoadedToppingResorceList[dataClassName];
     }
 
     //public string GetSkillName( DataTemporalManger manger, string dataClassName)

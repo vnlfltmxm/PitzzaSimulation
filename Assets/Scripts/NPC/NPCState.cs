@@ -88,6 +88,7 @@ public class NPCOrderState : BaseState<NPCController>
 }
 public class NPCWaitingPizzaState : BaseState<NPCController>
 {
+    private int _randomPizzaIndex;
     public NPCWaitingPizzaState(NPCController npcController) : base(npcController)
     {
 
@@ -95,7 +96,9 @@ public class NPCWaitingPizzaState : BaseState<NPCController>
 
     public override void OnEnterState()
     {
-        Owner._orderPizza = "치즈피자";
+        SetRandomIndex();
+        var oederPizza= DataManger.Inst.GetPizzaData(PlayerController.Instance.PizaaRecipe[_randomPizzaIndex]);
+        Owner._orderPizza = oederPizza.Name;
         UIManger.Instance.PrintText($"{Owner._orderPizza} 주세요");
         InteractionObjectManger.Instance.UnRegisterChangeNPCState();
         
@@ -108,6 +111,12 @@ public class NPCWaitingPizzaState : BaseState<NPCController>
 
     public override void OnUpdateState()
     {
+    }
+
+    private void SetRandomIndex()
+    {
+        _randomPizzaIndex = 0;
+        _randomPizzaIndex = Random.Range(0, PlayerController.Instance.PizaaRecipe.Count);
     }
 }
 

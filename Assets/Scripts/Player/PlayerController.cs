@@ -25,6 +25,10 @@ public class PlayerController : Singleton<PlayerController>
     private float _minLookAngle = -60f; 
     private float _verticalLookRotation = 0f;
     private GameObject _checkRayHitObj = null;
+
+    private List<string> _pizzaRecipe = new List<string>();
+    [HideInInspector]
+    public List<string> PizaaRecipe { get {  return _pizzaRecipe; } }
     private void Awake()
     {
         _nav = GetComponent<NavMeshAgent>();
@@ -34,6 +38,7 @@ public class PlayerController : Singleton<PlayerController>
     // Start is called before the first frame update
     void Start()
     {
+        _pizzaRecipe.Add(DataManger.Inst.GetplayerData("플레이어").StartPizzaRecipe);
     }
 
     // Update is called once per frame
