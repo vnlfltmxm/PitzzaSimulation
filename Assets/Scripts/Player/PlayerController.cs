@@ -282,7 +282,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             InteractionObjectManger.Instance.OnRegisterChangeNPCState();
             InteractionObjectManger.Instance.OnChangeNPCState(targetNPC);
-
+            UIManger.Instance.SetButtonActive(true);
         }
     }
     

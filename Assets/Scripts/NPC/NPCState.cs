@@ -75,6 +75,7 @@ public class NPCOrderState : BaseState<NPCController>
     {
         UIManger.Instance.PrintText("林巩捞夸");
         Owner.RegisterCheckState();
+        Owner.ChangeNPCStateToLeave();
     }
 
     public override void OnExitState()
@@ -88,7 +89,7 @@ public class NPCOrderState : BaseState<NPCController>
 }
 public class NPCWaitingPizzaState : BaseState<NPCController>
 {
-    private int _randomPizzaIndex;
+    
     public NPCWaitingPizzaState(NPCController npcController) : base(npcController)
     {
 
@@ -96,10 +97,9 @@ public class NPCWaitingPizzaState : BaseState<NPCController>
 
     public override void OnEnterState()
     {
-        SetRandomIndex();
-        var oederPizza= DataManger.Inst.GetPizzaData(PlayerController.Instance.PizaaRecipe[_randomPizzaIndex]);
-        Owner._orderPizza = oederPizza.Name;
-        UIManger.Instance.PrintText($"{Owner._orderPizza} 林技夸");
+        Owner.SetRandomIndex();
+        
+        UIManger.Instance.PrintText($"{Owner.Pizza.Name} 林技夸");
         InteractionObjectManger.Instance.UnRegisterChangeNPCState();
         
     }
@@ -113,11 +113,7 @@ public class NPCWaitingPizzaState : BaseState<NPCController>
     {
     }
 
-    private void SetRandomIndex()
-    {
-        _randomPizzaIndex = 0;
-        _randomPizzaIndex = Random.Range(0, PlayerController.Instance.PizaaRecipe.Count);
-    }
+    
 }
 
 public class NPCLeaveState : BaseState<NPCController>
@@ -129,6 +125,7 @@ public class NPCLeaveState : BaseState<NPCController>
 
     public override void OnEnterState()
     {
+        Owner.ChangeNPCStateToLeave();
     }
 
     public override void OnExitState()

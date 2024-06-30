@@ -18,6 +18,8 @@ public class UIManger : Singleton<UIManger>
     private GameObject _PlayerUIRoot;
     [SerializeField]
     private Canvas _canvas;
+    [SerializeField]
+    private GameObject _buttonRoot;
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class UIManger : Singleton<UIManger>
     private void InitUI()
     {
         SetTextBGActive(false);
+        SetButtonActive(false);
     }
     private IEnumerator SetPrintText(string text)
     {
@@ -39,6 +42,10 @@ public class UIManger : Singleton<UIManger>
             index++;
             yield return new WaitForSeconds(0.1f);
         }
+    }
+    public void SetButtonActive(bool active)
+    {
+        _buttonRoot.SetActive(active);
     }
     private void SetTextBGActive(bool active)
     {
@@ -52,6 +59,16 @@ public class UIManger : Singleton<UIManger>
     public void PrintInteractionText(string text)
     {
         _interactionText.text = text;
+    }
+
+    public void OnAcceptButtonCleckEvent()
+    {
+        SetTextBGActive(false);
+        SetButtonActive(false);
+    }
+    public void OnRefuseButtonCleckEvent()
+    {
+        SetButtonActive(false);
     }
     //private void OnRegisterNPCTalkEvent()
     //{

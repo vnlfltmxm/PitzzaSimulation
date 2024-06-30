@@ -6,15 +6,13 @@ using UnityEngine.AI;
 
 public class NPCController : MonoBehaviour
 {
-    [HideInInspector]
-    public string _orderPizza;
     private StateMachin<NPCController> _npcState = new StateMachin<NPCController>();
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
-
-    private string _orderPizzaData;
+    private int _randomPizzaIndex;
+    private Pizza _orderPizzaData;
     [HideInInspector]
-    public string Pizza { get { return _orderPizzaData; } }
+    public Pizza Pizza { get { return _orderPizzaData; } }
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -77,6 +75,18 @@ public class NPCController : MonoBehaviour
         }
             return false;
     }
+    public void RegisterChangeStateToLeave()
+    {
+        EventManger.Instance.ChangeNPCStateToLeave += ChangeNPCStateToLeave;
+    }
+    public void UnRegisterChangeStateToLeave()
+    {
+        EventManger.Instance.ChangeNPCStateToLeave -= ChangeNPCStateToLeave;
+    }
+    public void ChangeNPCStateToLeave()
+    {
+        _npcState.ChangeState(NPCStateName.LEAVE);
+    }
     public void RegisterCheckState()
     {
         EventManger.Instance.CheckNPCState += CheckCurrentState;
@@ -97,5 +107,12 @@ public class NPCController : MonoBehaviour
         
 
         return false;
+    }
+    public void SetRandomIndex()
+    {
+        _randomPizzaIndex = 0;
+        _randomPizzaIndex = UnityEngine.Random.Range(0, PlayerController.Instance.PizaaRecipe.Count);
+
+        _orderPizzaData = DataManger.Inst.GetPizzaData(PlayerController.Instance.PizaaRecipe[_randomPizzaIndex]);
     }
 }
