@@ -20,29 +20,42 @@ public class PoolManger : Singleton<PoolManger>
     }
     private void InitPool(GameObject[] foodList)
     {
-        var player = DataManger.Inst.GetplayerData("플레이어");
-        for (int i = 0; i < player.StartToppingResorceList.Count; i++)
+        for (int i = 0; i < foodList.Length; i++)
         {
             AddPoolInDictionary(foodList[i]);
-            AddObjectInPool(foodList[i], player.StartToppingResorceList[i]);
-            SetItemMaxCountValueInDictionary(foodList[i].name, 5);
+            AddObjectInPool(foodList[i]);
+            SetItemMaxCountValueInDictionary(foodList[i].name, 100);
             SetItemCountValueInDictionary(foodList[i].name);
+            DisableStartPoolAtPool(foodList[i]);
         }
     }
     
-    private void AddObjectInPool(GameObject prefabObj,string name)
+    private void AddObjectInPool(GameObject prefabObj)
     {
-        _poolDic.TryGetValue(name, out Queue<GameObject> pool);
-        var parent = InteractionObjectManger.Instance.FindPrefabsParentTrasnform(name);
+        _poolDic.TryGetValue(prefabObj.name, out Queue<GameObject> pool);
+        var parent = InteractionObjectManger.Instance.FindPrefabsParentTrasnform(prefabObj.tag);
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 100; i++)
         {
             GameObject obj = Instantiate(prefabObj, parent);
             pool.Enqueue(obj);
             obj.SetActive(false);
         }
     }
-
+    private void DisableStartPoolAtPool(GameObject pool)
+    {
+        var name = pool.gameObject.tag;
+        var parent = InteractionObjectManger.Instance.FindPrefabsParentTrasnform(name);
+        var player = DataManger.Inst.GetplayerData("플레이어");
+        if (player.StartToppingResorceList.Contains(name))
+        {
+            parent.gameObject.SetActive(true);
+        }
+        else
+        {
+            parent.gameObject.SetActive(false);
+        }
+    }
     private void AddPoolInDictionary(GameObject prefabObj)
     {
         _poolDic.Add(prefabObj.gameObject.name, new Queue<GameObject>());
