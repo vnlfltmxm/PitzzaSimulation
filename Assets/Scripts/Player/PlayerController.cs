@@ -35,6 +35,8 @@ public class PlayerController : Singleton<PlayerController>
     {
         _nav = GetComponent<NavMeshAgent>();
         _nav.updateRotation = false;
+        CurserLock();
+        RegisterCureserLock();
     }
 
     // Start is called before the first frame update
@@ -47,10 +49,19 @@ public class PlayerController : Singleton<PlayerController>
     // Update is called once per frame
     void Update()
     {
-        MoveToPlayer();
-        RotateWithMouse();
+        if(Cursor.lockState == CursorLockMode.Locked)
+        {
+            MoveToPlayer();
+            RotateWithMouse();
+        }
+        
         RayToCameraFoward();
         
+    }
+
+    private void OnDisable()
+    {
+        UnRegisterCureserLock();
     }
     private void InitPlayer()
     {
@@ -58,6 +69,24 @@ public class PlayerController : Singleton<PlayerController>
         _pizzaRecipe.Add(_playerData.StartPizzaRecipe);
         _money = _playerData.StartMoney;
         UIManger.Instance.SetMoneyText(_money);
+    }
+    private void CurserLock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    private void CurserUnLock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+    private void RegisterCureserLock()
+    {
+        EventManger.Instance.PlayerCurserLock += CurserLock;
+    }
+    private void UnRegisterCureserLock()
+    {
+        EventManger.Instance.PlayerCurserLock -= CurserLock;
     }
     private bool CheckKey()
     {
@@ -303,6 +332,7 @@ public class PlayerController : Singleton<PlayerController>
             InteractionObjectManger.Instance.OnRegisterChangeNPCState();
             InteractionObjectManger.Instance.OnChangeNPCState(targetNPC);
             UIManger.Instance.SetButtonActive(true);
+            CurserUnLock();
         }
     }
     private void SellPizza(GameObject NPC)

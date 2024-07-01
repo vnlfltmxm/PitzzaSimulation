@@ -81,11 +81,13 @@ public class UIManger : Singleton<UIManger>
     {
         SetTextBGActive(false);
         SetButtonActive(false);
+        EventManger.Instance.OnPlayerCurserLock();
     }
     public void OnRefuseButtonCleckEvent()
     {
         SetButtonActive(false);
         SetTextBGActive(false);
+        EventManger.Instance.OnPlayerCurserLock();
         EventManger.Instance.OnChangeNPCStatetoLeave();
     }
     //private void OnRegisterNPCTalkEvent()

@@ -12,6 +12,7 @@ public class EventManger : Singleton<EventManger>
     public Action<GameObject> TurnOffMachine;
     public Action<GameObject> TurnOnMachine;
     public Action<Color,GameObject> OverCooked;
+    public Action PlayerCurserLock;
     public Action Packing;
     public Action<Dough> CheckPizza;
     public Action<Transform> DoughMove;
@@ -28,6 +29,10 @@ public class EventManger : Singleton<EventManger>
     //{
     //    NPCTalk?.Invoke(text);
     //}
+    public void OnPlayerCurserLock()
+    {
+        PlayerCurserLock?.Invoke();
+    }
     public void OnCheckPizzaEventInvoke(Dough pizza)
     {
         CheckPizza?.Invoke(pizza);
