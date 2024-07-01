@@ -34,7 +34,7 @@ public class UIManger : Singleton<UIManger>
         SetTextBGActive(false);
         SetButtonActive(false);
     }
-    private IEnumerator SetPrintText(string text)
+    private IEnumerator SetPrintText(string text,bool isNPCChangedLeave)
     {
         int index = 0;
         _text.text = string.Empty;
@@ -44,12 +44,19 @@ public class UIManger : Singleton<UIManger>
             index++;
             yield return new WaitForSeconds(0.1f);
         }
+
+        if (isNPCChangedLeave)
+        {
+            yield return new WaitForSeconds(1f);
+            SetTextBGActive(false);
+        }
+
     }
     public void SetButtonActive(bool active)
     {
         _buttonRoot.SetActive(active);
     }
-    private void SetTextBGActive(bool active)
+    public void SetTextBGActive(bool active)
     {
         _textRoot.SetActive(active);
     }
@@ -57,10 +64,13 @@ public class UIManger : Singleton<UIManger>
     {
         _moneytext.text = value.ToString();
     }
-    public void PrintText(string text)
+    public void PrintNPCText(string text,bool isNPCChangedLeave)
     {
-        SetTextBGActive(true);
-        StartCoroutine(SetPrintText(text));
+        if (_textRoot.gameObject.activeSelf == false)
+        {
+            SetTextBGActive(true);
+        }
+        StartCoroutine(SetPrintText(text, isNPCChangedLeave));
     }
     public void PrintInteractionText(string text)
     {
@@ -75,6 +85,7 @@ public class UIManger : Singleton<UIManger>
     public void OnRefuseButtonCleckEvent()
     {
         SetButtonActive(false);
+        SetTextBGActive(false);
         EventManger.Instance.OnChangeNPCStatetoLeave();
     }
     //private void OnRegisterNPCTalkEvent()

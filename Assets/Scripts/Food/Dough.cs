@@ -7,6 +7,7 @@ using static UnityEditor.Progress;
 public class Dough : Food
 {
     private int _doughCount = 0;
+    private int _pizzaSize = 0;
     private bool _isDoughReady = false;
     private bool _isMoveReady = false;
     private bool _isDoughCooked = false;
@@ -19,10 +20,16 @@ public class Dough : Food
     [SerializeField]
     private Mesh[] _meshs;
 
+    private Dictionary<string, int> _pizzaToppingDic = new Dictionary<string, int>();
+
     protected MeshFilter _meshFilter;
     private MeshCollider _meshCollider;
 
     public bool _isPizzaCooked { get { return _isDoughCooked; } }
+    public bool IsPizzaPackaging { get { return _isPizzaPackaging; } }
+    public bool IsPizzaOverCooked { get { return _isDoughOverCooked; } }
+    public Dictionary<string,int> CheckPizzaList { get { return _pizzaToppingDic; } }
+    public int PizzaSize { get { return _pizzaSize; } }
 
     protected override void Awake()
     {
@@ -107,13 +114,37 @@ public class Dough : Food
 
     //private void OnCollisionExit(Collision collision)
     //{
-       
+
     //    if (collision.transform.CompareTag("KneaderInputPos") && _isDoughReady == true)
     //    {
     //        UnResterHandKneadEvent();
     //    }
     //}
+    public void BackUpChekPizza(GameObject item)
+    {
+        if (item.transform.childCount > 0)
+        {
+            for (int i = item.transform.childCount - 1; i >= 0; i--)
+            {
+                var child = item.transform.GetChild(i);
 
+                BackUpChekPizza(child.gameObject);
+            }
+        }
+        if (!item.CompareTag("Untagged"))
+        {
+            if (_pizzaToppingDic.ContainsKey(item.tag) == false)
+            {
+                _pizzaToppingDic.Add(item.tag, 1);
+            }
+            else
+            {
+                _pizzaToppingDic[item.tag]++;
+            }
+        }
+        
+
+    }
     private void DoughCooked()
     {
        
@@ -126,6 +157,7 @@ public class Dough : Food
                 //마테리얼 변경
                 Color cookedColor = new Color(1, 0.68f, 0.28f, 1);
                 base.ChangeMaterialColor(cookedColor);
+                BackUpChekPizza(this.gameObject);
                 Melting();
                 _isDoughCooked = true;
             }
@@ -314,7 +346,7 @@ public class Dough : Food
     }
     private void PackagingDough()
     {
-        SetDoughScale(0);
+        //SetDoughScale(0);
         _meshRenderer.enabled = false;
         if (_doughKneadCount < 5) 
         {

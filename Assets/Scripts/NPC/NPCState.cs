@@ -9,6 +9,7 @@ public enum NPCStateName
     WALK,
     ORDER,
     WAITINGPIZZA,
+    CHECKPIZZA,
     LEAVE,
 
     LAST
@@ -73,7 +74,7 @@ public class NPCOrderState : BaseState<NPCController>
 
     public override void OnEnterState()
     {
-        UIManger.Instance.PrintText("주문이요");
+        UIManger.Instance.PrintNPCText("주문이요", false);
         Owner.RegisterCheckState();
         Owner.RegisterChangeStateToLeave();
     }
@@ -98,15 +99,15 @@ public class NPCWaitingPizzaState : BaseState<NPCController>
     public override void OnEnterState()
     {
         Owner.SetRandomIndex();
-        
-        UIManger.Instance.PrintText($"{Owner.Pizza.Name} 주세요");
+        string size = Owner.PizzaSize == 0 ? "레귤러 사이즈" : "라지 사이즈";
+        UIManger.Instance.PrintNPCText($"{Owner.Pizza.Name} {size} 주세요",false);
         InteractionObjectManger.Instance.UnRegisterChangeNPCState();
-        
+        Owner.RegisterCheckPizza();
     }
 
     public override void OnExitState()
     {
-       
+       Owner.UnRegisterCheckPizza();
     }
 
     public override void OnUpdateState()
@@ -115,7 +116,27 @@ public class NPCWaitingPizzaState : BaseState<NPCController>
 
     
 }
+public class NPCCheckPizzaState : BaseState<NPCController>
+{
+    public NPCCheckPizzaState(NPCController npcController) : base(npcController)
+    {
 
+    }
+
+    public override void OnEnterState()
+    {
+        
+    }
+
+    public override void OnExitState()
+    {
+        
+    }
+
+    public override void OnUpdateState()
+    {
+    }
+}
 public class NPCLeaveState : BaseState<NPCController>
 {
     public NPCLeaveState(NPCController npcController) : base(npcController)

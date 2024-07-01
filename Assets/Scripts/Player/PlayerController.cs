@@ -207,7 +207,17 @@ public class PlayerController : Singleton<PlayerController>
         }
         else if(InteractionObjectManger.Instance.OnCheckNPCState(obj, NPCStateName.WAITINGPIZZA) == true)
         {
-            if (CheckOnHandlingItem()&&_grabPos.transform.GetChild(0).CompareTag("Dough"))
+            if (CheckOnHandlingItem() == false)
+            {
+                return;
+            }
+            var pizza= _grabPos.transform.GetChild(0).GetComponent<Dough>();
+            if (pizza == null)
+            {
+                return;
+            }
+
+            if ( pizza.IsPizzaPackaging)
             {
                 SetInteractionText("аж╠Б");
             }
@@ -255,6 +265,7 @@ public class PlayerController : Singleton<PlayerController>
                     break;
                 case 11:
                     CheckOrder(hit.transform.gameObject);
+                    SellPizza(hit.transform.gameObject);
                     break;
                 default:
                     break;
@@ -293,6 +304,29 @@ public class PlayerController : Singleton<PlayerController>
             InteractionObjectManger.Instance.OnChangeNPCState(targetNPC);
             UIManger.Instance.SetButtonActive(true);
         }
+    }
+    private void SellPizza(GameObject NPC)
+    {
+        if (InteractionObjectManger.Instance.OnCheckNPCState(NPC, NPCStateName.WAITINGPIZZA) == true)
+        {
+            if (CheckOnHandlingItem() == false)
+            {
+                return;
+            }
+            var pizza = _grabPos.transform.GetChild(0).gameObject.GetComponent<Dough>();
+            if (pizza == null)
+            {
+                return;
+            }
+            if ( pizza.IsPizzaPackaging)
+            {
+                EventManger.Instance.OnCheckPizzaEventInvoke(pizza);
+                PoolManger.Instance.ReturnItemInPool(pizza.gameObject);
+            }
+
+        }
+
+
     }
     
     private bool CheckItemTag(GameObject item,string tagName)
