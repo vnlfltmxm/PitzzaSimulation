@@ -52,6 +52,7 @@ MonoBehaviour:
   _PlayerUIRoot: {fileID: 7067263115940762014}
   _canvas: {fileID: 2996821327217530623}
   _buttonRoot: {fileID: 6196759834823078348}
+  _moneytext: {fileID: 4255378258999978315}
 --- !u!1001 &517918334782750013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -175,6 +176,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8186886236576828024, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186886236576828024, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186886236576828024, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4381674027691222806}
+    - target: {fileID: 8186886236576828024, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186886236576828024, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnRefuseButtonCleckEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186886236576828024, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManger, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186886236576828024, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
 --- !u!1 &1341349709658905947 stripped
@@ -187,6 +216,17 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 3361614852039551938, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
   m_PrefabInstance: {fileID: 517918334782750013}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4255378258999978315 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4340942276143223926, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}
+  m_PrefabInstance: {fileID: 517918334782750013}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6196759834823078348 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5967080149050100977, guid: 12e19a7268a409941aefe4685b1f51f5, type: 3}

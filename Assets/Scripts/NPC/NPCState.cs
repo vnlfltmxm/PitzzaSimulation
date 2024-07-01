@@ -75,7 +75,7 @@ public class NPCOrderState : BaseState<NPCController>
     {
         UIManger.Instance.PrintText("주문이요");
         Owner.RegisterCheckState();
-        Owner.ChangeNPCStateToLeave();
+        Owner.RegisterChangeStateToLeave();
     }
 
     public override void OnExitState()
@@ -106,7 +106,7 @@ public class NPCWaitingPizzaState : BaseState<NPCController>
 
     public override void OnExitState()
     {
-        Owner.UnRegisterCheckState();
+       
     }
 
     public override void OnUpdateState()
@@ -125,14 +125,24 @@ public class NPCLeaveState : BaseState<NPCController>
 
     public override void OnEnterState()
     {
-        Owner.ChangeNPCStateToLeave();
+        Owner.UnRegisterCheckState();
+        Owner.UnRegisterChangeStateToLeave();
+        Owner.SetNPCIsStopping(false);
+        Owner.SetBoolNPCAnimotorPropertyToName("IsWalk", true);
+        Owner.SetNPCDestinationPos(NavmeshManger.Instance.GetRespawnPos());
     }
 
     public override void OnExitState()
     {
+        Owner.SetBoolNPCAnimotorPropertyToName("IsWalk", false);
+        Owner.SetNPCIsStopping(true);
     }
 
     public override void OnUpdateState()
     {
+        if (Owner.CheckArriveDesrtination())
+        {
+            Owner.ChangeNPCState(NPCStateName.IDLE);
+        }
     }
 }

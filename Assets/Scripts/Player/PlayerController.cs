@@ -25,6 +25,8 @@ public class PlayerController : Singleton<PlayerController>
     private float _minLookAngle = -60f; 
     private float _verticalLookRotation = 0f;
     private GameObject _checkRayHitObj = null;
+    private int _money;
+    private Player _playerData;
 
     private List<string> _pizzaRecipe = new List<string>();
     [HideInInspector]
@@ -38,7 +40,8 @@ public class PlayerController : Singleton<PlayerController>
     // Start is called before the first frame update
     void Start()
     {
-        _pizzaRecipe.Add(DataManger.Inst.GetplayerData("플레이어").StartPizzaRecipe);
+        InitPlayer();
+       
     }
 
     // Update is called once per frame
@@ -49,7 +52,13 @@ public class PlayerController : Singleton<PlayerController>
         RayToCameraFoward();
         
     }
-
+    private void InitPlayer()
+    {
+        _playerData = DataManger.Inst.GetplayerData("플레이어");
+        _pizzaRecipe.Add(_playerData.StartPizzaRecipe);
+        _money = _playerData.StartMoney;
+        UIManger.Instance.SetMoneyText(_money);
+    }
     private bool CheckKey()
     {
         if (Input.GetKey(KeyCode.W) ||

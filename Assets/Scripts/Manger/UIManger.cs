@@ -20,6 +20,8 @@ public class UIManger : Singleton<UIManger>
     private Canvas _canvas;
     [SerializeField]
     private GameObject _buttonRoot;
+    [SerializeField]
+    private Text _moneytext;
 
     private void Awake()
     {
@@ -51,6 +53,10 @@ public class UIManger : Singleton<UIManger>
     {
         _textRoot.SetActive(active);
     }
+    public void SetMoneyText(int value)
+    {
+        _moneytext.text = value.ToString();
+    }
     public void PrintText(string text)
     {
         SetTextBGActive(true);
@@ -69,6 +75,7 @@ public class UIManger : Singleton<UIManger>
     public void OnRefuseButtonCleckEvent()
     {
         SetButtonActive(false);
+        EventManger.Instance.OnChangeNPCStatetoLeave();
     }
     //private void OnRegisterNPCTalkEvent()
     //{

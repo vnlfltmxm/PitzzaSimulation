@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class NPCController : MonoBehaviour
 {
     private StateMachin<NPCController> _npcState = new StateMachin<NPCController>();
     private Animator _animator;
-    private NavMeshAgent _navMeshAgent;
+    public NavMeshAgent _navMeshAgent;
     private int _randomPizzaIndex;
     private Pizza _orderPizzaData;
     [HideInInspector]
@@ -68,8 +69,7 @@ public class NPCController : MonoBehaviour
 
     public bool CheckArriveDesrtination()
     {
-        
-        if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance) 
+        if (Vector3.Distance(gameObject.transform.position, _navMeshAgent.destination) <= _navMeshAgent.stoppingDistance)
         {
             return true;
         }
