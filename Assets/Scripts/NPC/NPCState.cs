@@ -74,7 +74,7 @@ public class NPCOrderState : BaseState<NPCController>
 
     public override void OnEnterState()
     {
-        UIManger.Instance.PrintNPCText("주문이요", false);
+        UIManger.Instance.PrintNPCText("주문이요");
         Owner.RegisterCheckState();
         Owner.RegisterChangeStateToLeave();
     }
@@ -100,7 +100,7 @@ public class NPCWaitingPizzaState : BaseState<NPCController>
     {
         Owner.SetRandomIndex();
         string size = Owner.PizzaSize == 0 ? "레귤러 사이즈" : "라지 사이즈";
-        UIManger.Instance.PrintNPCText($"{Owner.Pizza.Name} {size} 주세요",false);
+        UIManger.Instance.PrintNPCText($"{Owner.Pizza.Name} {size} 주세요");
         InteractionObjectManger.Instance.UnRegisterChangeNPCState();
         Owner.RegisterCheckPizza();
     }

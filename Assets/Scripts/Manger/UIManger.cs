@@ -34,7 +34,7 @@ public class UIManger : Singleton<UIManger>
         SetTextBGActive(false);
         SetButtonActive(false);
     }
-    private IEnumerator SetPrintText(string text,bool isNPCChangedLeave)
+    private IEnumerator SetPrintText(string text, bool isNPCChangedLeave)
     {
         int index = 0;
         _text.text = string.Empty;
@@ -64,7 +64,7 @@ public class UIManger : Singleton<UIManger>
     {
         _moneytext.text = value.ToString();
     }
-    public void PrintNPCText(string text,bool isNPCChangedLeave)
+    public void PrintNPCText(string text, bool isNPCChangedLeave = false)
     {
         if (_textRoot.gameObject.activeSelf == false)
         {
