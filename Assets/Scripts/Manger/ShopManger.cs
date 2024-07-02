@@ -9,10 +9,15 @@ public class ShopManger : Singleton<ShopManger>
 
     private void Start()
     {
+        RegisterButtonEvent();
         if (DataManger.Inst.LoadedToppingResorceList != null)
         {
             _toppingItemDic = DataManger.Inst.LoadedToppingResorceList;
         }
+    }
+    private void OnDisable()
+    {
+        UnRegisterButtonEvent();
     }
 
     public bool CheckPlayerMoney()
@@ -42,4 +47,39 @@ public class ShopManger : Singleton<ShopManger>
         return true;
     }
 
+    private void RegisterButtonEvent()
+    {
+        EventManger.Instance.ClickPlusButton += BuyToppingItem;
+        EventManger.Instance.ClickMinuseButton += CancelToppingItem;
+        
+    }
+    private void UnRegisterButtonEvent()
+    {
+        EventManger.Instance.ClickPlusButton += BuyToppingItem;
+        EventManger.Instance.ClickMinuseButton += CancelToppingItem;
+
+    }
+
+    public void BuyToppingItem(string toppingName)
+    {
+        if (_shoppingDic.ContainsKey(toppingName) == false) 
+        {
+            _shoppingDic.Add(toppingName, 1);
+        }
+        else
+        {
+            _shoppingDic[toppingName]++;
+        }
+    }
+    public void CancelToppingItem(string toppingName)
+    {
+        if (_shoppingDic.ContainsKey(toppingName) == false)
+        {
+            return;
+        }
+        else
+        {
+            _shoppingDic[toppingName]--;
+        }
+    }
 }
