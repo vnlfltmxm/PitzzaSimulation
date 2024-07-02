@@ -292,6 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1048073331671983581}
+  - component: {fileID: 1923440909051390449}
   m_Layer: 0
   m_Name: ShopItemRoot
   m_TagString: Untagged
@@ -320,6 +321,22 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000015258789, y: -23.6}
   m_SizeDelta: {x: 0, y: 25}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1923440909051390449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5213035757126071275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c7ece348ad4044c8cda1f9c8dcf7b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nameText: {fileID: 7181765195610693156}
+  _valueSetText: {fileID: 8035378329840390264}
+  _priceText: {fileID: 2181020916975144194}
+  _buyText: {fileID: 12917811255778426}
 --- !u!1 &5888808924187331673
 GameObject:
   m_ObjectHideFlags: 0
