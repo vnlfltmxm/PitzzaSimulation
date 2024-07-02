@@ -71,8 +71,22 @@ public class UIManger : Singleton<UIManger>
 
 
         }
+        SetPlayerShopMoneyText(DataManger.Inst.GetplayerData("플레이어").StartMoney);
+        SetResultShopMoneyText(DataManger.Inst.GetplayerData("플레이어").StartMoney);
         _shopUIRoot.SetActive(false );
     }
+
+    public void SetPlayerShopMoneyText(int value)
+    {
+        _shopPlayerMoneytext.text = value.ToString();
+    }
+
+    public void SetResultShopMoneyText(int value)
+    {
+        _shopResultMoneytext.text = value.ToString();
+    }
+
+
     private IEnumerator SetPrintText(string text, bool isNPCChangedLeave)
     {
         int index = 0;
