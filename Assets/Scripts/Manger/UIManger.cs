@@ -34,6 +34,10 @@ public class UIManger : Singleton<UIManger>
     private GameObject _shopItemUIPrefabs;
     [SerializeField]
     private GameObject _cotent;
+    [SerializeField]
+    private GameObject _scrollView;
+    [SerializeField]
+    private GameObject _shopMenuUI;
     private void Awake()
     {
         InitUI();
@@ -77,6 +81,7 @@ public class UIManger : Singleton<UIManger>
         }
         SetPlayerShopMoneyText(DataManger.Inst.GetplayerData("플레이어").StartMoney);
         SetResultShopMoneyText(DataManger.Inst.GetplayerData("플레이어").StartMoney);
+        _scrollView.SetActive(false);
         _shopUIRoot.SetActive(false );
     }
     private void RegisterClickButtonEvent()
@@ -169,6 +174,24 @@ public class UIManger : Singleton<UIManger>
         SetTextBGActive(false);
         EventManger.Instance.OnPlayerCurserLock();
         EventManger.Instance.OnChangeNPCStatetoLeave();
+    }
+    public void OnClickShopOpenButton()
+    {
+        _shopMenuUI.SetActive(false);
+        _scrollView.SetActive(true);
+    }
+    public void OnClickCloseButton()
+    {
+        if( _scrollView.activeSelf == true)
+        {
+            _scrollView.SetActive(false);
+            _shopMenuUI.SetActive(true);
+        }
+
+        if( _shopMenuUI.activeSelf == true)
+        {
+            _shopUIRoot.SetActive(false);
+        }
     }
     //private void OnRegisterNPCTalkEvent()
     //{
