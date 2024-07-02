@@ -16,21 +16,29 @@ public class ShopItemUI : MonoBehaviour
 
     private int _buyValue = 0;
 
-    public void InitShopItemUI(string name, int valueSet, int price)
+    private string _toppingName;
+
+    public void InitShopItemUI(string itemName,string toppingName, int valueSet, int price)
     {
-        _nameText.text = name;
+        _nameText.text = itemName;
+        _toppingName = toppingName;
         _valueSetText.text = valueSet.ToString();
         _priceText.text = price.ToString();
         _buyText.text = _buyValue.ToString();
     }
 
-    public void OnClickMinuseButton()
+    public void On_ClickPlusButton()
     {
+        if (ShopManger.Instance.CheckPlayerMoney() == false) 
+        {
+            return;
+        }
         _buyValue++;
         _buyText.text = _buyValue.ToString();
+        EventManger.Instance.OnClickPlusButtonEvent(_toppingName);
     }
 
-    public void OnClickPlusButton()
+    public void On_ClickMinuseButton()
     {
         if( _buyValue <= 0 )
         {
@@ -38,5 +46,6 @@ public class ShopItemUI : MonoBehaviour
         }
         _buyValue--;
         _buyText.text = _buyValue.ToString();
+        EventManger.Instance.OnClickMinuseButtonEvent(_toppingName);
     }
 }

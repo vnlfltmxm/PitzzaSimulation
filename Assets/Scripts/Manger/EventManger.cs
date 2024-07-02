@@ -16,6 +16,8 @@ public class EventManger : Singleton<EventManger>
     public Action Packing;
     public Action<Dough> CheckPizza;
     public Action<Transform> DoughMove;
+    public Action<string> ClickPlusButton;
+    public Action<string> ClickMinuseButton;
     //public Action<string> NPCTalk;
     public Func<Transform> DoughDesPos;
     public Func<Enum,GameObject,bool> CheckNPCState;
@@ -29,6 +31,15 @@ public class EventManger : Singleton<EventManger>
     //{
     //    NPCTalk?.Invoke(text);
     //}
+
+    public void OnClickPlusButtonEvent(string itemName)
+    {
+        ClickPlusButton?.Invoke(itemName);
+    }
+    public void OnClickMinuseButtonEvent(string itemName)
+    {
+        ClickMinuseButton?.Invoke(itemName);
+    }
     public void OnPlayerCurserLock()
     {
         PlayerCurserLock?.Invoke();

@@ -410,6 +410,50 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 50090733325874584, guid: af4aca96ca8ce4e49bffc803da48bdf3, type: 3}
   m_PrefabInstance: {fileID: 725893005}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1211646799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1211646801}
+  - component: {fileID: 1211646800}
+  m_Layer: 0
+  m_Name: ShopManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1211646800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211646799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e627b0b8035630c4cb327b54469ac272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1211646801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211646799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 255.32498, y: 156.8486, z: 1.7740983}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1480253026 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7980038566765333230, guid: af4aca96ca8ce4e49bffc803da48bdf3, type: 3}

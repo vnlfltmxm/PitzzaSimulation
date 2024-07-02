@@ -31,6 +31,7 @@ public class PlayerController : Singleton<PlayerController>
     private List<string> _pizzaRecipe = new List<string>();
     [HideInInspector]
     public List<string> PizaaRecipe { get {  return _pizzaRecipe; } }
+    public int PlayerMoney { get { return _money; } }
     private void Awake()
     {
         _nav = GetComponent<NavMeshAgent>();

@@ -38,12 +38,16 @@ public class UIManger : Singleton<UIManger>
     {
         InitUI();
         _interactionText.text = string.Empty;
+        RegisterClickButtonEvent();
     }
     private void Start()
     {
         InitShopUI();
     }
-
+    private void OnDisable()
+    {
+        UnRegisterClickButtonEvent();
+    }
     private void InitUI()
     {
         SetTextBGActive(false);
@@ -63,11 +67,11 @@ public class UIManger : Singleton<UIManger>
             var shopItemUI = itemUI.GetComponent<ShopItemUI>();
             if ( shopItemUI == null)
             {
-                itemUI.SetActive(false);
+                Destroy(itemUI);
                 return;
             }
             var toppingItem = toppingList[item];
-            shopItemUI.InitShopItemUI(toppingItem.ItemName, toppingItem.MinBuyValues, toppingItem.Price * toppingItem.MinBuyValues);
+            shopItemUI.InitShopItemUI(toppingItem.ItemName,toppingItem.Name, toppingItem.MinBuyValues, toppingItem.Price * toppingItem.MinBuyValues);
 
 
         }
@@ -75,7 +79,30 @@ public class UIManger : Singleton<UIManger>
         SetResultShopMoneyText(DataManger.Inst.GetplayerData("플레이어").StartMoney);
         _shopUIRoot.SetActive(false );
     }
+    private void RegisterClickButtonEvent()
+    {
+        EventManger.Instance.ClickPlusButton += OnClickPlusButton;
+        EventManger.Instance.ClickMinuseButton += OnClickMinuseButton;
+    }
+    private void UnRegisterClickButtonEvent()
+    {
+        EventManger.Instance.ClickPlusButton -= OnClickPlusButton;
+        EventManger.Instance.ClickMinuseButton -= OnClickMinuseButton;
+    }
+    private void OnClickPlusButton(string toppingName)
+    {
+        int resultMoney = int.Parse(_shopResultMoneytext.text);
 
+        var toppingItem = DataManger.Inst.GetToppingResorceData(toppingName);
+        SetResultShopMoneyText(resultMoney - (toppingItem.MinBuyValues * toppingItem.Price));
+    }
+    private void OnClickMinuseButton(string toppingName)
+    {
+        int resultMoney = int.Parse(_shopResultMoneytext.text);
+
+        var toppingItem = DataManger.Inst.GetToppingResorceData(toppingName);
+        SetResultShopMoneyText(resultMoney + (toppingItem.MinBuyValues * toppingItem.Price));
+    }
     public void SetPlayerShopMoneyText(int value)
     {
         _shopPlayerMoneytext.text = value.ToString();
