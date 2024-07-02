@@ -17,6 +17,10 @@ public class UIManger : Singleton<UIManger>
     [SerializeField]
     private GameObject _PlayerUIRoot;
     [SerializeField]
+    private GameObject _shopUIRoot;
+    [SerializeField]
+    private GameObject _PlayerCoinUIRoot;
+    [SerializeField]
     private Canvas _canvas;
     [SerializeField]
     private GameObject _buttonRoot;
@@ -26,17 +30,48 @@ public class UIManger : Singleton<UIManger>
     private Text _shopPlayerMoneytext;
     [SerializeField]
     private Text _shopResultMoneytext;
-
+    [SerializeField]
+    private GameObject _shopItemUIPrefabs;
+    [SerializeField]
+    private GameObject _cotent;
     private void Awake()
     {
         InitUI();
         _interactionText.text = string.Empty;
+    }
+    private void Start()
+    {
+        InitShopUI();
     }
 
     private void InitUI()
     {
         SetTextBGActive(false);
         SetButtonActive(false);
+    }
+    private void InitShopUI()
+    {
+        var toppingList = DataManger.Inst.LoadedToppingResorceList;
+        if(toppingList == null)
+        {
+            return;
+        }
+
+        foreach(var item in toppingList.Keys)
+        {
+            GameObject itemUI = Instantiate(_shopItemUIPrefabs,_cotent.transform);
+            var shopItemUI = itemUI.GetComponent<ShopItemUI>();
+            if ( shopItemUI == null)
+            {
+                itemUI.SetActive(false);
+                return;
+            }
+            var toppingItem = toppingList[item];
+            shopItemUI.InitShopItemUI(toppingItem.ItemName, toppingItem.MinBuyValues, toppingItem.Price * toppingItem.MinBuyValues);
+
+
+        }
+        _shopUIRoot.SetActive(false );
     }
     private IEnumerator SetPrintText(string text, bool isNPCChangedLeave)
     {

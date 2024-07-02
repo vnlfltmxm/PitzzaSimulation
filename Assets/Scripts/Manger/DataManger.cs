@@ -162,6 +162,7 @@ public class DataManger : MonoBehaviour
         {
             var tempToppingResorce = new ToppingResorce();
             tempToppingResorce.Name = data.Attribute(nameof(tempToppingResorce.Name)).Value;
+            tempToppingResorce.ItemName = data.Attribute(nameof(tempToppingResorce.ItemName)).Value;
             tempToppingResorce.Description = data.Attribute(nameof(tempToppingResorce.Description)).Value;
             tempToppingResorce.Price = int.Parse(data.Attribute(nameof(tempToppingResorce.Price)).Value);
             tempToppingResorce.MinBuyValues = int.Parse(data.Attribute(nameof(tempToppingResorce.MinBuyValues)).Value);

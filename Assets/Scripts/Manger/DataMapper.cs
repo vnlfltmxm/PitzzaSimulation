@@ -20,6 +20,7 @@ public class Pizza
 public class ToppingResorce
 {
     public string Name { get; set; }
+    public string ItemName { get; set; }
     public string Description { get; set; }
     public int StartMaxCount {  get; set; }
     public int Price {  get; set; }
