@@ -22,6 +22,10 @@ public class UIManger : Singleton<UIManger>
     private GameObject _buttonRoot;
     [SerializeField]
     private Text _moneytext;
+    [SerializeField]
+    private Text _shopPlayerMoneytext;
+    [SerializeField]
+    private Text _shopResultMoneytext;
 
     private void Awake()
     {
