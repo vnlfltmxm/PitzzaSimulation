@@ -564,6 +564,26 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1161247237290147499, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161247237290147499, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161247237290147499, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161247237290147499, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161247237290147499, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1286505728142150849, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -616,6 +636,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2111122138487264985, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2111122138487264985, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2111122138487264985, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510638348354585255, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2658266027644425646, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
       propertyPath: m_Name
       value: UIManger
@@ -652,6 +688,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4011367578867688518, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011367578867688518, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268741528756256350, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268741528756256350, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268741528756256350, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866092910478372929, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000034332275
+      objectReference: {fileID: 0}
     - target: {fileID: 6217731068485590011, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -687,6 +747,10 @@ PrefabInstance:
     - target: {fileID: 6960893082643324853, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6960893082643324853, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 7594974330580153626, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
       propertyPath: m_AnchorMax.x
