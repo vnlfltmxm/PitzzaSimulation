@@ -42,7 +42,10 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     //    _pickUpItem += OnGetItemToTag;
     //    _pickUpItem += ;
     //}
-    
+    public void OnOpenShopMenu()
+    {
+        UIManger.Instance.OnShopMenuOpen();
+    }
     public void OnPickUpItem(GameObject item, GameObject grapPos)
     {
         SetUseGravityInItem(item, false);

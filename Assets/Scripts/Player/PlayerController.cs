@@ -167,15 +167,7 @@ public class PlayerController : Singleton<PlayerController>
 
         if (hit.transform != null)
         {
-            if (_checkRayHitObj == hit.transform.gameObject)
-            {
-                return;
-            }
-            else
-            {
-                _checkRayHitObj = hit.transform.gameObject;
-            }
-
+            
             var obj = hit.transform.gameObject.layer;
 
             switch (obj)
@@ -197,6 +189,12 @@ public class PlayerController : Singleton<PlayerController>
                     break;
                 case 11:
                     SetNPCInteractionText(hit.transform.gameObject);
+                    break;
+                case 12:
+                    if (UIManger.Instance.CheckOpenShopNenu() == true)
+                    {
+                        SetInteractionText("상점 메뉴");
+                    }
                     break;
                 default:
                     break;
@@ -297,6 +295,9 @@ public class PlayerController : Singleton<PlayerController>
                     CheckOrder(hit.transform.gameObject);
                     SellPizza(hit.transform.gameObject);
                     break;
+                case 12:
+                    OpenShopMenu();
+                    break;
                 default:
                     break;
             }
@@ -333,6 +334,7 @@ public class PlayerController : Singleton<PlayerController>
             InteractionObjectManger.Instance.OnRegisterChangeNPCState();
             InteractionObjectManger.Instance.OnChangeNPCState(targetNPC);
             UIManger.Instance.SetButtonActive(true);
+            SetInteractionText(string.Empty);
             CurserUnLock();
         }
     }
@@ -509,6 +511,14 @@ public class PlayerController : Singleton<PlayerController>
             return;
         }
     }
-
+    private void OpenShopMenu()
+    {
+        if (UIManger.Instance.CheckOpenShopNenu() == false)
+        {
+            return;
+        }
+        InteractionObjectManger.Instance.OnOpenShopMenu();
+        CurserUnLock();
+    }
 
 }

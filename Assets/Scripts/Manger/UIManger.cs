@@ -159,6 +159,10 @@ public class UIManger : Singleton<UIManger>
     }
     public void PrintInteractionText(string text)
     {
+        if(_interactionText.text == text)
+        {
+            return;
+        }
         _interactionText.text = text;
     }
 
@@ -175,6 +179,23 @@ public class UIManger : Singleton<UIManger>
         EventManger.Instance.OnPlayerCurserLock();
         EventManger.Instance.OnChangeNPCStatetoLeave();
     }
+    public void OnShopMenuOpen()
+    {
+        _crossHair.enabled = false;
+        PrintInteractionText(string.Empty);
+        _shopUIRoot.SetActive(true);
+    }
+
+    public bool CheckOpenShopNenu()
+    {
+        if (_shopUIRoot.activeSelf == false)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public void OnClickShopOpenButton()
     {
         _shopMenuUI.SetActive(false);
@@ -187,10 +208,11 @@ public class UIManger : Singleton<UIManger>
             _scrollView.SetActive(false);
             _shopMenuUI.SetActive(true);
         }
-
-        if( _shopMenuUI.activeSelf == true)
+        else if( _shopMenuUI.activeSelf == true)
         {
             _shopUIRoot.SetActive(false);
+            _crossHair.enabled = true;
+            EventManger.Instance.OnPlayerCurserLock();
         }
     }
     //private void OnRegisterNPCTalkEvent()

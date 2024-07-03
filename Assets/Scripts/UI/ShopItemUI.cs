@@ -29,7 +29,7 @@ public class ShopItemUI : MonoBehaviour
 
     public void On_ClickPlusButton()
     {
-        if (ShopManger.Instance.CheckPlayerMoney() == false) 
+        if (ShopManger.Instance.CheckPlayerMoney(_toppingName) == false) 
         {
             return;
         }

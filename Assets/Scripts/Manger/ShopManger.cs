@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class ShopManger : Singleton<ShopManger>
 {
@@ -20,7 +21,7 @@ public class ShopManger : Singleton<ShopManger>
         UnRegisterButtonEvent();
     }
 
-    public bool CheckPlayerMoney()
+    public bool CheckPlayerMoney(string itemName)
     {
         int playerMoney = PlayerController.Instance.PlayerMoney;
 
@@ -35,10 +36,12 @@ public class ShopManger : Singleton<ShopManger>
             
             foreach (var item in _shoppingDic.Keys)
             {
-                resultMoney += _toppingItemDic[item].Price * _toppingItemDic[item].MinBuyValues; 
+                resultMoney += _toppingItemDic[item].Price * _toppingItemDic[item].MinBuyValues * _shoppingDic[item];
             }
 
-            if(playerMoney - resultMoney < 0)
+            resultMoney += _toppingItemDic[itemName].Price * _toppingItemDic[itemName].MinBuyValues;
+
+            if (playerMoney - resultMoney < 0)
             {
                 return false;
             }
