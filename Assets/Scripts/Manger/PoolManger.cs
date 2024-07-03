@@ -172,7 +172,7 @@ public class PoolManger : Singleton<PoolManger>
             }
         }
     }
-    private bool CheckItemCount(string itemName)
+    public bool CheckItemCount(string itemName)
     {
 
         if (_itemMaxCountDic[itemName] > _itemCountDic[itemName])

@@ -83,7 +83,7 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
             item.transform.parent = pizza.transform;
             item.transform.position = hitPointPos;
             item.transform.rotation = pizza.transform.rotation;
-            if (item.CompareTag("Cheese") == true)
+            if (item.CompareTag("Cheese") == true || pizzaItem.CompareTag("Sauce") == true)
             {
                 item.layer = LayerMask.NameToLayer("Ignore Raycast");
             }

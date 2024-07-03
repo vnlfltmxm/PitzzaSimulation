@@ -173,7 +173,14 @@ public class PlayerController : Singleton<PlayerController>
             switch (obj)
             {
                 case 6:
-                    SetInteractionText("넣기", "꺼내기");
+                    if (PoolManger.Instance.CheckItemCount(hit.transform.gameObject.tag) == false)
+                    {
+                        SetInteractionText("넣기", "재료 소진");
+                    }
+                    else
+                    {
+                        SetInteractionText("넣기", "꺼내기");
+                    }
                     break;
                 case 7:
                     SetInteractionText("놓기", "줍기");
