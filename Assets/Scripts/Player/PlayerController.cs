@@ -29,8 +29,10 @@ public class PlayerController : Singleton<PlayerController>
     private Player _playerData;
 
     private List<string> _pizzaRecipe = new List<string>();
+    private List<string> _pizzaResorce = new List<string>();
     [HideInInspector]
     public List<string> PizaaRecipe { get {  return _pizzaRecipe; } }
+    public List<string> PizaaToppingResorce { get { return _pizzaResorce; } }
     public int PlayerMoney { get { return _money; } }
     private void Awake()
     {
@@ -68,6 +70,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         _playerData = DataManger.Inst.GetplayerData("플레이어");
         _pizzaRecipe.Add(_playerData.StartPizzaRecipe);
+        _pizzaResorce = _playerData.StartToppingResorceList;
         _money = _playerData.StartMoney;
         UIManger.Instance.SetMoneyText(_money);
     }

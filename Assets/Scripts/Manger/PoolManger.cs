@@ -56,6 +56,13 @@ public class PoolManger : Singleton<PoolManger>
             parent.gameObject.SetActive(false);
         }
     }
+    public void SetToppingZoneAtPool()
+    {
+        foreach (var item in PlayerController.Instance.PizaaToppingResorce)
+        {
+
+        }
+    }
     private void AddPoolInDictionary(GameObject prefabObj)
     {
         _poolDic.Add(prefabObj.gameObject.name, new Queue<GameObject>());
