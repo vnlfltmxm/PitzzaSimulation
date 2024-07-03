@@ -38,6 +38,12 @@ public class UIManger : Singleton<UIManger>
     private GameObject _scrollView;
     [SerializeField]
     private GameObject _shopMenuUI;
+    [SerializeField]
+    private GameObject _recipeUIRoot;
+    [SerializeField]
+    private GameObject _recipeCotent;
+    [SerializeField]
+    private GameObject _recipeUIPrefab;
     private void Awake()
     {
         InitUI();
@@ -47,6 +53,7 @@ public class UIManger : Singleton<UIManger>
     private void Start()
     {
         InitShopUI();
+        InitRecipeUI();
     }
     private void OnDisable()
     {
@@ -83,6 +90,34 @@ public class UIManger : Singleton<UIManger>
         SetResultShopMoneyText(DataManger.Inst.GetplayerData("플레이어").StartMoney);
         _scrollView.SetActive(false);
         _shopUIRoot.SetActive(false );
+    }
+    private void InitRecipeUI()
+    {
+        var recipeBook = DataManger.Inst.LoadedPizzaList;
+        if(recipeBook == null)
+        {
+            return;
+        }
+
+        foreach (var item in recipeBook.Keys)
+        {
+            GameObject recipe = Instantiate(_recipeUIPrefab, _recipeCotent.transform);
+            var recipeUIData = recipe.GetComponent<SlotPizzaRecipe>();
+            if(recipeUIData == null)
+            {
+                Destroy(recipe);
+                return;
+            }
+
+            recipeUIData.SetPizzaRecipeSlot(item);
+        }
+
+        SetRecipeUIRoot(false);
+    }
+
+    public void SetRecipeUIRoot(bool value)
+    {
+        _recipeUIRoot.SetActive(value);
     }
     private void RegisterClickButtonEvent()
     {
