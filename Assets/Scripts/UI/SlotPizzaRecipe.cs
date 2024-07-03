@@ -11,6 +11,21 @@ public class SlotPizzaRecipe : MonoBehaviour
     private GameObject _content;
     [SerializeField]
     private GameObject _toppingResorceListPrefab;
+    [SerializeField]
+    private GameObject _LockImage;
+
+    private string _pizzaClassName;
+    private void OnEnable()
+    {
+        if (_pizzaName.text != string.Empty && PlayerController.Instance.CheckPizzaRecipeList(_pizzaClassName))
+        {
+            _LockImage.SetActive(false);
+        }
+        else
+        {
+            _LockImage.SetActive(true);
+        }
+    }
 
     public void SetPizzaRecipeSlot(string pizzaName)
     {
@@ -20,7 +35,7 @@ public class SlotPizzaRecipe : MonoBehaviour
             return;
         }
         _pizzaName.text = pizzaData.Name;
-
+        _pizzaClassName = pizzaData.ClassName;
         int index = 0;
 
         foreach (var item in pizzaData.ToppingResorceList)

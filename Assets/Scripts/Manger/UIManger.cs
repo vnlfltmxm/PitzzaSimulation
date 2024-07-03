@@ -110,6 +110,8 @@ public class UIManger : Singleton<UIManger>
             }
 
             recipeUIData.SetPizzaRecipeSlot(item);
+            recipe.SetActive(false);
+            recipe.SetActive(true);
         }
 
         SetRecipeUIRoot(false);

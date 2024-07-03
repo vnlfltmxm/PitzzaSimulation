@@ -528,4 +528,8 @@ public class PlayerController : Singleton<PlayerController>
         CurserUnLock();
     }
 
+    public bool CheckPizzaRecipeList(string pizzaName)
+    {
+        return _pizzaRecipe.Contains(pizzaName);
+    }
 }
