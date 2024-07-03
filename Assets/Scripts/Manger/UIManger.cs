@@ -219,6 +219,7 @@ public class UIManger : Singleton<UIManger>
         _crossHair.enabled = false;
         PrintInteractionText(string.Empty);
         _shopUIRoot.SetActive(true);
+        _PlayerCoinUIRoot.SetActive(false);
     }
 
     public bool CheckOpenShopNenu()
@@ -236,6 +237,11 @@ public class UIManger : Singleton<UIManger>
         _shopMenuUI.SetActive(false);
         _scrollView.SetActive(true);
     }
+    public void On_ClickRecipeOpenButton()
+    {
+        _shopMenuUI.SetActive(false);
+        _recipeUIRoot.SetActive(true);
+    }
     public void OnClickCloseButton()
     {
         if( _scrollView.activeSelf == true)
@@ -247,7 +253,12 @@ public class UIManger : Singleton<UIManger>
         {
             _shopUIRoot.SetActive(false);
             _crossHair.enabled = true;
+            _PlayerCoinUIRoot.SetActive(true);
             EventManger.Instance.OnPlayerCurserLock();
+        }else if(_recipeUIRoot.activeSelf == true)
+        {
+            _recipeUIRoot.SetActive(false);
+            _shopMenuUI.SetActive(true);
         }
     }
     //private void OnRegisterNPCTalkEvent()
