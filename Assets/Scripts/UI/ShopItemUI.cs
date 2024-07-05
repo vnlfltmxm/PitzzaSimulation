@@ -18,6 +18,20 @@ public class ShopItemUI : MonoBehaviour
 
     private string _toppingName;
 
+    private void Awake()
+    {
+        RegisterDayEvent();
+    }
+
+    private void OnEnable()
+    {
+        _buyText.text = _buyValue.ToString();   
+    }
+
+    private void OnDestroy()
+    {
+        UnRegisterDayEvent();
+    }
     public void InitShopItemUI(string itemName,string toppingName, int valueSet, int price)
     {
         _nameText.text = itemName;
@@ -47,5 +61,18 @@ public class ShopItemUI : MonoBehaviour
         _buyValue--;
         _buyText.text = _buyValue.ToString();
         EventManger.Instance.OnClickMinuseButtonEvent(_toppingName);
+    }
+    public void ResetValue()
+    {
+        _buyValue = 0;
+    }
+
+    private void UnRegisterDayEvent()
+    {
+        EventManger.Instance.DayGone -= ResetValue;
+    }
+    private void RegisterDayEvent()
+    {
+        EventManger.Instance.DayGone += ResetValue;
     }
 }

@@ -60,7 +60,11 @@ public class PoolManger : Singleton<PoolManger>
     {
         foreach (var item in PlayerController.Instance.PizaaToppingResorce)
         {
-
+            var parent = InteractionObjectManger.Instance.FindPrefabsParentTrasnform(item);
+            if (_itemMaxCountDic[item] > 0)
+            {
+                parent.gameObject.SetActive(true);
+            }
         }
     }
     private void AddPoolInDictionary(GameObject prefabObj)
@@ -191,8 +195,26 @@ public class PoolManger : Singleton<PoolManger>
     }
     private void SetItemMaxCountValueInDictionary(string itemName, int maxCount)
     {
-        _itemMaxCountDic.Add(itemName, maxCount);
+        if (_itemMaxCountDic.ContainsKey(itemName) == false)
+        {
+            _itemMaxCountDic.Add(itemName, maxCount);
+        }
+        else
+        {
+            _itemMaxCountDic[itemName] += maxCount - _itemCountDic[itemName];
+        }
     }
+    //private void SetItemMaxCountValueInDictionary(string itemName, int maxCount,int itemCount)
+    //{
+    //    if (_itemMaxCountDic.ContainsKey(itemName) == false)
+    //    {
+    //        _itemMaxCountDic.Add(itemName, maxCount);
+    //    }
+    //    else
+    //    {
+    //        _itemMaxCountDic[itemName] += (maxCount - itemCount);
+    //    }
+    //}
     private void SetItemCountValueInDictionary(string itemName)
     {
         if (!_itemCountDic.ContainsKey(itemName))
@@ -207,6 +229,10 @@ public class PoolManger : Singleton<PoolManger>
         {
             _itemCountDic[itemName]++;
         }
+        else
+        {
+            _itemCountDic.Add(itemName, 1);
+        }
     }
     private void MinusItemCountValueInDictionary(string itemName)
     {
@@ -214,5 +240,24 @@ public class PoolManger : Singleton<PoolManger>
         {
             _itemCountDic[itemName]--;
         }
+    }
+
+    public void DayStart()
+    {
+        foreach (var item in PlayerController.Instance.PizaaToppingResorce)
+        {
+            SetItemMaxCountValueInDictionary(item, ShopManger.Instance.GetShopingValue(item));
+        }
+
+        SetToppingZoneAtPool();
+        _itemCountDic.Clear();
+    }
+    private void RegisterDayEvent()
+    {
+        EventManger.Instance.DayStart += DayStart;
+    }
+    private void UnRegisterDayEvent()
+    {
+        EventManger.Instance.DayStart -= DayStart;
     }
 }

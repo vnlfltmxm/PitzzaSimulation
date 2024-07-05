@@ -652,6 +652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManger
       objectReference: {fileID: 0}
+    - target: {fileID: 5866092910478372929, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.0005878804
+      objectReference: {fileID: 0}
     - target: {fileID: 6217731068485590011, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -672,6 +676,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6864152350097267183, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6883735253367546480, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -684,12 +692,20 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6960893082643324853, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.0000063052953
+      objectReference: {fileID: 0}
     - target: {fileID: 7594974330580153626, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7594974330580153626, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7594974330580153626, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

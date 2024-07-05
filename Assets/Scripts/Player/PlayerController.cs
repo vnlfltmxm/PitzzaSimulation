@@ -38,7 +38,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         _nav = GetComponent<NavMeshAgent>();
         _nav.updateRotation = false;
-        CurserLock();
+        //CurserLock();
         RegisterCureserLock();
     }
 
@@ -534,5 +534,22 @@ public class PlayerController : Singleton<PlayerController>
     public bool CheckPizzaRecipeList(string pizzaName)
     {
         return _pizzaRecipe.Contains(pizzaName);
+    }
+
+    public void PlusMoney(int money)
+    {
+        _money += money;
+    }
+
+    public void MinuseMoney(int money)
+    {
+        _money -= money;
+    }
+    public void PlusToppingList(string toppingName)
+    {
+        if (_pizzaResorce.Contains(toppingName) == false)
+        {
+            _pizzaResorce.Add(toppingName);
+        }
     }
 }

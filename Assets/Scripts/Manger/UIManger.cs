@@ -48,6 +48,8 @@ public class UIManger : Singleton<UIManger>
     private Text _hourTxt;
     [SerializeField]
     private Text _minuitTxt;
+    [SerializeField]
+    private Image _curtainImage;
     private void Awake()
     {
         InitUI();
@@ -58,6 +60,7 @@ public class UIManger : Singleton<UIManger>
     {
         InitShopUI();
         InitRecipeUI();
+        StartCoroutine(OutCurtain());
     }
     private void OnDisable()
     {
@@ -270,6 +273,7 @@ public class UIManger : Singleton<UIManger>
     {
         _shopMenuUI.SetActive(false);
         _recipeUIRoot.SetActive(true);
+        
     }
     public void OnClickCloseButton()
     {
@@ -289,6 +293,55 @@ public class UIManger : Singleton<UIManger>
             _recipeUIRoot.SetActive(false);
             _shopMenuUI.SetActive(true);
         }
+    }
+
+    private IEnumerator OnCurtain()
+    {
+        float alphaValue = 0;
+        while(_curtainImage.color.a <= 1)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            _curtainImage.color = new Color(0, 0, 0, alphaValue);
+            alphaValue += 0.1f;
+        }
+    }
+    private IEnumerator OutCurtain()
+    {
+        float alphaValue = 1;
+        while (_curtainImage.color.a >= 0)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            _curtainImage.color = new Color(0, 0, 0, alphaValue);
+            alphaValue -= 0.1f;
+        }
+        EventManger.Instance.OnPlayerCurserLock();
+    }
+    private void DayGone()
+    {
+        StartCoroutine(OnCurtain());
+    }
+
+    private void DayStart()
+    {
+        StartCoroutine(OutCurtain());
+        SetPlayerShopMoneyText(PlayerController.Instance.PlayerMoney);
+    }
+
+    private void OpenResultUI()
+    {
+
+    }
+    private void RegisterDayEvent()
+    {
+        EventManger.Instance.DayGone += DayGone;
+        EventManger.Instance.DayStart += DayStart;
+    }
+    private void UnRegisterDayEvent()
+    {
+        EventManger.Instance.DayGone -= DayGone;
+        EventManger.Instance.DayStart -= DayStart;
     }
     //private void OnRegisterNPCTalkEvent()
     //{
