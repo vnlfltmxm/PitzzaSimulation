@@ -9,6 +9,9 @@ public class GameManger : Singleton<GameManger>
     private int _minute = 0;
     private int _revenue = 0;
 
+
+    public int Revenu { get { return _revenue; } }
+
     private void Awake()
     {
         RegisterDayEvent();

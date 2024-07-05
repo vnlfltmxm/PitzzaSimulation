@@ -55,6 +55,7 @@ public class UIManger : Singleton<UIManger>
         InitUI();
         _interactionText.text = string.Empty;
         RegisterClickButtonEvent();
+        RegisterDayEvent();
     }
     private void Start()
     {
@@ -65,6 +66,7 @@ public class UIManger : Singleton<UIManger>
     private void OnDisable()
     {
         UnRegisterClickButtonEvent();
+        UnRegisterDayEvent();
     }
     private void InitUI()
     {

@@ -40,6 +40,7 @@ public class PlayerController : Singleton<PlayerController>
         _nav.updateRotation = false;
         //CurserLock();
         RegisterCureserLock();
+        RegisterDayEvent();
     }
 
     // Start is called before the first frame update
@@ -65,6 +66,7 @@ public class PlayerController : Singleton<PlayerController>
     private void OnDisable()
     {
         UnRegisterCureserLock();
+        UnRegisterDayEvent();
     }
     private void InitPlayer()
     {
@@ -91,6 +93,18 @@ public class PlayerController : Singleton<PlayerController>
     private void UnRegisterCureserLock()
     {
         EventManger.Instance.PlayerCurserLock -= CurserLock;
+    }
+    private void RegisterDayEvent()
+    {
+        EventManger.Instance.DayGone += RetrunHandlingItem;
+        EventManger.Instance.DayGone += CurserUnLock;
+        //EventManger.Instance.DayStart += CurserLock;
+    }
+    private void UnRegisterDayEvent()
+    {
+        EventManger.Instance.DayGone -= RetrunHandlingItem;
+        EventManger.Instance.DayGone -= CurserUnLock;
+        //EventManger.Instance.DayStart -= CurserLock;
     }
     private bool CheckKey()
     {
@@ -515,6 +529,19 @@ public class PlayerController : Singleton<PlayerController>
         if (rayHitObj.CompareTag(grapItem.tag))
         {
             InteractionObjectManger.Instance.OnReturnHandlingItemToPool(rayHitObj, grapItem);
+        }
+        else
+        {
+            return;
+        }
+    }
+    private void RetrunHandlingItem()
+    {
+        
+        if (CheckOnHandlingItem() == true) 
+        {
+            var grapItem = _grabPos.transform.GetChild(0).gameObject;
+            PoolManger.Instance.ReturnItemInPool(grapItem);
         }
         else
         {
