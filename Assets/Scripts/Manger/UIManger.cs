@@ -44,6 +44,10 @@ public class UIManger : Singleton<UIManger>
     private GameObject _recipeCotent;
     [SerializeField]
     private GameObject _recipeUIPrefab;
+    [SerializeField]
+    private Text _hourTxt;
+    [SerializeField]
+    private Text _minuitTxt;
     private void Awake()
     {
         InitUI();
@@ -173,6 +177,29 @@ public class UIManger : Singleton<UIManger>
             SetTextBGActive(false);
         }
 
+    }
+    private void SetTimeTxt(Text text,int value)
+    {
+        if (value < 10)
+        {
+            text.text = $"0{value}";
+        }
+        else
+        {
+            text.text = value.ToString();
+        }
+    }
+    public void SetHourTimeText(int hour)
+    {
+       SetTimeTxt(_hourTxt, hour);
+    }
+    public void SetMinuteTimeText(int minute)
+    {
+        SetTimeTxt(_minuitTxt, minute);
+    }
+    public void SetMinuteTimeText(string minute)
+    {
+        _minuitTxt.text = minute;
     }
     public void SetButtonActive(bool active)
     {
