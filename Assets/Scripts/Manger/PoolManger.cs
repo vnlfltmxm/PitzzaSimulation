@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class PoolManger : Singleton<PoolManger>
@@ -12,11 +13,15 @@ public class PoolManger : Singleton<PoolManger>
     //private Queue<GameObject> _poolQueue;
     private void Awake()
     {
-        
+        RegisterDayEvent();
     }
     private void Start()
     {
         InitPool(Prefabs_Food);
+    }
+    private void OnDisable()
+    {
+        UnRegisterDayEvent();
     }
     private void InitPool(GameObject[] foodList)
     {
@@ -250,7 +255,14 @@ public class PoolManger : Singleton<PoolManger>
         }
 
         SetToppingZoneAtPool();
-        _itemCountDic.Clear();
+    }
+
+    private void ResetItemCountValue()
+    {
+        foreach (var item in _itemCountDic.Keys)
+        {
+            _itemCountDic[item] = 0;
+        }
     }
     private void RegisterDayEvent()
     {

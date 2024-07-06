@@ -30,6 +30,11 @@ public class ShopManger : Singleton<ShopManger>
     }
     public int GetShopingValue(string itemName)
     {
+        if (_shoppingDic.ContainsKey(itemName) == false) 
+        {
+            return 0;
+        }
+
         return _shoppingDic[itemName];
     }
     public bool CheckPlayerMoney(string itemName)

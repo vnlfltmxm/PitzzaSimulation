@@ -99,11 +99,13 @@ public class PlayerController : Singleton<PlayerController>
         EventManger.Instance.DayGone += RetrunHandlingItem;
         EventManger.Instance.DayGone += CurserUnLock;
         //EventManger.Instance.DayStart += CurserLock;
+        EventManger.Instance.DayStart += PlusPizzaRecipe;
     }
     private void UnRegisterDayEvent()
     {
         EventManger.Instance.DayGone -= RetrunHandlingItem;
         EventManger.Instance.DayGone -= CurserUnLock;
+        EventManger.Instance.DayStart -= PlusPizzaRecipe;
         //EventManger.Instance.DayStart -= CurserLock;
     }
     private bool CheckKey()
@@ -220,6 +222,9 @@ public class PlayerController : Singleton<PlayerController>
                         SetInteractionText("상점 메뉴");
                     }
                     break;
+                case 13:
+                    SetInteractionText("퇴근");
+                    break;
                 default:
                     break;
             }
@@ -321,6 +326,9 @@ public class PlayerController : Singleton<PlayerController>
                     break;
                 case 12:
                     OpenShopMenu();
+                    break;
+                case 13:
+                    EventManger.Instance.OnDayGoneEventInvoke();
                     break;
                 default:
                     break;
@@ -578,5 +586,25 @@ public class PlayerController : Singleton<PlayerController>
         {
             _pizzaResorce.Add(toppingName);
         }
+    }
+    private void PlusPizzaRecipe()
+    {
+        var pizza = DataManger.Inst.LoadedPizzaList;
+
+        if (_pizzaResorce.Count > 0) 
+        {
+            foreach (var item in pizza.Keys)
+            {
+                foreach (var toppingResorce in pizza[item].ToppingResorceList)
+                {
+                    if (_pizzaResorce.Contains(toppingResorce) == true) 
+                    {
+                        _pizzaRecipe.Add(item);
+                    }
+                }
+                
+            }
+        }
+
     }
 }

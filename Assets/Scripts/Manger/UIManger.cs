@@ -50,6 +50,8 @@ public class UIManger : Singleton<UIManger>
     private Text _minuitTxt;
     [SerializeField]
     private Image _curtainImage;
+    [SerializeField]
+    private GameObject _resultUI;
     private void Awake()
     {
         InitUI();
@@ -72,6 +74,7 @@ public class UIManger : Singleton<UIManger>
     {
         SetTextBGActive(false);
         SetButtonActive(false);
+        SetResultUIActive(false);
     }
     private void InitShopUI()
     {
@@ -182,6 +185,10 @@ public class UIManger : Singleton<UIManger>
             SetTextBGActive(false);
         }
 
+    }
+    public void SetResultUIActive(bool active)
+    {
+        _resultUI.SetActive(active);
     }
     private void SetTimeTxt(Text text,int value)
     {
@@ -307,6 +314,8 @@ public class UIManger : Singleton<UIManger>
             _curtainImage.color = new Color(0, 0, 0, alphaValue);
             alphaValue += 0.1f;
         }
+
+        SetResultUIActive(true);
     }
     private IEnumerator OutCurtain()
     {
@@ -329,6 +338,7 @@ public class UIManger : Singleton<UIManger>
     {
         StartCoroutine(OutCurtain());
         SetPlayerShopMoneyText(PlayerController.Instance.PlayerMoney);
+        SetMoneyText(PlayerController.Instance.PlayerMoney);
     }
 
     private void OpenResultUI()

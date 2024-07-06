@@ -13,7 +13,7 @@ public class ResultUI : MonoBehaviour
     private GameObject _buttonSlot;
     private void OnEnable()
     {
-        
+        StartCoroutine(EnableResultUI());
     }
 
     private void OnDisable()
@@ -33,6 +33,7 @@ public class ResultUI : MonoBehaviour
             _Txt[i].SetActive(true);
             yield return new WaitForSeconds(0.5f);
             SetValueTxt(i);
+            yield return new WaitForSeconds(0.5f);
         }
         yield return new WaitForSeconds(0.5f);
         _buttonSlot.SetActive(true);
@@ -65,5 +66,9 @@ public class ResultUI : MonoBehaviour
                 break;
         }
     }
-
+    public void OnClickContinueButton()
+    {
+        EventManger.Instance.OnDayStartEventInvoke();
+        this.gameObject.SetActive(false);
+    }
 }
