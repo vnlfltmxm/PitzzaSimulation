@@ -332,6 +332,15 @@ public class UIManger : Singleton<UIManger>
     private void DayGone()
     {
         StartCoroutine(OnCurtain());
+        if(_textRoot.activeSelf == true)
+        {
+            _textRoot.SetActive(false);
+        }
+
+        if(_buttonRoot.activeSelf == true)
+        {
+            _buttonRoot.SetActive(false);
+        }
     }
 
     private void DayStart()

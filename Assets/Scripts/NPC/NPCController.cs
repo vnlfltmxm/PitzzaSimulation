@@ -27,11 +27,11 @@ public class NPCController : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        RegisterDayEvent();
     }
     void Start()
     {
-        _npcState.ChangeState(NPCStateName.WALK);
+        
     }
 
     // Update is called once per frame
@@ -39,7 +39,10 @@ public class NPCController : MonoBehaviour
     {
         _npcState.UpdateState();
     }
-
+    private void OnDisable()
+    {
+        UnregisterDayEvent();
+    }
     private void InitState()
     {
         _npcState.AddState(NPCStateName.IDLE, new NPCIdleState(this));
@@ -234,5 +237,17 @@ public class NPCController : MonoBehaviour
         }
         return true;
     }
+    private void RegisterDayEvent()
+    {
+        EventManger.Instance.DayGone += ChangeNPCStateToLeave;
+    }
 
+    private void UnregisterDayEvent()
+    {
+        EventManger.Instance.DayGone -= ChangeNPCStateToLeave;
+    }
+    public void ClearPizzaDic()
+    {
+        _checkOrderPizzaDic.Clear();
+    }
 }

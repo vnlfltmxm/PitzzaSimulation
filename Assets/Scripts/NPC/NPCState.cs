@@ -17,6 +17,8 @@ public enum NPCStateName
 
 public class NPCIdleState : BaseState<NPCController>
 {
+    float _checkTime = 0;
+    float _idleTime = 0;
     public NPCIdleState(NPCController npcController) : base(npcController)
     {
 
@@ -24,15 +26,29 @@ public class NPCIdleState : BaseState<NPCController>
 
     public override void OnEnterState()
     {
-       
+        _checkTime = 0;
+        _idleTime = RandomTime();
     }
 
     public override void OnExitState()
     {
+        _checkTime = 0;
+        _idleTime = 0;
     }
 
     public override void OnUpdateState()
     {
+        _checkTime += Time.deltaTime;
+        if( _checkTime >  _idleTime)
+        {
+            Owner.ChangeNPCState(NPCStateName.WALK);
+        }
+    }
+    private float RandomTime()
+    {
+        int randomTime = Random.Range(10, 16);
+
+        return randomTime;
     }
 }
 
@@ -151,6 +167,7 @@ public class NPCLeaveState : BaseState<NPCController>
         Owner.SetNPCIsStopping(false);
         Owner.SetBoolNPCAnimotorPropertyToName("IsWalk", true);
         Owner.SetNPCDestinationPos(NavmeshManger.Instance.GetRespawnPos());
+        Owner.ClearPizzaDic();
     }
 
     public override void OnExitState()

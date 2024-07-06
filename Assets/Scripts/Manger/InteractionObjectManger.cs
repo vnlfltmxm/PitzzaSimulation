@@ -11,10 +11,17 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     [SerializeField]
     private GameObject _toppingZone;
 
-  
 
+    private Transform _playerSpawnPos;
     private Queue<GameObject> _usingPool = new Queue<GameObject>();
 
+
+    public Transform PlayerRespawnPos { get { return _playerSpawnPos; } }
+
+    private void Awake()
+    {
+        _playerSpawnPos = FindPlayerRespawnPos();
+    }
     public Transform FindPrefabsParentTrasnform(string tagName)
     {
 
@@ -206,5 +213,17 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
         }
 
         return false;
+    }
+    public Transform FindPlayerRespawnPos()
+    {
+        foreach (Transform child in _pizzaHouse.transform)
+        {
+            if (child.CompareTag("playerSpawnPos"))
+            {
+                return child;
+            }
+        }
+
+        return null;
     }
 }

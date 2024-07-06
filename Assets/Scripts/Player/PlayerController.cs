@@ -98,6 +98,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         EventManger.Instance.DayGone += RetrunHandlingItem;
         EventManger.Instance.DayGone += CurserUnLock;
+        EventManger.Instance.DayStart += ResetPosion;
         //EventManger.Instance.DayStart += CurserLock;
         EventManger.Instance.DayStart += PlusPizzaRecipe;
     }
@@ -105,6 +106,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         EventManger.Instance.DayGone -= RetrunHandlingItem;
         EventManger.Instance.DayGone -= CurserUnLock;
+        EventManger.Instance.DayStart -= ResetPosion;
         EventManger.Instance.DayStart -= PlusPizzaRecipe;
         //EventManger.Instance.DayStart -= CurserLock;
     }
@@ -606,5 +608,10 @@ public class PlayerController : Singleton<PlayerController>
             }
         }
 
+    }
+    private void ResetPosion()
+    {
+        this.gameObject.transform.position = InteractionObjectManger.Instance.PlayerRespawnPos.position;
+        this.gameObject.transform.rotation = InteractionObjectManger.Instance.PlayerRespawnPos.rotation;
     }
 }
