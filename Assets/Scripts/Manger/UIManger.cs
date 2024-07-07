@@ -364,6 +364,14 @@ public class UIManger : Singleton<UIManger>
         EventManger.Instance.DayGone -= DayGone;
         EventManger.Instance.DayStart -= DayStart;
     }
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+    }
     //private void OnRegisterNPCTalkEvent()
     //{
     //    EventManger.Instance.NPCTalk += PrintText;

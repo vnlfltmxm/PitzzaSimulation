@@ -71,4 +71,8 @@ public class ResultUI : MonoBehaviour
         EventManger.Instance.OnDayStartEventInvoke();
         this.gameObject.SetActive(false);
     }
+    public void OnClickExitButton()
+    {
+        UIManger.Instance.ExitGame();
+    }
 }
