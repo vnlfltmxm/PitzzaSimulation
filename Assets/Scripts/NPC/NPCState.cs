@@ -38,7 +38,11 @@ public class NPCIdleState : BaseState<NPCController>
 
     public override void OnUpdateState()
     {
-        _checkTime += Time.deltaTime;
+        if (GameManger.Instance.IsDayGone == false)
+        {
+            _checkTime += Time.deltaTime;
+        }
+
         if( _checkTime >  _idleTime)
         {
             Owner.ChangeNPCState(NPCStateName.WALK);

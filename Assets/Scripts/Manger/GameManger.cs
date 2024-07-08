@@ -8,9 +8,10 @@ public class GameManger : Singleton<GameManger>
     private int _hour = 9;
     private int _minute = 0;
     private int _revenue = 0;
-
+    Coroutine _Timer;
 
     public int Revenu { get { return _revenue; } }
+    public bool IsDayGone { get { return _isDayGone; } }
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class GameManger : Singleton<GameManger>
     {
         UIManger.Instance.SetHourTimeText(_hour);
         UIManger.Instance.SetMinuteTimeText(_minute);
-        StartCoroutine(Timer());
+        _Timer = StartCoroutine(Timer());
     }
     private void OnDisable()
     {
@@ -61,15 +62,17 @@ public class GameManger : Singleton<GameManger>
     public void DayStart()
     {
         ResetValue();
+        _isDayGone = false;
         UIManger.Instance.SetHourTimeText(_hour);
         UIManger.Instance.SetMinuteTimeText(_minute);
-        StartCoroutine(Timer());
+        _Timer = StartCoroutine(Timer());
 
     }
     private void DayGone()
     {
         PlayerController.Instance.PlusMoney(_revenue);
-        StopCoroutine(Timer());
+        _isDayGone = true;
+        StopCoroutine(_Timer);
     }
     private void RegisterDayEvent()
     {
