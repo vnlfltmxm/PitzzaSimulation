@@ -5,10 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum ItemName
-{
-    Dough
-}
 
 public class PlayerController : Singleton<PlayerController>
 {
@@ -34,20 +30,22 @@ public class PlayerController : Singleton<PlayerController>
     public List<string> PizaaRecipe { get {  return _pizzaRecipe; } }
     public List<string> PizaaToppingResorce { get { return _pizzaResorce; } }
     public int PlayerMoney { get { return _money; } }
+    public Player Player { get { return _playerData; } }
     private void Awake()
     {
         _nav = GetComponent<NavMeshAgent>();
         _nav.updateRotation = false;
         //CurserLock();
         RegisterCureserLock();
-        RegisterDayEvent();
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        RegisterDayEvent();
         InitPlayer();
-       
+       DataManger.Inst.SaveData();
     }
 
     // Update is called once per frame
@@ -71,7 +69,7 @@ public class PlayerController : Singleton<PlayerController>
     private void InitPlayer()
     {
         _playerData = DataManger.Inst.GetplayerData("플레이어");
-        _pizzaRecipe.Add(_playerData.StartPizzaRecipe);
+        _pizzaRecipe = _playerData.StartPizzaRecipe;
         _pizzaResorce = _playerData.StartToppingResorceList;
         _money = _playerData.StartMoney;
         UIManger.Instance.SetMoneyText(_money);
@@ -100,14 +98,14 @@ public class PlayerController : Singleton<PlayerController>
         EventManger.Instance.DayGone += CurserUnLock;
         EventManger.Instance.DayStart += ResetPosion;
         //EventManger.Instance.DayStart += CurserLock;
-        EventManger.Instance.DayStart += PlusPizzaRecipe;
+        EventManger.Instance.DayGone += PlusPizzaRecipe;
     }
     private void UnRegisterDayEvent()
     {
         EventManger.Instance.DayGone -= RetrunHandlingItem;
         EventManger.Instance.DayGone -= CurserUnLock;
         EventManger.Instance.DayStart -= ResetPosion;
-        EventManger.Instance.DayStart -= PlusPizzaRecipe;
+        EventManger.Instance.DayGone -= PlusPizzaRecipe;
         //EventManger.Instance.DayStart -= CurserLock;
     }
     private bool CheckKey()

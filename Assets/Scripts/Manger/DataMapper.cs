@@ -29,8 +29,8 @@ public class ToppingResorce
 
 public class Player
 {
-    public string Name { get; set; }
-    public string StartPizzaRecipe {  get; set; }
-    public int StartMoney {  get; set; }
+    public string Name; /*{ get; set; }*/
+    public List<string> StartPizzaRecipe = new List<string>();
+    public int StartMoney; /*{  get; set; }*/
     public List<string> StartToppingResorceList = new List<string>();
 }

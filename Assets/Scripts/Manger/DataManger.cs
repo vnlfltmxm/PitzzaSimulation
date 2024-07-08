@@ -6,9 +6,11 @@ using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using System.IO;
 
 public class DataManger : MonoBehaviour
 {
+    private string filePath;
     public Dictionary<string, Pizza> LoadedPizzaList { get; private set; }
     public Dictionary<string, ToppingResorce> LoadedToppingResorceList { get; private set; }
     public Dictionary<string, Player> LoadedPlayer { get; private set; }
@@ -19,6 +21,7 @@ public class DataManger : MonoBehaviour
 
     private void Awake()
     {
+        filePath = Application.persistentDataPath + "/playerData.json";
         Inst = this;
         ReadAllDataOnAwake();
     }
@@ -28,7 +31,26 @@ public class DataManger : MonoBehaviour
 
         ReadData(nameof(Pizza));//엑셀파일?변환파일의 이름을 가져오는거인듯? 그래서 TempCharter가 아닌것
         ReadData(nameof(ToppingResorce));
-        ReadData(nameof(Player));
+        if (File.Exists(filePath))
+        {
+            // 파일에서 JSON 문자열 읽기
+            string jsonData = File.ReadAllText(filePath);
+
+            // JSON 문자열을 객체로 변환
+            Player data = new Player();
+            data = LoadData();
+            //data.Name = jsonData.Attribute(nameof(data.Name)).Value;
+            //data.StartPizzaRecipe = data.Attribute(nameof(data.StartPizzaRecipe)).Value;
+            //data.StartMoney = int.Parse(data.Attribute(nameof(data.StartMoney)).Value);
+            //SetDataList(out data.StartToppingResorceList, data, "StartToppingResorceList");
+            
+
+        }
+        else
+        {
+            ReadData(nameof(Player));
+            
+        }
     }
 
     private void ReadData(string name)
@@ -186,11 +208,16 @@ public class DataManger : MonoBehaviour
         {
             var tempPlayer = new Player();
             tempPlayer.Name = data.Attribute(nameof(tempPlayer.Name)).Value;
-            tempPlayer.StartPizzaRecipe = data.Attribute(nameof(tempPlayer.StartPizzaRecipe)).Value;
+            //tempPlayer.StartPizzaRecipe = data.Attribute(nameof(tempPlayer.StartPizzaRecipe)).Value;
+            SetDataList(out tempPlayer.StartPizzaRecipe, data, "StartPizzaRecipe");
             tempPlayer.StartMoney = int.Parse(data.Attribute(nameof(tempPlayer.StartMoney)).Value);
             SetDataList(out tempPlayer.StartToppingResorceList, data, "StartToppingResorceList");
             LoadedPlayer.Add(tempPlayer.Name, tempPlayer);
         }
+
+
+        
+
     }
     public Pizza GetPizzaData(string dataName)
     {
@@ -220,7 +247,70 @@ public class DataManger : MonoBehaviour
         //딕셔너리는 찾아주는게 빠르다
         return LoadedToppingResorceList[dataClassName];
     }
+   
+    private void LoadFile()
+    {
+        // 파일 경로 설정
+        filePath = Application.persistentDataPath + "/playerData.json";
 
+        // 데이터 생성
+        Player data = new Player();
+        
+        // 데이터 저장
+        SaveData();
+
+    }
+
+    public void SaveData()
+    {
+        Player data = new Player();
+        data.Name = PlayerController.Instance.Player.Name;
+        data.StartPizzaRecipe = PlayerController.Instance.PizaaRecipe;
+        data.StartToppingResorceList = PlayerController.Instance.PizaaToppingResorce;
+        data.StartMoney = PlayerController.Instance.PlayerMoney;
+        // 객체를 JSON 문자열로 변환
+        string jsonData = JsonUtility.ToJson(data, true);
+
+        // JSON 문자열을 파일에 저장
+        File.WriteAllText(filePath, jsonData);
+
+    }
+    public IEnumerator SaveDataCo()
+    {
+        Player data = new Player();
+        data.Name = PlayerController.Instance.Player.Name;
+        data.StartPizzaRecipe = PlayerController.Instance.PizaaRecipe;
+        data.StartToppingResorceList = PlayerController.Instance.PizaaToppingResorce;
+        data.StartMoney = PlayerController.Instance.PlayerMoney;
+        // 객체를 JSON 문자열로 변환
+        string jsonData = JsonUtility.ToJson(data, true);
+
+        // JSON 문자열을 파일에 저장
+        File.WriteAllText(filePath, jsonData);
+        yield return null;
+
+    }
+
+    Player LoadData()
+    {
+        // 파일이 존재하는지 확인
+        if (File.Exists(filePath))
+        {
+            // 파일에서 JSON 문자열 읽기
+            string jsonData = File.ReadAllText(filePath);
+            LoadedPlayer = new Dictionary<string, Player>();
+            // JSON 문자열을 객체로 변환
+            Player data = JsonUtility.FromJson<Player>(jsonData);
+            LoadedPlayer.Add(data.Name, data);
+            Debug.Log("Data loaded from " + filePath);
+            return data;
+        }
+        else
+        {
+            Debug.LogWarning("No data file found at " + filePath);
+            return null;
+        }
+    }
     //public string GetSkillName( DataTemporalManger manger, string dataClassName)
     //{
     //    var skillData = manger.GetSkillData(dataClassName);

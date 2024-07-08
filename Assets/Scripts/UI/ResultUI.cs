@@ -35,6 +35,8 @@ public class ResultUI : MonoBehaviour
             SetValueTxt(i);
             yield return new WaitForSeconds(0.5f);
         }
+        yield return StartCoroutine(DataManger.Inst.SaveDataCo());
+
         yield return new WaitForSeconds(0.5f);
         _buttonSlot.SetActive(true);
 
