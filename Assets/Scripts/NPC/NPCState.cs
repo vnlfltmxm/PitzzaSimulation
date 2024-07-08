@@ -101,7 +101,7 @@ public class NPCOrderState : BaseState<NPCController>
 
     public override void OnExitState()
     {
-        
+        UIManger.Instance.StopPrintText();
     }
 
     public override void OnUpdateState()

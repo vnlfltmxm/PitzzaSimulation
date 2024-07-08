@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -52,6 +53,8 @@ public class UIManger : Singleton<UIManger>
     private Image _curtainImage;
     [SerializeField]
     private GameObject _resultUI;
+
+    private Coroutine _txtCoroutine;
     private void Awake()
     {
         InitUI();
@@ -176,7 +179,7 @@ public class UIManger : Singleton<UIManger>
         {
             _text.text += text[index];
             index++;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.1f);
         }
 
         if (isNPCChangedLeave)
@@ -231,7 +234,11 @@ public class UIManger : Singleton<UIManger>
         {
             SetTextBGActive(true);
         }
-        StartCoroutine(SetPrintText(text, isNPCChangedLeave));
+        _txtCoroutine = StartCoroutine(SetPrintText(text, isNPCChangedLeave));
+    }
+    public void StopPrintText()
+    {
+        StopCoroutine(_txtCoroutine);
     }
     public void PrintInteractionText(string text)
     {
