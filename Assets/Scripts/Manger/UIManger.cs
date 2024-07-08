@@ -234,6 +234,12 @@ public class UIManger : Singleton<UIManger>
         {
             SetTextBGActive(true);
         }
+
+        if(_txtCoroutine != null)
+        {
+            StopPrintText();
+        }
+
         _txtCoroutine = StartCoroutine(SetPrintText(text, isNPCChangedLeave));
     }
     public void StopPrintText()
