@@ -597,14 +597,22 @@ public class PlayerController : Singleton<PlayerController>
         {
             foreach (var item in pizza.Keys)
             {
-                foreach (var toppingResorce in pizza[item].ToppingResorceList)
+                if (_pizzaRecipe.Contains(item) == false)
                 {
-                    if (_pizzaResorce.Contains(toppingResorce) == true) 
+                    int count = 0;
+                    foreach (var toppingResorce in pizza[item].ToppingResorceList)
                     {
-                        _pizzaRecipe.Add(item);
+                        if (_pizzaResorce.Contains(toppingResorce) == true)
+                        {
+                            count++;
+                        }
+
+                        if(count == pizza[item].ToppingResorceList.Count)
+                        {
+                            _pizzaRecipe.Add(item);
+                        }
                     }
                 }
-                
             }
         }
 

@@ -95,7 +95,7 @@ public class DataManger : MonoBehaviour
     {
         LoadedPizzaList = new Dictionary<string, Pizza>();
 
-        XDocument doc = XDocument.Load($"{_dataRootPathInHome}/{name}.xml");
+        XDocument doc = XDocument.Load($"{_dataRootPath}/{name}.xml");
         
         var dataElements = doc.Descendants("data");
 
@@ -154,7 +154,7 @@ public class DataManger : MonoBehaviour
     {
         LoadedToppingResorceList = new Dictionary<string, ToppingResorce>();
 
-        XDocument doc = XDocument.Load($"{_dataRootPathInHome}/{name}.xml");
+        XDocument doc = XDocument.Load($"{_dataRootPath}/{name}.xml");
         
         var dataElements = doc.Descendants("data");
 
@@ -178,7 +178,7 @@ public class DataManger : MonoBehaviour
     {
         LoadedPlayer = new Dictionary<string, Player>();
 
-        XDocument doc = XDocument.Load($"{_dataRootPathInHome}/{name}.xml");
+        XDocument doc = XDocument.Load($"{_dataRootPath}/{name}.xml");
         
         var dataElements = doc.Descendants("data");
 

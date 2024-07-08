@@ -61,6 +61,8 @@ public class GameManger : Singleton<GameManger>
     public void DayStart()
     {
         ResetValue();
+        UIManger.Instance.SetHourTimeText(_hour);
+        UIManger.Instance.SetMinuteTimeText(_minute);
         StartCoroutine(Timer());
 
     }
