@@ -39,7 +39,7 @@ public class ShopManger : Singleton<ShopManger>
     }
     public bool CheckPlayerMoney(string itemName)
     {
-        int playerMoney = PlayerController.Instance.PlayerMoney;
+        float playerMoney = PlayerController.Instance.PlayerMoney;
 
         if (playerMoney <= 0)
         {

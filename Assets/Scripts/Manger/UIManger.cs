@@ -160,12 +160,12 @@ public class UIManger : Singleton<UIManger>
         var toppingItem = DataManger.Inst.GetToppingResorceData(toppingName);
         SetResultShopMoneyText(resultMoney + (toppingItem.MinBuyValues * toppingItem.Price));
     }
-    public void SetPlayerShopMoneyText(int value)
+    public void SetPlayerShopMoneyText(float value)
     {
         _shopPlayerMoneytext.text = value.ToString();
     }
 
-    public void SetResultShopMoneyText(int value)
+    public void SetResultShopMoneyText(float value)
     {
         _shopResultMoneytext.text = value.ToString();
     }
@@ -224,7 +224,7 @@ public class UIManger : Singleton<UIManger>
     {
         _textRoot.SetActive(active);
     }
-    public void SetMoneyText(int value)
+    public void SetMoneyText(float value)
     {
         _moneytext.text = value.ToString();
     }

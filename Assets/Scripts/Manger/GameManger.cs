@@ -7,10 +7,10 @@ public class GameManger : Singleton<GameManger>
     private bool _isDayGone = false;
     private int _hour = 9;
     private int _minute = 0;
-    private int _revenue = 0;
+    private float _revenue = 0;
     Coroutine _Timer;
 
-    public int Revenu { get { return _revenue; } }
+    public float Revenu { get { return _revenue; } }
     public bool IsDayGone { get { return _isDayGone; } }
 
     private void Awake()
@@ -83,6 +83,10 @@ public class GameManger : Singleton<GameManger>
     {
         EventManger.Instance.DayGone -= DayGone;
         EventManger.Instance.DayStart -= DayStart;
+    }
+    public void PluseIncomeMoney(float price)
+    {
+        _revenue += price;
     }
     //private void RegisterDayStartEvent()
     //{

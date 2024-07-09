@@ -130,7 +130,8 @@ public class DataManger : MonoBehaviour
             tempPizza.Description = data.Attribute(nameof(tempPizza.Description)).Value;
             tempPizza.BaseSizeRidous = float.Parse(data.Attribute(nameof(tempPizza.BaseSizeRidous)).Value);
             tempPizza.LargeSizeRidous = float.Parse(data.Attribute(nameof(tempPizza.LargeSizeRidous)).Value);
-
+            tempPizza.BasePrice = float.Parse(data.Attribute(nameof(tempPizza.BasePrice)).Value);
+            tempPizza.LargePrice = float.Parse(data.Attribute(nameof(tempPizza.LargePrice)).Value);
             //tempSkill.IconName = data.Attribute(nameof(tempSkill.IconName)).Value;
             SetDataList(out tempPizza.ToppingResorceList, data, "ToppingResorceList");
             SetDataList(out tempPizza.BaseSizeToppingValues, data, "BaseSizeToppingValues");

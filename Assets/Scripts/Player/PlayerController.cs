@@ -21,7 +21,7 @@ public class PlayerController : Singleton<PlayerController>
     private float _minLookAngle = -60f; 
     private float _verticalLookRotation = 0f;
     private GameObject _checkRayHitObj = null;
-    private int _money;
+    private float _money;
     private Player _playerData;
 
     private List<string> _pizzaRecipe = new List<string>();
@@ -29,7 +29,7 @@ public class PlayerController : Singleton<PlayerController>
     [HideInInspector]
     public List<string> PizaaRecipe { get {  return _pizzaRecipe; } }
     public List<string> PizaaToppingResorce { get { return _pizzaResorce; } }
-    public int PlayerMoney { get { return _money; } }
+    public float PlayerMoney { get { return _money; } }
     public Player Player { get { return _playerData; } }
     private void Awake()
     {
@@ -572,7 +572,7 @@ public class PlayerController : Singleton<PlayerController>
         return _pizzaRecipe.Contains(pizzaName);
     }
 
-    public void PlusMoney(int money)
+    public void PlusMoney(float money)
     {
         _money += money;
     }

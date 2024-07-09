@@ -56,10 +56,24 @@ public class ResultUI : MonoBehaviour
         switch (index)
         {
             case 0:
-                _valueTxt[index].text = $"{GameManger.Instance.Revenu} 원 ";
+                if (GameManger.Instance.Revenu < 0)
+                {
+                    _valueTxt[index].text = $"{0} 원 ";
+                }
+                else
+                {
+                    _valueTxt[index].text = $"{GameManger.Instance.Revenu} 원 ";
+                }
                 break;
             case 1:
-                _valueTxt[index].text = $"{ShopManger.Instance.Pay} 원 ";
+                if (GameManger.Instance.Revenu < 0)
+                {
+                    _valueTxt[index].text = $"{GameManger.Instance.Revenu + ShopManger.Instance.Pay} 원 ";
+                }
+                else
+                {
+                    _valueTxt[index].text = $"{ShopManger.Instance.Pay} 원 ";
+                }
                 break;
             case 2:
                 _valueTxt[index].text = $"{GameManger.Instance.Revenu - ShopManger.Instance.Pay} 원 ";

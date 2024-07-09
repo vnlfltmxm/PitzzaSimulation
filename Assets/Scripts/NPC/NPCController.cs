@@ -153,12 +153,14 @@ public class NPCController : MonoBehaviour
         if (pizza._isPizzaCooked == false)
         {
             PrintCheckPizzaText("이게 뭐야 하나도 안 익었잖아요",true);
+            PayPizzaPrice(-0.5f);
             return;
         }
 
         if(pizza.IsPizzaOverCooked == true)
         {
             PrintCheckPizzaText("장난쳐요? 다 탔잖아요", true);
+            PayPizzaPrice(-1);
             return;
         }
 
@@ -167,16 +169,19 @@ public class NPCController : MonoBehaviour
             || CheckPizzaToppingList(pizza) == false) 
         {
             PrintCheckPizzaText("주문한 피자랑 다르잖아요", true);
+            PayPizzaPrice(0);
             return;
         }
 
         if(CheckPizzaToppingListValue(pizza) == false)
         {
             PrintCheckPizzaText("재료 양이 다르잖아요", true);
+            PayPizzaPrice(0.5f);
             return;
         }
 
         PrintCheckPizzaText("감사합니다", true);
+        PayPizzaPrice();
     }
     private bool CheckPizzaSize(Dough pizza)
     {
@@ -249,5 +254,20 @@ public class NPCController : MonoBehaviour
     public void ClearPizzaDic()
     {
         _checkOrderPizzaDic.Clear();
+    }
+
+    public void PayPizzaPrice(float magnification = 1)
+    {
+        float pay = 0;
+        if (_pizzaSize == 0)
+        {
+            pay = _orderPizzaData.BasePrice;
+            GameManger.Instance.PluseIncomeMoney(pay * magnification);
+        }
+        else
+        {
+            pay = _orderPizzaData.LargePrice;
+            GameManger.Instance.PluseIncomeMoney(pay * magnification);
+        }
     }
 }
