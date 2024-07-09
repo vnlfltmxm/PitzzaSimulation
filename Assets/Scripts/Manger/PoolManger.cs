@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PoolManger : Singleton<PoolManger>
 {
-    private Dictionary<string, int> _itemCountDic = new Dictionary<string, int>();
+    //private Dictionary<string, int> _itemCountDic = new Dictionary<string, int>();
     private Dictionary<string, int> _itemMaxCountDic = new Dictionary<string, int>();
     private Dictionary<string, Queue<GameObject>> _poolDic = new Dictionary<string, Queue<GameObject>>();
     [SerializeField] 
@@ -17,7 +17,7 @@ public class PoolManger : Singleton<PoolManger>
     }
     private void Start()
     {
-        InitPool(Prefabs_Food);
+        //InitPool(Prefabs_Food);
     }
     private void OnDisable()
     {
@@ -29,12 +29,45 @@ public class PoolManger : Singleton<PoolManger>
         {
             AddPoolInDictionary(foodList[i]);
             AddObjectInPool(foodList[i]);
-            SetItemMaxCountValueInDictionary(foodList[i].name, DataManger.Inst.GetToppingResorceData(foodList[i].tag).StartMaxCount);
-            SetItemCountValueInDictionary(foodList[i].name);
+            if (DataManger.Inst.IsFileCheck() == false)
+            {
+                SetItemMaxCountValueInDictionary(foodList[i].name, DataManger.Inst.GetToppingResorceData(foodList[i].tag).StartMaxCount);
+            }
+            else
+            {
+                SetItemMaxCountValueInDictionary(foodList[i].name, DataManger.Inst.GetplayerData("플레이어").ToppingResorceCountList[i]);
+            }
+            //SetItemCountValueInDictionary(foodList[i].name);
             DisableStartPoolAtPool(foodList[i]);
         }
     }
-    
+    public void InitPool()
+    {
+        for (int i = 0; i < Prefabs_Food.Length; i++)
+        {
+            AddPoolInDictionary(Prefabs_Food[i]);
+            AddObjectInPool(Prefabs_Food[i]);
+            if (DataManger.Inst.IsFileCheck() == false)
+            {
+                SetItemMaxCountValueInDictionary(Prefabs_Food[i].name, DataManger.Inst.GetToppingResorceData(Prefabs_Food[i].tag).StartMaxCount);
+            }
+            else
+            {
+                if (i < DataManger.Inst.GetplayerData("플레이어").ToppingResorceCountList.Count)
+                {
+                    SetItemMaxCountValueInDictionary(Prefabs_Food[i].name, DataManger.Inst.GetplayerData("플레이어").ToppingResorceCountList[i]);
+                }
+                else
+                {
+                    SetItemMaxCountValueInDictionary(Prefabs_Food[i].name, DataManger.Inst.GetToppingResorceData(Prefabs_Food[i].tag).StartMaxCount);
+                }
+            }
+            //SetItemCountValueInDictionary(foodList[i].name);
+            DisableStartPoolAtPool(Prefabs_Food[i]);
+            SetPoolPosionY(Prefabs_Food[i].name);
+        }
+    }
+
     private void AddObjectInPool(GameObject prefabObj)
     {
         _poolDic.TryGetValue(prefabObj.name, out Queue<GameObject> pool);
@@ -70,6 +103,7 @@ public class PoolManger : Singleton<PoolManger>
             {
                 parent.gameObject.SetActive(true);
             }
+           
         }
     }
     private void AddPoolInDictionary(GameObject prefabObj)
@@ -86,7 +120,8 @@ public class PoolManger : Singleton<PoolManger>
     public void InPoolItem(GameObject pool,GameObject item)
     {
         ReturnItemInPool(item);
-        MinusItemCountValueInDictionary(pool.tag);
+        //MinusItemCountValueInDictionary(pool.tag);
+        PlusItemMaxCountValueInDictionary(pool.tag);
         SetPoolPosionY(pool);
     }
     public void ReturnItemInPool(GameObject item, string targetTagName,bool isTargetTagInclude)
@@ -142,7 +177,8 @@ public class PoolManger : Singleton<PoolManger>
         if (CheckItemCount(pool.tag))
         {
             GameObject item = _poolDic[pool.tag].Dequeue();
-            PlusItemCountValueInDictionary(pool.tag);
+            //PlusItemCountValueInDictionary(pool.tag);
+            MinusItemMaxCountValueInDictionary(pool.tag);
             SetPoolPosionY(pool);
             return item;
         }
@@ -161,10 +197,38 @@ public class PoolManger : Singleton<PoolManger>
         {
             return;
         }
-        float m = -0.23f / _itemMaxCountDic[pool.tag];
-        float b = 1.0f;
+        float maxVaule = DataManger.Inst.GetToppingResorceData(pool.tag).StartMaxCount;
+        float m = (0.23f / (maxVaule - 1)) * (_itemMaxCountDic[pool.tag] - 1) + 0.77f;
+       // float m = -0.23f / maxVaule;
+        //float b = 1.0f;
 
-        Vector3 resultPos = new Vector3(targetPool.gameObject.transform.localPosition.x, m * _itemCountDic[pool.tag] + b, targetPool.gameObject.transform.localPosition.z);
+        Vector3 resultPos = new Vector3(targetPool.gameObject.transform.localPosition.x, m/* * _itemMaxCountDic[pool.tag] + b*/, targetPool.gameObject.transform.localPosition.z);
+        if (_itemMaxCountDic[pool.tag] >= maxVaule)
+        {
+            resultPos = new Vector3(targetPool.gameObject.transform.localPosition.x, 1, targetPool.gameObject.transform.localPosition.z);
+        }
+        targetPool.gameObject.transform.localPosition = resultPos;
+        PoolMeshEnableToCount(targetPool.gameObject);
+    }
+    public void SetPoolPosionY(string pool)
+    {
+        var targetPool = InteractionObjectManger.Instance.FindPrefabsParentTrasnform(pool);
+
+
+        if (targetPool.CompareTag("Dough"))
+        {
+            return;
+        }
+        float maxVaule = DataManger.Inst.GetToppingResorceData(pool).StartMaxCount;
+        float m = (0.23f / (maxVaule - 1)) * (_itemMaxCountDic[pool] - 1) + 0.77f;
+        //float m = -0.23f / maxVaule;
+        //float b = 1.0f;
+
+        Vector3 resultPos = new Vector3(targetPool.gameObject.transform.localPosition.x, m /** _itemMaxCountDic[pool] + b*/, targetPool.gameObject.transform.localPosition.z);
+        if (_itemMaxCountDic[pool] >= maxVaule)
+        {
+            resultPos = new Vector3(targetPool.gameObject.transform.localPosition.x, 1, targetPool.gameObject.transform.localPosition.z);
+        }
         targetPool.gameObject.transform.localPosition = resultPos;
         PoolMeshEnableToCount(targetPool.gameObject);
     }
@@ -176,7 +240,7 @@ public class PoolManger : Singleton<PoolManger>
             return;
         }
 
-        if (_itemCountDic[pool.tag] == _itemMaxCountDic[pool.tag])
+        if (0/*_itemCountDic[pool.tag]*/ == _itemMaxCountDic[pool.tag])
         {
             chiled.gameObject.SetActive(false);
         }
@@ -191,7 +255,7 @@ public class PoolManger : Singleton<PoolManger>
     public bool CheckItemCount(string itemName)
     {
 
-        if (_itemMaxCountDic[itemName] > _itemCountDic[itemName])
+        if (_itemMaxCountDic[itemName] > 0/*_itemCountDic[itemName]*/)
         {
             return true;
         }
@@ -206,7 +270,9 @@ public class PoolManger : Singleton<PoolManger>
         }
         else
         {
-            _itemMaxCountDic[itemName] += maxCount - _itemCountDic[itemName];
+            _itemMaxCountDic[itemName] += maxCount; /*- _itemCountDic[itemName];*/
+           // SetPoolPosionY(itemName);
+            //_itemCountDic[itemName] = 0;
         }
     }
     //private void SetItemMaxCountValueInDictionary(string itemName, int maxCount,int itemCount)
@@ -220,34 +286,52 @@ public class PoolManger : Singleton<PoolManger>
     //        _itemMaxCountDic[itemName] += (maxCount - itemCount);
     //    }
     //}
-    private void SetItemCountValueInDictionary(string itemName)
-    {
-        if (!_itemCountDic.ContainsKey(itemName))
-        {
-            _itemCountDic.Add(itemName, 0);
-        }
-    }
+    //private void SetItemCountValueInDictionary(string itemName)
+    //{
+    //    if (!_itemCountDic.ContainsKey(itemName))
+    //    {
+    //        _itemCountDic.Add(itemName, 0);
+    //    }
+    //}
 
-    private void PlusItemCountValueInDictionary(string itemName)
+    //private void PlusItemCountValueInDictionary(string itemName)
+    //{
+    //    if (_itemCountDic.ContainsKey(itemName))
+    //    {
+    //        _itemCountDic[itemName]++;
+    //    }
+    //    else
+    //    {
+    //        _itemCountDic.Add(itemName, 1);
+    //    }
+    //}
+    //private void MinusItemCountValueInDictionary(string itemName)
+    //{
+    //    if (_itemCountDic.ContainsKey(itemName))
+    //    {
+    //        _itemCountDic[itemName]--;
+    //    }
+    //}
+
+    private void PlusItemMaxCountValueInDictionary(string itemName)
     {
-        if (_itemCountDic.ContainsKey(itemName))
+        if (_itemMaxCountDic.ContainsKey(itemName))
         {
-            _itemCountDic[itemName]++;
+            _itemMaxCountDic[itemName]++;
         }
         else
         {
-            _itemCountDic.Add(itemName, 1);
+            _itemMaxCountDic.Add(itemName, 1);
         }
     }
-    private void MinusItemCountValueInDictionary(string itemName)
+    private void MinusItemMaxCountValueInDictionary(string itemName)
     {
-        if (_itemCountDic.ContainsKey(itemName))
+        if (_itemMaxCountDic.ContainsKey(itemName))
         {
-            _itemCountDic[itemName]--;
+            _itemMaxCountDic[itemName]--;
         }
     }
-
-    public void DayStart()
+    public void DayGone()
     {
         foreach (var item in PlayerController.Instance.PizaaToppingResorce)
         {
@@ -255,21 +339,45 @@ public class PoolManger : Singleton<PoolManger>
         }
 
         SetToppingZoneAtPool();
+        //ResetItemCountValue();
     }
 
-    private void ResetItemCountValue()
+    public void DayStart()
     {
-        foreach (var item in _itemCountDic.Keys)
+        foreach (var item in PlayerController.Instance.PizaaToppingResorce)
         {
-            _itemCountDic[item] = 0;
+            SetPoolPosionY(item);
         }
+
+        //ResetItemCountValue();
     }
+    public List<int> ReturnToppingResorceCount()
+    {
+        List<int> ret = new List<int>();
+
+        foreach (var item in PlayerController.Instance.PizaaToppingResorce)
+        {
+            ret.Add(_itemMaxCountDic[item]);
+        }
+
+        return ret;
+    }
+
+    //private void ResetItemCountValue()
+    //{
+    //    foreach (var item in _itemCountDic.Keys)
+    //    {
+    //        _itemCountDic[item] = 0;
+    //    }
+    //}
     private void RegisterDayEvent()
     {
+        EventManger.Instance.DayGone += DayGone;
         EventManger.Instance.DayStart += DayStart;
     }
     private void UnRegisterDayEvent()
     {
+        EventManger.Instance.DayGone -= DayGone;
         EventManger.Instance.DayStart -= DayStart;
     }
 }

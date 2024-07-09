@@ -45,6 +45,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         RegisterDayEvent();
         InitPlayer();
+        PoolManger.Instance.InitPool();
        DataManger.Inst.SaveData();
     }
 

@@ -212,6 +212,7 @@ public class DataManger : MonoBehaviour
             SetDataList(out tempPlayer.StartPizzaRecipe, data, "StartPizzaRecipe");
             tempPlayer.StartMoney = int.Parse(data.Attribute(nameof(tempPlayer.StartMoney)).Value);
             SetDataList(out tempPlayer.StartToppingResorceList, data, "StartToppingResorceList");
+            SetDataList(out tempPlayer.ToppingResorceCountList, data, "ToppingResorceCountList");
             LoadedPlayer.Add(tempPlayer.Name, tempPlayer);
         }
 
@@ -268,6 +269,7 @@ public class DataManger : MonoBehaviour
         data.StartPizzaRecipe = PlayerController.Instance.PizaaRecipe;
         data.StartToppingResorceList = PlayerController.Instance.PizaaToppingResorce;
         data.StartMoney = PlayerController.Instance.PlayerMoney;
+        data.ToppingResorceCountList = PoolManger.Instance.ReturnToppingResorceCount();
         // 객체를 JSON 문자열로 변환
         string jsonData = JsonUtility.ToJson(data, true);
 
@@ -282,6 +284,7 @@ public class DataManger : MonoBehaviour
         data.StartPizzaRecipe = PlayerController.Instance.PizaaRecipe;
         data.StartToppingResorceList = PlayerController.Instance.PizaaToppingResorce;
         data.StartMoney = PlayerController.Instance.PlayerMoney;
+        data.ToppingResorceCountList = PoolManger.Instance.ReturnToppingResorceCount();
         // 객체를 JSON 문자열로 변환
         string jsonData = JsonUtility.ToJson(data, true);
 
@@ -309,6 +312,17 @@ public class DataManger : MonoBehaviour
         {
             Debug.LogWarning("No data file found at " + filePath);
             return null;
+        }
+    }
+    public bool IsFileCheck()
+    {
+        if (File.Exists(filePath))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     //public string GetSkillName( DataTemporalManger manger, string dataClassName)

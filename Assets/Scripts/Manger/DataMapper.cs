@@ -33,4 +33,5 @@ public class Player
     public List<string> StartPizzaRecipe = new List<string>();
     public int StartMoney; /*{  get; set; }*/
     public List<string> StartToppingResorceList = new List<string>();
+    public List<int> ToppingResorceCountList = new List<int>();
 }

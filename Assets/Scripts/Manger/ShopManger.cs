@@ -52,7 +52,7 @@ public class ShopManger : Singleton<ShopManger>
             
             foreach (var item in _shoppingDic.Keys)
             {
-                resultMoney += _toppingItemDic[item].Price * _toppingItemDic[item].MinBuyValues * _shoppingDic[item];
+                resultMoney += _toppingItemDic[item].Price * _toppingItemDic[item].MinBuyValues * (_shoppingDic[item] / DataManger.Inst.GetToppingResorceData(item).MinBuyValues);
             }
 
             resultMoney += _toppingItemDic[itemName].Price * _toppingItemDic[itemName].MinBuyValues;
@@ -83,11 +83,11 @@ public class ShopManger : Singleton<ShopManger>
     {
         if (_shoppingDic.ContainsKey(toppingName) == false) 
         {
-            _shoppingDic.Add(toppingName, 1);
+            _shoppingDic.Add(toppingName, DataManger.Inst.GetToppingResorceData(toppingName).MinBuyValues);
         }
         else
         {
-            _shoppingDic[toppingName]++;
+            _shoppingDic[toppingName] += DataManger.Inst.GetToppingResorceData(toppingName).MinBuyValues;
         }
     }
     public void CancelToppingItem(string toppingName)
@@ -98,7 +98,7 @@ public class ShopManger : Singleton<ShopManger>
         }
         else
         {
-            _shoppingDic[toppingName]--;
+            _shoppingDic[toppingName] -= DataManger.Inst.GetToppingResorceData(toppingName).MinBuyValues;
         }
     }
     public void ResetShoppingDic()
@@ -114,7 +114,7 @@ public class ShopManger : Singleton<ShopManger>
 
             foreach (var item in _shoppingDic.Keys)
             {
-                _resutMoney += _toppingItemDic[item].Price * _toppingItemDic[item].MinBuyValues * _shoppingDic[item];
+                _resutMoney += _toppingItemDic[item].Price * _toppingItemDic[item].MinBuyValues * (_shoppingDic[item] / DataManger.Inst.GetToppingResorceData(item).MinBuyValues);
                 PlayerController.Instance.PlusToppingList(item);
             }
         }
