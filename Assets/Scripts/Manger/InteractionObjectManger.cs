@@ -83,38 +83,51 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     //}
     public void OnToppingPizza(GameObject item, GameObject pizza, Vector3 hitPointPos)
     {
-        GameObject pizzaItem = PoolManger.Instance.OutPoolItem(item);
+        
 
-        if (pizzaItem == null)
+        if (item.layer == LayerMask.NameToLayer("Pizza"))
         {
             item.transform.parent = pizza.transform;
             item.transform.position = hitPointPos;
             item.transform.rotation = pizza.transform.rotation;
-            if (item.CompareTag("Cheese") == true || pizzaItem.CompareTag("Sauce") == true)
-            {
-                item.layer = LayerMask.NameToLayer("Ignore Raycast");
-            }
-            else
-            {
-                item.layer = LayerMask.NameToLayer("Pizza");
-            }
-            Debug.Log("재료소진2");
+            SetUseGravityInItem(item, false);
         }
         else
         {
-            pizzaItem.SetActive(true);
-            pizzaItem.transform.parent = pizza.transform;
-            pizzaItem.transform.position = hitPointPos;
-            if (pizzaItem.CompareTag("Cheese") == true || pizzaItem.CompareTag("Sauce") == true) 
+            GameObject pizzaItem = PoolManger.Instance.OutPoolItem(item);
+            if (pizzaItem == null)
             {
-                pizzaItem.layer = LayerMask.NameToLayer("Ignore Raycast");
+                item.transform.parent = pizza.transform;
+                item.transform.position = hitPointPos;
+                item.transform.rotation = pizza.transform.rotation;
+                if (item.CompareTag("Cheese") == true || item.CompareTag("Sauce") == true)
+                {
+                    item.layer = LayerMask.NameToLayer("Ignore Raycast");
+                }
+                else
+                {
+                    item.layer = LayerMask.NameToLayer("Pizza");
+                }
+                Debug.Log("재료소진2");
             }
             else
             {
-                pizzaItem.layer = LayerMask.NameToLayer("Pizza");
+                pizzaItem.SetActive(true);
+                pizzaItem.transform.parent = pizza.transform;
+                pizzaItem.transform.position = hitPointPos;
+                if (pizzaItem.CompareTag("Cheese") == true || pizzaItem.CompareTag("Sauce") == true)
+                {
+                    pizzaItem.layer = LayerMask.NameToLayer("Ignore Raycast");
+                }
+                else
+                {
+                    pizzaItem.layer = LayerMask.NameToLayer("Pizza");
+                }
+                SetUseGravityInItem(pizzaItem, false);
             }
-            SetUseGravityInItem(pizzaItem, false);
         }
+
+        
         
        // PoolManger.Instance.SetPoolPosionY(item);
     }

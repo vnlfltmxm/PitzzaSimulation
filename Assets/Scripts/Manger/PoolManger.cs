@@ -338,12 +338,13 @@ public class PoolManger : Singleton<PoolManger>
             SetItemMaxCountValueInDictionary(item, ShopManger.Instance.GetShopingValue(item));
         }
 
-        SetToppingZoneAtPool();
+        
         //ResetItemCountValue();
     }
 
     public void DayStart()
     {
+        SetToppingZoneAtPool();
         foreach (var item in PlayerController.Instance.PizaaToppingResorce)
         {
             SetPoolPosionY(item);

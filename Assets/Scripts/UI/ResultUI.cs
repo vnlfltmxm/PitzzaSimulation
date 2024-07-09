@@ -68,7 +68,7 @@ public class ResultUI : MonoBehaviour
             case 1:
                 if (GameManger.Instance.Revenu < 0)
                 {
-                    _valueTxt[index].text = $"{GameManger.Instance.Revenu + ShopManger.Instance.Pay} ¿ø ";
+                    _valueTxt[index].text = $"{GameManger.Instance.Revenu + (ShopManger.Instance.Pay * -1)} ¿ø ";
                 }
                 else
                 {
