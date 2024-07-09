@@ -360,6 +360,7 @@ public class UIManger : Singleton<UIManger>
     {
         StartCoroutine(OutCurtain());
         SetPlayerShopMoneyText(PlayerController.Instance.PlayerMoney);
+        SetResultShopMoneyText(PlayerController.Instance.PlayerMoney);
         PrintInteractionText(string.Empty);
         SetMoneyText(PlayerController.Instance.PlayerMoney);
     }

@@ -63,11 +63,11 @@ public class Dough : Food
             ResterHandKneadEvent();
             EventManger.Instance.OnRegiterDouhgDic(this.gameObject);
         }
-        if (collision.transform.CompareTag("Player") && _isDoughReady == false)
-        {
-            UnResterHandKneadEvent();
-            EventManger.Instance.UnRegiterDouhgDic(this.gameObject);
-        }
+        //if (collision.transform.CompareTag("Player") && _isDoughReady == false)
+        //{
+        //    UnResterHandKneadEvent();
+        //    EventManger.Instance.UnRegiterDouhgDic(this.gameObject);
+        //}
 
         if (collision.transform.CompareTag("KneaderInputPos") )
         {
@@ -87,7 +87,14 @@ public class Dough : Food
 
         }
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("Player") && _isDoughReady == false)
+        {
+            UnResterHandKneadEvent();
+            EventManger.Instance.UnRegiterDouhgDic(this.gameObject);
+        }
+    }
     private void OnCollisionStay(Collision collision)
     {
        

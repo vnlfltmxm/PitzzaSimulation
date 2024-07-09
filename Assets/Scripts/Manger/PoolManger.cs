@@ -195,6 +195,12 @@ public class PoolManger : Singleton<PoolManger>
         
         if (targetPool.CompareTag("Dough"))
         {
+            var refrigerator=targetPool.GetComponent<DoughRefrigerator>();
+            if (refrigerator == null)
+            {
+                return;
+            }
+            refrigerator.ViewDough(_itemMaxCountDic[pool.tag]);
             return;
         }
         float maxVaule = DataManger.Inst.GetToppingResorceData(pool.tag).StartMaxCount;
@@ -217,6 +223,12 @@ public class PoolManger : Singleton<PoolManger>
 
         if (targetPool.CompareTag("Dough"))
         {
+            var refrigerator = targetPool.GetComponent<DoughRefrigerator>();
+            if (refrigerator == null)
+            {
+                return;
+            }
+            refrigerator.ViewDough(_itemMaxCountDic[pool]);
             return;
         }
         float maxVaule = DataManger.Inst.GetToppingResorceData(pool).StartMaxCount;
