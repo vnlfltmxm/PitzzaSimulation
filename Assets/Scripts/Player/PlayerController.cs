@@ -46,7 +46,7 @@ public class PlayerController : Singleton<PlayerController>
         RegisterDayEvent();
         InitPlayer();
         PoolManger.Instance.InitPool();
-       DataManger.Inst.SaveData();
+        DataManger.Inst.SaveData();
     }
 
     // Update is called once per frame

@@ -337,8 +337,15 @@ public class Dough : Food
             RotateDough(destination);
             if (CheckDestinationPos(destination))
             {
-                
-                this.gameObject.layer = LayerMask.NameToLayer("Pizza");
+                if (_isDoughReady == false)
+                {
+                    this.gameObject.layer = LayerMask.NameToLayer("Item");
+                }
+                else
+                {
+                    this.gameObject.layer = LayerMask.NameToLayer("Pizza");
+
+                }
                 UnResterMoveDoughEvent();
                 if (_isPizzaPackaging || !_isDoughReady) 
                 {
