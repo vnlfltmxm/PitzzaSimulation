@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +27,7 @@ public class UIManger : Singleton<UIManger>
     [SerializeField]
     private GameObject _buttonRoot;
     [SerializeField]
-    private Text _moneytext;
+    private TextMeshProUGUI _moneytext;
     [SerializeField]
     private Text _shopPlayerMoneytext;
     [SerializeField]
