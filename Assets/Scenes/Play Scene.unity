@@ -652,6 +652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManger
       objectReference: {fileID: 0}
+    - target: {fileID: 5255319127972140665, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5.200012
+      objectReference: {fileID: 0}
     - target: {fileID: 5866092910478372929, guid: dcb08c049f9901e499ae8b121146b15a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.0005878804
