@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManger : Singleton<GameManger>
 {
+    [SerializeField]
+    private Material[] _skyBoxmatrials;
     private bool _isDayGone = false;
     private int _hour = 9;
     private int _minute = 0;
@@ -87,6 +89,10 @@ public class GameManger : Singleton<GameManger>
     public void PluseIncomeMoney(float price)
     {
         _revenue += price;
+    }
+    private void ChangeSkyBox(int index)
+    {
+
     }
     //private void RegisterDayStartEvent()
     //{
