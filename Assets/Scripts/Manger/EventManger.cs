@@ -24,6 +24,8 @@ public class EventManger : Singleton<EventManger>
     public Action ChangeNPCStateToLeave;
     public Action DayGone;
     public Action DayStart;
+    public Action LightOn;
+    public Action LightOff;
     public delegate void MyDelegate(GameObject obj, NPCStateName tempEnum = NPCStateName.WAITINGPIZZA);//이 방식은 action처럼 함수 선언시 모양은 맟춰줘야하지만 디폴트 변수를 사용함으로써 변수사용은 안해도 된다 NPCStateName부분만 
     public MyDelegate CehckOrder;
 
@@ -33,6 +35,14 @@ public class EventManger : Singleton<EventManger>
     //{
     //    NPCTalk?.Invoke(text);
     //}
+    public void OnLightOnEventInvoke()
+    {
+        LightOn?.Invoke();
+    }
+    public void OnLightOffEventInvoke()
+    {
+        LightOff?.Invoke();
+    }
     public void OnDayGoneEventInvoke()
     {
         DayGone?.Invoke();

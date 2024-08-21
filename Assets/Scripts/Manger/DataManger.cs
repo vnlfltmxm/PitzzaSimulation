@@ -14,7 +14,7 @@ public class DataManger : MonoBehaviour
     public Dictionary<string, ToppingResorce> LoadedToppingResorceList { get; private set; }
     public Dictionary<string, Player> LoadedPlayer { get; private set; }
 
-    private readonly string _dataRootPath = "C:/Users/KGA/Desktop/PizzaDataTable";//읽는거 실패시 \\을 /로
+    private readonly string _dataRootPath = Application.streamingAssetsPath;//"Application.StreamingAssetsPath";
     private readonly string _dataRootPathInHome = "C:/Users/qkr38/Downloads/PizzaDataTable";
     public static DataManger Inst { get; private set; }
 

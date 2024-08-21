@@ -2907,6 +2907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b593e58ed4e854d4db3c20b870736395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _nightLight: {fileID: 1164587130330213887}
 --- !u!1 &9126164409117557377
 GameObject:
   m_ObjectHideFlags: 0
@@ -23225,6 +23226,11 @@ PrefabInstance:
 --- !u!4 &1164587130330213856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5050820325319033083, guid: e90c13f270be6cb49b18897d3877b5fa, type: 3}
+  m_PrefabInstance: {fileID: 6210867958674369819}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1164587130330213887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5050820325319033060, guid: e90c13f270be6cb49b18897d3877b5fa, type: 3}
   m_PrefabInstance: {fileID: 6210867958674369819}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6527088461124126720
