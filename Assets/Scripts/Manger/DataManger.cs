@@ -305,12 +305,12 @@ public class DataManger : MonoBehaviour
             // JSON 문자열을 객체로 변환
             Player data = JsonUtility.FromJson<Player>(jsonData);
             LoadedPlayer.Add(data.Name, data);
-            Debug.Log("Data loaded from " + filePath);
+            
             return data;
         }
         else
         {
-            Debug.LogWarning("No data file found at " + filePath);
+           
             return null;
         }
     }

@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pizzaHouse: {fileID: 0}
-  _doughtRefrigerator: {fileID: 3797118438238345098, guid: aeeabb9684e03da49a9437465cfeb5da, type: 3}
+  _toppingZone: {fileID: 0}

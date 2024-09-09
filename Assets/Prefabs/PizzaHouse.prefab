@@ -23177,6 +23177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Light_Knight
       objectReference: {fileID: 0}
+    - target: {fileID: 5050820325319033060, guid: e90c13f270be6cb49b18897d3877b5fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5050820325319033083, guid: e90c13f270be6cb49b18897d3877b5fa, type: 3}
       propertyPath: m_RootOrder
       value: 14
