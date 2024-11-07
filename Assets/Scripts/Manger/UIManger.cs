@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using System.Xml.Serialization;
 using TMPro;
 using Unity.VisualScripting;
@@ -175,13 +176,17 @@ public class UIManger : Singleton<UIManger>
     private IEnumerator SetPrintText(string text, bool isNPCChangedLeave)
     {
         int index = 0;
+        var sb = new StringBuilder();  // StringBuilder 사용
         _text.text = string.Empty;
+
         while (index < text.Length)
         {
-            _text.text += text[index];
+            sb.Append(text[index]);
+            _text.text = sb.ToString();  // UI 텍스트에 적용
             index++;
             yield return new WaitForSeconds(0.1f);
         }
+
 
         if (isNPCChangedLeave)
         {
