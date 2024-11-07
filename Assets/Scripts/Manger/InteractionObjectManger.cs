@@ -141,7 +141,7 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     //    OnGetItemPoolToTag(tagName);
     //    //OnGrapItemToPlayer(_usingPool, grapPos);
     //}
-    public void OnPickUpItemToPool(GameObject pool, GameObject grapPos)
+    public void OnPickUpItemToPool(GameObject pool, Transform grapPos)
     {
         OnGrapItemInPoolToPlayer(pool, grapPos);
     }
@@ -154,7 +154,7 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
         _usingPool = PoolManger.Instance.GetPoolToTagName(tagName);
     }
 
-    private void OnGrapItemInPoolToPlayer(GameObject pool,GameObject grapPos)
+    private void OnGrapItemInPoolToPlayer(GameObject pool,Transform grapPos)
     {
         GameObject item = PoolManger.Instance.OutPoolItem(pool);
         if(item == null) 
@@ -163,9 +163,9 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
         }
         item.SetActive(true);
         
-        item.transform.position = grapPos.transform.position;
-        item.transform.rotation = grapPos.transform.rotation;
-        item.transform.parent = grapPos.transform;
+        item.transform.position = grapPos.position;
+        item.transform.rotation = grapPos.rotation;
+        item.transform.parent = grapPos;
         SetUseGravityInItem(item, false);
     }
     private void OnReturnItemToPool(GameObject pool, GameObject item)
@@ -240,3 +240,4 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
         return null;
     }
 }
+

@@ -13,6 +13,7 @@ public class EventManger : Singleton<EventManger>
     public Action<GameObject> TurnOnMachine;
     public Action<Color,GameObject> OverCooked;
     public Action PlayerCurserLock;
+    public Action PlayerCurserUnLock;
     public Action Packing;
     public Action<Dough> CheckPizza;
     public Action<Transform> DoughMove;
@@ -63,6 +64,10 @@ public class EventManger : Singleton<EventManger>
     public void OnPlayerCurserLock()
     {
         PlayerCurserLock?.Invoke();
+    }
+    public void OnPlayerCurserUnLock()
+    {
+        PlayerCurserUnLock?.Invoke();
     }
     public void OnCheckPizzaEventInvoke(Dough pizza)
     {

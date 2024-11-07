@@ -8,6 +8,17 @@ using UnityEngine.AI;
 
 public class PlayerController : Singleton<PlayerController>
 {
+    enum InteractionObj
+    {
+        Pool = 6,
+        Pizza,
+        Machine,
+        Item,
+        Button,
+        NPC,
+        Shop,
+        Door
+    }
    
     [SerializeField]
     private Camera _camera;
@@ -24,6 +35,8 @@ public class PlayerController : Singleton<PlayerController>
     private float _money;
     private Player _playerData;
 
+    private Dictionary<InteractionObj, IExcute> _excuteDic = new Dictionary<InteractionObj, IExcute>();
+
     private List<string> _pizzaRecipe = new List<string>();
     private List<string> _pizzaResorce = new List<string>();
     [HideInInspector]
@@ -31,13 +44,14 @@ public class PlayerController : Singleton<PlayerController>
     public List<string> PizaaToppingResorce { get { return _pizzaResorce; } }
     public float PlayerMoney { get { return _money; } }
     public Player Player { get { return _playerData; } }
+    public Transform grabPos { get { return _grabPos.transform; } }
     private void Awake()
     {
         _nav = GetComponent<NavMeshAgent>();
         _nav.updateRotation = false;
         //CurserLock();
-        RegisterCureserLock();
-        
+        RegisterCureserEvent();
+        InitExcute();
     }
 
     // Start is called before the first frame update
@@ -64,7 +78,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void OnDisable()
     {
-        UnRegisterCureserLock();
+        UnRegisterCureserEvent();
         UnRegisterDayEvent();
     }
     private void InitPlayer()
@@ -85,13 +99,15 @@ public class PlayerController : Singleton<PlayerController>
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
-    private void RegisterCureserLock()
+    private void RegisterCureserEvent()
     {
         EventManger.Instance.PlayerCurserLock += CurserLock;
+        EventManger.Instance.PlayerCurserUnLock += CurserUnLock;
     }
-    private void UnRegisterCureserLock()
+    private void UnRegisterCureserEvent()
     {
         EventManger.Instance.PlayerCurserLock -= CurserLock;
+        EventManger.Instance.PlayerCurserUnLock -= CurserUnLock;
     }
     private void RegisterDayEvent()
     {
@@ -302,38 +318,8 @@ public class PlayerController : Singleton<PlayerController>
         {
             var obj = hit.transform.gameObject.layer;
 
-            switch (obj)
-            {
-                case 6:
-                    PickUpItemToPool(hit.transform.gameObject);
-                    break;
-                case 7:
-                    //ToppingPizza(hit.transform.gameObject, hit);
-                    //PickUpItem(hit.transform.gameObject);
-                    PizzaActive(hit.transform.gameObject, hit);
-                    break;
-                case 8:
-                    DropPizzaToMachine(hit.transform.gameObject, hit);
-                    break;
-                case 9:
-                    PickUpItem(hit.transform.gameObject);
-                    break;
-                case 10:
-                    PushMachineButton(hit.transform.gameObject);
-                    break;
-                case 11:
-                    CheckOrder(hit.transform.gameObject);
-                    SellPizza(hit.transform.gameObject);
-                    break;
-                case 12:
-                    OpenShopMenu();
-                    break;
-                case 13:
-                    EventManger.Instance.OnDayGoneEventInvoke();
-                    break;
-                default:
-                    break;
-            }
+            _excuteDic[(InteractionObj)obj].Excute(hit.transform.gameObject, hit);
+            
 
         }
         else
@@ -341,6 +327,8 @@ public class PlayerController : Singleton<PlayerController>
             DropItem();
         }
     }
+
+   
 
     private void PressButtonSpace(RaycastHit hit)
     {
@@ -360,40 +348,8 @@ public class PlayerController : Singleton<PlayerController>
             EventManger.Instance.OnInvokeHandKneadEvent(hit.transform.gameObject);
         }
     }
-    private void CheckOrder(GameObject targetNPC)
-    {
-        if (InteractionObjectManger.Instance.OnCheckNPCState(targetNPC,NPCStateName.ORDER) == true) 
-        {
-            InteractionObjectManger.Instance.OnRegisterChangeNPCState();
-            InteractionObjectManger.Instance.OnChangeNPCState(targetNPC);
-            UIManger.Instance.SetButtonActive(true);
-            SetInteractionText(string.Empty);
-            CurserUnLock();
-        }
-    }
-    private void SellPizza(GameObject NPC)
-    {
-        if (InteractionObjectManger.Instance.OnCheckNPCState(NPC, NPCStateName.WAITINGPIZZA) == true)
-        {
-            if (CheckOnHandlingItem() == false)
-            {
-                return;
-            }
-            var pizza = _grabPos.transform.GetChild(0).gameObject.GetComponent<Dough>();
-            if (pizza == null)
-            {
-                return;
-            }
-            if ( pizza.IsPizzaPackaging)
-            {
-                EventManger.Instance.OnCheckPizzaEventInvoke(pizza);
-                PoolManger.Instance.ReturnItemInPool(pizza.gameObject);
-            }
-
-        }
-
-
-    }
+    
+   
     
     private bool CheckItemTag(GameObject item,string tagName)
     {
@@ -413,29 +369,7 @@ public class PlayerController : Singleton<PlayerController>
 
         return false;
     }
-    private void PizzaActive(GameObject pizza, RaycastHit hitRay)
-    {
-        if (pizza.transform.gameObject != null)
-        {
-            if (CheckOnHandlingItem())
-            {
-                if (CheckePizzaCooked(pizza) == true)
-                {
-                    return;
-                }
-                ToppingPizza(pizza, hitRay);
-            }
-            else
-            {
-                if (CheckePizzaCooked(pizza) == true && pizza.CompareTag("Dough") == false)  
-                {
-                    return;
-                }
-                PickUpItem(pizza);
-            }
-
-        }
-    }
+    
     private bool CheckePizzaCooked(GameObject pizza)
     {
         var checkPizza = pizza.GetComponentInParent<Dough>();
@@ -446,7 +380,7 @@ public class PlayerController : Singleton<PlayerController>
 
         return checkPizza._isPizzaCooked;
     }
-    private bool CheckOnHandlingItem()
+    public bool CheckOnHandlingItem()
     {
         if (_grabPos.transform.childCount > 0)
         {
@@ -455,37 +389,8 @@ public class PlayerController : Singleton<PlayerController>
 
         return false;
     }
-    private void PickUpItem(GameObject obj)
-    {
-        if (obj.transform.gameObject != null)
-        {
-            if (CheckOnHandlingItem())
-            {
-                return;
-            }
-            else
-            {
-                InteractionObjectManger.Instance.OnPickUpItem(obj, _grabPos);
-            }
-            
-        }
-    }
-    private void DropPizzaToMachine(GameObject machine, RaycastHit RayHitPos)
-    {
-        Vector3 pointPos = RayHitPos.normal;
-        if(CheckOnHandlingItem()==false ) 
-        {
-            return;
-        }
-        var obj = _grabPos.transform.GetChild(0).gameObject;
-        float dotProduct = Vector3.Dot(pointPos, machine.transform.up);
-
-        if (dotProduct > 0.9f &&
-            obj.CompareTag("Dough"))  
-        {
-            InteractionObjectManger.Instance.OnDropItemToMachine(obj, machine, RayHitPos.point);
-        }
-    }
+   
+    
     private void DropItem()
     {
         if (CheckOnHandlingItem())
@@ -493,46 +398,13 @@ public class PlayerController : Singleton<PlayerController>
             InteractionObjectManger.Instance.OnDropItem(_grabPos.transform.GetChild(0).gameObject);
         }
     }
-    private void PickUpItemToPool(GameObject obj)
-    {
-        if (obj.transform.gameObject != null)
-        {
-            if (CheckOnHandlingItem()) 
-            {
-                RetrunHandlingItem(obj);
-            }
-            else
-            {
-                InteractionObjectManger.Instance.OnPickUpItemToPool(obj, _grabPos);
-            }
-        }
-
-    }
-
-    private void ToppingPizza(GameObject pizza,RaycastHit hitRay)
-    {
-        var pizzaItem = _grabPos.transform.GetChild(0).gameObject;
-
-        if (pizzaItem.CompareTag("Dough"))
-        {
-            return;
-        }
-
-        InteractionObjectManger.Instance.OnToppingPizza(pizzaItem, pizza, hitRay.point);
-    }
+   
+   
 
 
-    private void PushMachineButton(GameObject obj)
-    {
-        var MachineButton = obj.GetComponentInParent<MachineBase>();
+   
 
-        if(MachineButton != null)
-        {
-            EventManger.Instance.OnMachineActivateEvent(MachineButton.gameObject);
-        }
-    }
-
-    private void RetrunHandlingItem(GameObject rayHitObj)
+    public void RetrunHandlingItem(GameObject rayHitObj)
     {
         var grapItem = _grabPos.transform.GetChild(0).gameObject;
         if (rayHitObj.CompareTag(grapItem.tag))
@@ -557,15 +429,7 @@ public class PlayerController : Singleton<PlayerController>
             return;
         }
     }
-    private void OpenShopMenu()
-    {
-        if (UIManger.Instance.CheckOpenShopNenu() == false)
-        {
-            return;
-        }
-        InteractionObjectManger.Instance.OnOpenShopMenu();
-        CurserUnLock();
-    }
+   
 
     public bool CheckPizzaRecipeList(string pizzaName)
     {
@@ -620,5 +484,263 @@ public class PlayerController : Singleton<PlayerController>
     {
         this.gameObject.transform.position = InteractionObjectManger.Instance.PlayerRespawnPos.position;
         this.gameObject.transform.rotation = InteractionObjectManger.Instance.PlayerRespawnPos.rotation;
+    }
+
+    private void InitExcute()
+    {
+        _excuteDic.Add(InteractionObj.Pool, new PickUpExcute(_grabPos.transform));
+        _excuteDic.Add(InteractionObj.Pizza, new PizzaActiveExcute(_grabPos.transform));
+        _excuteDic.Add(InteractionObj.Machine, new DropPizzaToMachineExcute(_grabPos.transform));
+        _excuteDic.Add(InteractionObj.Item, new PickUpItemExcute(_grabPos.transform));
+        _excuteDic.Add(InteractionObj.Button, new PushMachineButtonExcute());
+        _excuteDic.Add(InteractionObj.NPC, new InteractionNPCExcute(_grabPos.transform));
+        _excuteDic.Add(InteractionObj.Shop, new OpenShopMenuExcute());
+        _excuteDic.Add(InteractionObj.Door, new DoorExcute());
+
+    }
+}
+
+public class PickUpExcute : IExcute
+{
+    Transform _playerGrabPos;
+
+    public PickUpExcute(Transform playerGrabPos)
+    {
+        _playerGrabPos = playerGrabPos;
+    }
+
+    public void Excute(GameObject go, RaycastHit hitPos)
+    {
+        PickUpItemToPool(go);
+
+    }
+    private void PickUpItemToPool(GameObject obj)
+    {
+        if (obj.transform.gameObject != null)
+        {
+            if (PlayerController.Instance.CheckOnHandlingItem())
+            {
+                PlayerController.Instance.RetrunHandlingItem(obj);
+            }
+            else
+            {
+                InteractionObjectManger.Instance.OnPickUpItemToPool(obj, _playerGrabPos);
+            }
+        }
+
+    }
+}
+
+public class PizzaActiveExcute : IExcute
+{
+    Transform _playerGrabPos;
+
+    public PizzaActiveExcute(Transform playerGrabPos)
+    {
+        _playerGrabPos = playerGrabPos;
+    }
+
+    public void Excute(GameObject go, RaycastHit hitPos)
+    {
+        PizzaActive(go, hitPos);
+    }
+    private void PizzaActive(GameObject pizza, RaycastHit hitRay)
+    {
+        if (pizza.transform.gameObject != null)
+        {
+            if (PlayerController.Instance.CheckOnHandlingItem())
+            {
+                if (CheckePizzaCooked(pizza) == true)
+                {
+                    return;
+                }
+                ToppingPizza(pizza, hitRay);
+            }
+            else
+            {
+                if (CheckePizzaCooked(pizza) == true && pizza.CompareTag("Dough") == false)
+                {
+                    return;
+                }
+                InteractionObjectManger.Instance.OnPickUpItem(pizza, _playerGrabPos.gameObject);
+            }
+
+        }
+    }
+    private bool CheckePizzaCooked(GameObject pizza)
+    {
+        var checkPizza = pizza.GetComponentInParent<Dough>();
+        if (checkPizza == null)
+        {
+            return false;
+        }
+
+        return checkPizza._isPizzaCooked;
+    }
+    private void ToppingPizza(GameObject pizza, RaycastHit hitRay)
+    {
+        var pizzaItem = _playerGrabPos.transform.GetChild(0).gameObject;
+
+        if (pizzaItem.CompareTag("Dough"))
+        {
+            return;
+        }
+
+        InteractionObjectManger.Instance.OnToppingPizza(pizzaItem, pizza, hitRay.point);
+    }
+}
+
+public class DropPizzaToMachineExcute : IExcute
+{
+    Transform _playerGrabPos;
+
+    public DropPizzaToMachineExcute(Transform playerGrabPos)
+    {
+        _playerGrabPos = playerGrabPos;
+    }
+    public void Excute(GameObject go, RaycastHit hitPos)
+    {
+        DropPizzaToMachine(go, hitPos);
+    }
+    private void DropPizzaToMachine(GameObject machine, RaycastHit RayHitPos)
+    {
+        Vector3 pointPos = RayHitPos.normal;
+        if (PlayerController.Instance.CheckOnHandlingItem() == false)
+        {
+            return;
+        }
+        var obj = _playerGrabPos.transform.GetChild(0).gameObject;
+        float dotProduct = Vector3.Dot(pointPos, machine.transform.up);
+
+        if (dotProduct > 0.9f &&
+            obj.CompareTag("Dough"))
+        {
+            InteractionObjectManger.Instance.OnDropItemToMachine(obj, machine, RayHitPos.point);
+        }
+    }
+}
+
+public class PickUpItemExcute : IExcute
+{
+    Transform _playerGrabPos;
+
+    public PickUpItemExcute(Transform playerGrabPos)
+    {
+        _playerGrabPos = playerGrabPos;
+    }
+
+    public void Excute(GameObject go, RaycastHit hitPos)
+    {
+        PickUpItem(go);
+    }
+    private void PickUpItem(GameObject obj)
+    {
+        if (obj.transform.gameObject != null)
+        {
+            if (PlayerController.Instance.CheckOnHandlingItem())
+            {
+                return;
+            }
+            else
+            {
+                InteractionObjectManger.Instance.OnPickUpItem(obj, _playerGrabPos.gameObject);
+            }
+
+        }
+    }
+}
+
+public class PushMachineButtonExcute : IExcute
+{
+    public void Excute(GameObject go, RaycastHit hitPos)
+    {
+        PushMachineButton(go);
+    }
+    private void PushMachineButton(GameObject obj)
+    {
+        var MachineButton = obj.GetComponentInParent<MachineBase>();
+
+        if (MachineButton != null)
+        {
+            EventManger.Instance.OnMachineActivateEvent(MachineButton.gameObject);
+        }
+    }
+}
+
+public class InteractionNPCExcute : IExcute
+{
+    Transform _playerGrabPos;
+
+    public InteractionNPCExcute(Transform playerGrabPos)
+    {
+        _playerGrabPos = playerGrabPos;
+    }
+    public void Excute(GameObject go, RaycastHit hitPos)
+    {
+        CheckOrder(go);
+        SellPizza(go);
+    }
+    private void CheckOrder(GameObject targetNPC)
+    {
+        if (InteractionObjectManger.Instance.OnCheckNPCState(targetNPC, NPCStateName.ORDER) == true)
+        {
+            InteractionObjectManger.Instance.OnRegisterChangeNPCState();
+            InteractionObjectManger.Instance.OnChangeNPCState(targetNPC);
+            UIManger.Instance.SetButtonActive(true);
+            UIManger.Instance.PrintInteractionText(string.Empty);
+            EventManger.Instance.OnPlayerCurserUnLock();
+        }
+    }
+    private void SellPizza(GameObject NPC)
+    {
+        if (InteractionObjectManger.Instance.OnCheckNPCState(NPC, NPCStateName.WAITINGPIZZA) == true)
+        {
+            if (PlayerController.Instance.CheckOnHandlingItem() == false)
+            {
+                return;
+            }
+            var pizza = _playerGrabPos.transform.GetChild(0).gameObject.GetComponent<Dough>();
+            if (pizza == null)
+            {
+                return;
+            }
+            if (pizza.IsPizzaPackaging)
+            {
+                EventManger.Instance.OnCheckPizzaEventInvoke(pizza);
+                PoolManger.Instance.ReturnItemInPool(pizza.gameObject);
+            }
+
+        }
+
+
+    }
+}
+
+public class OpenShopMenuExcute : IExcute
+{
+    public void Excute(GameObject go, RaycastHit hitPos)
+    {
+        OpenShopMenu();
+    }
+    private void OpenShopMenu()
+    {
+        if (UIManger.Instance.CheckOpenShopNenu() == false)
+        {
+            return;
+        }
+        InteractionObjectManger.Instance.OnOpenShopMenu();
+        EventManger.Instance.OnPlayerCurserUnLock();
+    }
+}
+
+public class DoorExcute : IExcute
+{
+    public void Excute(GameObject go, RaycastHit hitPos)
+    {
+        DoorInteraction();
+    }
+    private void DoorInteraction()
+    {
+        EventManger.Instance.OnDayGoneEventInvoke();
     }
 }
