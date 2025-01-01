@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 123765127273928472}
-  m_Layer: 0
+  - component: {fileID: 6208929481469367158}
+  m_Layer: 12
   m_Name: ShopZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,6 +35,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6208929481469367158
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3413779933801777657}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.66, y: 0.7, z: 0.35}
+  m_Center: {x: -0.465, y: 1.25, z: -0.69}
 --- !u!1001 &2148904951639665405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44,10 +58,6 @@ PrefabInstance:
     - target: {fileID: 1950802142998856, guid: 029f51b61a52f8f4d98ae45eead3b548, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Kitchen_Counter_End_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 1950802142998856, guid: 029f51b61a52f8f4d98ae45eead3b548, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4218188518004634, guid: 029f51b61a52f8f4d98ae45eead3b548, type: 3}
       propertyPath: m_RootOrder
@@ -93,15 +103,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 64272063973341146, guid: 029f51b61a52f8f4d98ae45eead3b548, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 029f51b61a52f8f4d98ae45eead3b548, type: 3}
 --- !u!1 &2149518386848979893 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1950802142998856, guid: 029f51b61a52f8f4d98ae45eead3b548, type: 3}
   m_PrefabInstance: {fileID: 2148904951639665405}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &4947341897769858139
+--- !u!65 &5528715949571829558
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,8 +121,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2518291, y: 0.90961766, z: 1.1059998}
-  m_Center: {x: -0.62591445, y: 0.45480883, z: -0.49999982}
+  m_Size: {x: 1.2518295, y: 0.90961766, z: 1.1060001}
+  m_Center: {x: -0.62591463, y: 0.45480883, z: -0.49999994}
 --- !u!4 &2151750580009794919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4218188518004634, guid: 029f51b61a52f8f4d98ae45eead3b548, type: 3}
@@ -237,27 +246,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 64903834495846572, guid: 08ac6aa35dbb8e1428a7dbff2fb4d57f, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08ac6aa35dbb8e1428a7dbff2fb4d57f, type: 3}
---- !u!1 &7494207066697668099 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1397678337469932, guid: 08ac6aa35dbb8e1428a7dbff2fb4d57f, type: 3}
-  m_PrefabInstance: {fileID: 7495171417175768047}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &9120691103109966686
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7494207066697668099}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.66582, y: 0.6476198, z: 0.34064266}
-  m_Center: {x: -0.000000014901161, y: 0.32343498, z: 0}
 --- !u!4 &7500102541969318071 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4931546049534808, guid: 08ac6aa35dbb8e1428a7dbff2fb4d57f, type: 3}

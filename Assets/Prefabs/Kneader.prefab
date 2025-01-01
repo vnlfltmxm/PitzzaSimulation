@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &569813199675923266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4684055908263279926}
+  - component: {fileID: 2263587138495379344}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4684055908263279926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569813199675923266}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1247988500867846266}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2263587138495379344
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569813199675923266}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.02, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1635675885521623859
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,6 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7905324605954453675}
+  - component: {fileID: 7861282554220674186}
   m_Layer: 0
   m_Name: Kneader
   m_TagString: Untagged
@@ -68,6 +114,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7861282554220674186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2759939281341831202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b9177ab422c85e4fa79aa77390160e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: Kneader
+  _doughDesPos: {fileID: 1635675885521623859}
 --- !u!1 &5854590896552103827
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,9 +140,9 @@ GameObject:
   - component: {fileID: 4241813389398276050}
   - component: {fileID: 8447409213095736834}
   - component: {fileID: 2301390021662335171}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Kneader
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -163,8 +223,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 0.95}
+  m_Center: {x: 0, y: 0, z: -0.025}
 --- !u!1 &7678849225292291796
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,9 +235,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1247988500867846266}
   - component: {fileID: 7068884564773907683}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: InputPos
-  m_TagString: Untagged
+  m_TagString: KneaderInputPos
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,7 +253,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.598, z: -0.367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4684055908263279926}
   m_Father: {fileID: 7905324605954453675}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 70.278, y: 0, z: 0}
@@ -379,6 +440,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Elevator_Buttons_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1428609012047252, guid: d78db2c9c92d95c46b071d012f2eae7b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4200403950582492, guid: d78db2c9c92d95c46b071d012f2eae7b, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -423,8 +488,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64614838573649722, guid: d78db2c9c92d95c46b071d012f2eae7b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d78db2c9c92d95c46b071d012f2eae7b, type: 3}
+--- !u!1 &7941337386148484239 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1428609012047252, guid: d78db2c9c92d95c46b071d012f2eae7b, type: 3}
+  m_PrefabInstance: {fileID: 7939950634814884123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &5924708024593111442
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941337386148484239}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.16103403, y: 0.27301067, z: 0.074261434}
+  m_Center: {x: 0, y: 0.000000022351742, z: 0.021212626}
 --- !u!4 &7943983837827331015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4200403950582492, guid: d78db2c9c92d95c46b071d012f2eae7b, type: 3}

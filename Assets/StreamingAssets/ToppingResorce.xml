@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ToppingResorce>
+  <dataCategory>
+    <data Name="Dough" ItemName="도우" Description="피자의 본체" IconPath="" PrefabPath="" StartMaxCount="30" Price="100" MinBuyValues="1" />
+    <data Name="Cheese" ItemName="치즈" Description="피자에 들어가는 치즈" IconPath="" PrefabPath="" StartMaxCount="50" Price="5" MinBuyValues="50" />
+    <data Name="Sauce" ItemName="소스" Description="피자에 들어가는 소스" IconPath="" PrefabPath="" StartMaxCount="50" Price="5" MinBuyValues="50" />
+    <data Name="MeatBall" ItemName="불고기" Description="피자에 들어가는 작은 불고기" IconPath="" PrefabPath="" StartMaxCount="30" Price="5" MinBuyValues="50" />
+    <data Name="Pepperoni" ItemName="페페로니" Description="피자에 들어가는 동그란 햄" IconPath="" PrefabPath="" StartMaxCount="30" Price="8" MinBuyValues="30" />
+    <data Name="Sausage" ItemName="소시지" Description="피자에 들어가는 작고 네모난 소시지" IconPath="" PrefabPath="" StartMaxCount="30" Price="8" MinBuyValues="30" />
+    <data Name="Shrimp" ItemName="새우" Description="피자에 들어가는 새우" IconPath="" PrefabPath="" StartMaxCount="20" Price="12" MinBuyValues="10" />
+    <data Name="Pineapple" ItemName="파인애플" Description="피자에 들어가는 작은 파인애플" IconPath="" PrefabPath="" StartMaxCount="30" Price="8" MinBuyValues="10" />
+    <data Name="Olive" ItemName="올리브" Description="피자에 들어가는 작은 올리브" IconPath="" PrefabPath="" StartMaxCount="50" Price="8" MinBuyValues="10" />
+    <data Name="Onion" ItemName="양파" Description="피자에 들어가는 작은 양파조각들" IconPath="" PrefabPath="" StartMaxCount="50" Price="5" MinBuyValues="10" />
+    <data Name="GreenPepper" ItemName="피망" Description="피자에 들어가는 작은 피망" IconPath="" PrefabPath="" StartMaxCount="30" Price="5" MinBuyValues="10" />
+    <data Name="Mushroom" ItemName="버섯" Description="피자에 들어가는 작은 버섯" IconPath="" PrefabPath="" StartMaxCount="30" Price="5" MinBuyValues="10" />
+  </dataCategory>
+</ToppingResorce>

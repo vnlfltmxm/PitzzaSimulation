@@ -8,12 +8,20 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
 {
     [SerializeField]
     private GameObject _pizzaHouse;
-    public GameObject _doughtRefrigerator;
+    [SerializeField]
+    private GameObject _toppingZone;
 
-    public Action<string,GameObject> _pickUpItem;
 
+    private Transform _playerSpawnPos;
     private Queue<GameObject> _usingPool = new Queue<GameObject>();
 
+
+    public Transform PlayerRespawnPos { get { return _playerSpawnPos; } }
+
+    private void Awake()
+    {
+        _playerSpawnPos = FindPlayerRespawnPos();
+    }
     public Transform FindPrefabsParentTrasnform(string tagName)
     {
 
@@ -24,6 +32,15 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
                 return child;
             }
         }
+
+        foreach (Transform child in _toppingZone.transform)
+        {
+            if (child.CompareTag(tagName))
+            {
+                return child;
+            }
+        }
+
         return null;
     }
 
@@ -32,14 +49,87 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     //    _pickUpItem += OnGetItemToTag;
     //    _pickUpItem += ;
     //}
-
-    public void OnPickUpItem()
+    public void OnOpenShopMenu()
     {
-
+        UIManger.Instance.OnShopMenuOpen();
     }
-    public void OnDropItem()
+    public void OnPickUpItem(GameObject item, GameObject grapPos)
     {
+        SetUseGravityInItem(item, false);
+        item.transform.position = grapPos.transform.position;
+        item.transform.rotation = grapPos.transform.rotation;
+        item.transform.parent = grapPos.transform;
+    }
+    public void OnDropItem(GameObject item)
+    {
+        item.transform.parent = null;
+        SetUseGravityInItem(item, true);
+    }
+    public void OnDropItemToMachine(GameObject item, GameObject machine, Vector3 hitPointPos)
+    {
+        item.transform.parent = null;
+        item.transform.position = hitPointPos;
+        item.transform.rotation = machine.transform.rotation;
+    }
+    //public void OnChangeNPCState(GameObject NPC)
+    //{
+    //    var target=NPC.GetComponent<NPCController>();
+    //    if (target == null)
+    //    {
+    //        return;
+    //    }
 
+    //    target.ChangeNPCState(NPCStateName.WAITINGPIZZA);
+    //}
+    public void OnToppingPizza(GameObject item, GameObject pizza, Vector3 hitPointPos)
+    {
+        
+
+        if (item.layer == LayerMask.NameToLayer("Pizza"))
+        {
+            item.transform.parent = pizza.transform;
+            item.transform.position = hitPointPos;
+            item.transform.rotation = pizza.transform.rotation;
+            SetUseGravityInItem(item, false);
+        }
+        else
+        {
+            GameObject pizzaItem = PoolManger.Instance.OutPoolItem(item);
+            if (pizzaItem == null)
+            {
+                item.transform.parent = pizza.transform;
+                item.transform.position = hitPointPos;
+                item.transform.rotation = pizza.transform.rotation;
+                if (item.CompareTag("Cheese") == true || item.CompareTag("Sauce") == true)
+                {
+                    item.layer = LayerMask.NameToLayer("Ignore Raycast");
+                }
+                else
+                {
+                    item.layer = LayerMask.NameToLayer("Pizza");
+                }
+                Debug.Log("재료소진2");
+            }
+            else
+            {
+                pizzaItem.SetActive(true);
+                pizzaItem.transform.parent = pizza.transform;
+                pizzaItem.transform.position = hitPointPos;
+                if (pizzaItem.CompareTag("Cheese") == true || pizzaItem.CompareTag("Sauce") == true)
+                {
+                    pizzaItem.layer = LayerMask.NameToLayer("Ignore Raycast");
+                }
+                else
+                {
+                    pizzaItem.layer = LayerMask.NameToLayer("Pizza");
+                }
+                SetUseGravityInItem(pizzaItem, false);
+            }
+        }
+
+        
+        
+       // PoolManger.Instance.SetPoolPosionY(item);
     }
     public void OnReturnHandlingItemToPool(GameObject pool,GameObject item)
     {
@@ -51,7 +141,7 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     //    OnGetItemPoolToTag(tagName);
     //    //OnGrapItemToPlayer(_usingPool, grapPos);
     //}
-    public void OnPickUpItemToPool(GameObject pool, GameObject grapPos)
+    public void OnPickUpItemToPool(GameObject pool, Transform grapPos)
     {
         OnGrapItemInPoolToPlayer(pool, grapPos);
     }
@@ -64,13 +154,19 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
         _usingPool = PoolManger.Instance.GetPoolToTagName(tagName);
     }
 
-    private void OnGrapItemInPoolToPlayer(GameObject pool,GameObject grapPos)
+    private void OnGrapItemInPoolToPlayer(GameObject pool,Transform grapPos)
     {
         GameObject item = PoolManger.Instance.OutPoolItem(pool);
+        if(item == null) 
+        {
+            return;
+        }
         item.SetActive(true);
-        item.transform.position = grapPos.transform.position;
-        item.transform.rotation = grapPos.transform.rotation;
-        item.transform.parent = grapPos.transform;
+        
+        item.transform.position = grapPos.position;
+        item.transform.rotation = grapPos.rotation;
+        item.transform.parent = grapPos;
+        SetUseGravityInItem(item, false);
     }
     private void OnReturnItemToPool(GameObject pool, GameObject item)
     {
@@ -81,13 +177,67 @@ public class InteractionObjectManger : Singleton<InteractionObjectManger>
     private void SetUseGravityInItem(GameObject item, bool value)
     {
         Rigidbody rd= item.GetComponent<Rigidbody>();
-        if (rd = null) 
+        if (rd == null) 
+        {
+            return;
+        }
+        
+        SetConstraintsInItem(rd, value);
+        rd.useGravity = value;
+
+    }
+    private void SetConstraintsInItem(Rigidbody rd, bool value)
+    {
+        if (value == true) 
+        {
+            rd.constraints = RigidbodyConstraints.None;
+        }
+        else
+        {
+            rd.constraints = RigidbodyConstraints.FreezeAll;
+        }
+    }
+
+    public void UnRegisterChangeNPCState()
+    {
+        EventManger.Instance.CehckOrder -= OnChangeNPCState;
+    }
+    public void OnRegisterChangeNPCState()
+    {
+        EventManger.Instance.CehckOrder += OnChangeNPCState;
+    }
+    public void OnChangeNPCState(GameObject NPCObj, NPCStateName stateName = NPCStateName.WAITINGPIZZA)
+    {
+        var NPC=NPCObj.GetComponent<NPCController>();
+
+        if(NPC == null)
         {
             return;
         }
 
-        rd.useGravity = value;
-
+        NPC.ChangeNPCState(stateName);
     }
-    
+
+    public bool OnCheckNPCState(GameObject targetNPC,NPCStateName stateName)
+    {
+        if (EventManger.Instance.OnCheckNPCState(stateName, targetNPC) == true)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    public Transform FindPlayerRespawnPos()
+    {
+        foreach (Transform child in _pizzaHouse.transform)
+        {
+            if (child.CompareTag("playerSpawnPos"))
+            {
+                return child;
+            }
+        }
+
+        return null;
+    }
 }
+

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Pizza>
+  <dataCategory>
+    <data DataId="1" ClassName="Pizza_CheesePizza" Name="치즈피자" Description="치즈만 들어간 피자" IconPath="" PrefabPath="" BaseSizeRidous="1.3" LargeSizeRidous="1.5" ToppingResorceList="{Dough,Cheese,Sauce}" BaseSizeToppingValues="{1,3,3}" LargeSizeToppingValues="{1,5,5}" BasePrice="1500" LargePrice="2000" />
+    <data DataId="2" ClassName="Pizza_PepperoniPizza" Name="페페로니피자" Description="페페로니와 치즈가 들어간 피자" IconPath="" PrefabPath="" BaseSizeRidous="1.3" LargeSizeRidous="1.5" ToppingResorceList="{Dough,Cheese,Sauce,Pepperoni}" BaseSizeToppingValues="{1,3,3,12}" LargeSizeToppingValues="{1,5,5,22}" BasePrice="1800" LargePrice="2500" />
+    <data DataId="3" ClassName="Pizza_ShrimpPizza" Name="쉬림프피자" Description="새우가 들어간 피자" IconPath="" PrefabPath="" BaseSizeRidous="1.3" LargeSizeRidous="1.5" ToppingResorceList="{Dough,Cheese,Sauce,Shrimp,Onion,MeatBall,Mushroom,Pepperoni}" BaseSizeToppingValues="{1,3,3,6,10,10,10,6}" LargeSizeToppingValues="{1,5,5,8,18,18,18,8}" BasePrice="2300" LargePrice="3000" />
+    <data DataId="4" ClassName="Pizza_VegetablePizza" Name="야채피자" Description="야채만 들어간 피자" IconPath="" PrefabPath="" BaseSizeRidous="1.3" LargeSizeRidous="1.5" ToppingResorceList="{Dough,Cheese,Sauce,Onion,Olive,GreenPepper,Mushroom}" BaseSizeToppingValues="{1,3,3,10,10,10,10}" LargeSizeToppingValues="{1,5,5,18,18,18,18}" BasePrice="1800" LargePrice="2500" />
+    <data DataId="5" ClassName="Pizza_PineapplePizza" Name="파인애플피자" Description="파인애플이 들어간 피자" IconPath="" PrefabPath="" BaseSizeRidous="1.3" LargeSizeRidous="1.5" ToppingResorceList="{Dough,Cheese,Sauce,Pineapple,Sausage}" BaseSizeToppingValues="{1,3,3,12,12}" LargeSizeToppingValues="{1,5,5,22,22}" BasePrice="2000" LargePrice="2700" />
+    <data DataId="6" ClassName="Pizza_MeatballPizza" Name="불고기피자" Description="불고기가 들어간 피자" IconPath="" PrefabPath="" BaseSizeRidous="1.3" LargeSizeRidous="1.5" ToppingResorceList="{Dough,Cheese,Sauce,Onion,GreenPepper,Mushroom,MeatBall,Sausage}" BaseSizeToppingValues="{1,3,3,10,10,10,12,12}" LargeSizeToppingValues="{1,5,5,18,18,18,22,22}" BasePrice="2000" LargePrice="2700" />
+  </dataCategory>
+</Pizza>

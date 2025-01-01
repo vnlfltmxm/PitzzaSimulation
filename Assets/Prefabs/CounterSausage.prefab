@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 33667719705264612}
   - component: {fileID: 23409733236592844}
   - component: {fileID: 6488589159039109918}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CounterSausage
-  m_TagString: Untagged
+  m_TagString: Sausage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

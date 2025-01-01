@@ -6,6 +6,20 @@ TagManager:
   tags:
   - Dough
   - playerSpawnPos
+  - Kneader
+  - GreenPepper
+  - Olive
+  - Onion
+  - Cheese
+  - Shrimp
+  - Pepperoni
+  - Pineapple
+  - MeatBall
+  - Mushroom
+  - Sausage
+  - KneaderInputPos
+  - Oven
+  - Sauce
   layers:
   - Default
   - TransparentFX
@@ -14,13 +28,13 @@ TagManager:
   - Water
   - UI
   - Pool
+  - Pizza
+  - Machine
   - Item
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Button
+  - NPC
+  - Shop
+  - Door
   - 
   - 
   - 
