@@ -1,10 +1,12 @@
+using System.IO;
+using System;
 using UnityEditor;
 
 public class BuildScript
 {
     public static void Build() 
     {
-        string outputPath = @"C:\Users\qkr38\Pizza.exe";
+        string outputPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Pizza.exe");
         BuildPipeline.BuildPlayer(new[] { "Assets/Scenes/PlayScene.unity" }, outputPath, BuildTarget.StandaloneWindows64, BuildOptions.None);
     }
 
