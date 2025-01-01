@@ -29,7 +29,7 @@ public class BuildScript
         }
 
         var buildReport = BuildPipeline.BuildPlayer(
-            new[] { "Assets/Scenes/PlayScene.unity" },
+            new[] { "Assets/Scenes/Play Scene.unity" },
             outputPath,
             BuildTarget.StandaloneWindows64,
             BuildOptions.None
